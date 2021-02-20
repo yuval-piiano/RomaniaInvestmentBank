@@ -27,9 +27,9 @@ public class Main {
 //		 clientService.saveClient(client);
 		//clientService.orderClientsByNoDesc();
 		//System.out.println(clientService.showAllClients());
-//		System.out.print("Enter the city: ");
-//		String oras=scanner.next();
-//		System.out.println(bankAgencyService.findBankAgencyByCity(oras));
+//		System.out.print("Enter the no of address: ");
+//		int no=scanner.nextInt();
+//		System.out.println(addressService.findAddressByNo(no));
 		
 //		System.out.print("Enter the firstname: ");
 //		String firstName=scanner.next();
@@ -43,8 +43,8 @@ public class Main {
 //		int no=scanner.nextInt();
 //		System.out.println(addressService.findAddressByNo(no));
 		
-		System.out.println(addressService.orderAddressesByCountyDesc());
-		//clientService.addClient(client);
+		//System.out.println(addressService.orderAddressesByCountyDesc());
+		//addressService.addAddress(address);
 //		int option;
 //		System.out.println(clientService.showAllClients());
 //		System.out.println(clientService.orderByNoAsc());

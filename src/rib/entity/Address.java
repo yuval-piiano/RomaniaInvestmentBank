@@ -73,11 +73,9 @@ public class Address {
 		if (Hibernate.isInitialized(this.blockOfFlatsNumber) && this.blockOfFlatsNumber != null)
 			finalString += ", Block No. " + this.blockOfFlatsNumber;
 		if (Hibernate.isInitialized(this.apartment) && this.apartment != null)
-			finalString += ", Ap. " + this.apartment+"\n";
+			finalString += ", Ap. " + this.apartment + "\n";
 		else
 			finalString += "\n";
-
 		return finalString;
 	}
 }
-

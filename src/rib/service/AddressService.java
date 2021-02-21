@@ -39,8 +39,9 @@ public class AddressService {
 		System.out.print("Apartment: ");
 		address.setApartment(scanner.next());
 		System.out.print("Street: ");
-		address.setStreet(scanner.next());
-
+		scanner.nextLine();
+		address.setStreet(scanner.nextLine());
+		
 		query.setParameter(1, address.getCity());
 		query.setParameter(2, address.getCounty());
 		query.setParameter(3, address.getHouseNumber().equals("-")?null:address.getHouseNumber());

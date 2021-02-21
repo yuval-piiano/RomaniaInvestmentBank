@@ -48,7 +48,7 @@ public class Client {
 	private String phoneNumber;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private BankAccount account;
+	private BankAccount bankAccount;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "Address_No")
@@ -58,7 +58,7 @@ public class Client {
 	private CustomerAdvisors customerAdvisors;
 
 	public Client(String id, String firstName, String lastName, long cnp, String email, Address address,
-			String phoneNumber, CustomerAdvisors customerAdvisors, BankAccount account) {
+			String phoneNumber, CustomerAdvisors customerAdvisors, BankAccount bankAccount) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -67,7 +67,7 @@ public class Client {
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.customerAdvisors = customerAdvisors;
-		this.account = account;
+		this.bankAccount=bankAccount;
 		this.address = address;
 	}
 
@@ -82,7 +82,6 @@ public class Client {
 			finalString += this.address;
 		else
 			finalString += "\n";
-
 		return finalString;
 	}
 }

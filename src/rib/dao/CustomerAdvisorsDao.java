@@ -38,11 +38,6 @@ public class CustomerAdvisorsDao implements EntityDao<CustomerAdvisors, Integer>
 	}
 
 	@Override
-	public CustomerAdvisors findByNo(int no) {
-		return session.get(CustomerAdvisors.class, no);
-	}
-
-	@Override
 	public void delete(CustomerAdvisors entity) {
 		session.delete(entity);
 	}
@@ -98,16 +93,4 @@ public class CustomerAdvisorsDao implements EntityDao<CustomerAdvisors, Integer>
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public void update(CustomerAdvisors entity) {
-		// TODO Auto-generated method stub
-
-	}
-
-//	@Override
-//	public List<CustomerAdvisors> findById(String entity) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }

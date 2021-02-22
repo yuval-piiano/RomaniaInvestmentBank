@@ -37,9 +37,16 @@ public class ClientDao implements EntityDao<Client, Integer> {
 		session.close();
 	}
 
-	@Override
-	public Client findByNo(int No) {
-		return session.get(Client.class, No);
+	public Client findByCnp(long cnp) {
+		return session.get(Client.class, cnp);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Client> findClientById(String id) throws Exception{
+		List<Client> clients=session.createQuery("from Client where ID=:id").setParameter("id", id).list();
+		if (clients.isEmpty())
+			throw new Exception("There is not client with the ID: " + id);
+		return clients;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -47,7 +54,7 @@ public class ClientDao implements EntityDao<Client, Integer> {
 		List<Client> clients = session.createQuery("from Client where FirstName=:firstName")
 				.setParameter("firstName", firstName).list();
 		if (clients.isEmpty())
-			throw new Exception("There are not client: " + firstName);
+			throw new Exception("There is not client with first name: " + firstName);
 		return clients;
 	}
 
@@ -98,10 +105,4 @@ public class ClientDao implements EntityDao<Client, Integer> {
 	public List<Client> showAll() {
 		return session.createQuery("from Client", Client.class).list();
 	}
-
-	@Override
-	public void update(Client entity) {
-		session.saveOrUpdate(entity);
-	}
 }
-

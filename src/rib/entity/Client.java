@@ -49,6 +49,10 @@ public class Client {
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private BankAccount bankAccount;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "Deposit_ID")
+	private Deposit deposit;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "Address_No")
@@ -58,7 +62,7 @@ public class Client {
 	private CustomerAdvisors customerAdvisors;
 
 	public Client(String id, String firstName, String lastName, long cnp, String email, Address address,
-			String phoneNumber, CustomerAdvisors customerAdvisors, BankAccount bankAccount) {
+			String phoneNumber, CustomerAdvisors customerAdvisors, BankAccount bankAccount, Deposit deposit) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -69,6 +73,7 @@ public class Client {
 		this.customerAdvisors = customerAdvisors;
 		this.bankAccount=bankAccount;
 		this.address = address;
+		this.deposit=deposit;
 	}
 
 	@Override

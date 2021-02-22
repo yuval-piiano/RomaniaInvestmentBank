@@ -34,5 +34,6 @@
 		<mapping class="rib.entity.BankAccount" />
 		<mapping class="rib.entity.Address" />
 		<mapping class="rib.entity.BankAccount" />
+		<mapping class="rib.entity.Deposit" />
 	</session-factory>
 </hibernate-configuration>

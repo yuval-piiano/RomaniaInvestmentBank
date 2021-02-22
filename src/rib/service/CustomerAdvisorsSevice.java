@@ -39,6 +39,7 @@ public class CustomerAdvisorsSevice {
 		customerAdvisors.setCnp(scanner.next());
 		System.out.print("Phone: ");
 		customerAdvisors.setPhoneNumber(scanner.next());
+		System.out.println("If a parameter doesn't exist, you enter \"0\"");
 		System.out.print("Address no.: ");
 		address.setNo(scanner.nextInt());
 		System.out.print("Bank agency no.: ");
@@ -48,18 +49,11 @@ public class CustomerAdvisorsSevice {
 		query.setParameter(2, customerAdvisors.getLastName());
 		query.setParameter(3, customerAdvisors.getCnp());
 		query.setParameter(4, customerAdvisors.getPhoneNumber());
-		query.setParameter(5, address.getNo());
-		query.setParameter(6, bankAgency.getNo());
+		query.setParameter(5, address.getNo()==0?null:address.getNo());
+		query.setParameter(6, bankAgency.getNo()==0?null:bankAgency.getNo());
 		System.err.println("Customer advisors successfully added!");
 		query.executeUpdate();
 		session.getTransaction().commit();
-	}
-
-	public CustomerAdvisors findCustomerAdvisorsByNo(int no) {
-		customerAdvisorsDao.openCurrentSession();
-		CustomerAdvisors customerAdvisors = customerAdvisorsDao.findByNo(no);
-		customerAdvisorsDao.closeCurrentSession();
-		return customerAdvisors;
 	}
 	
 	public void deleteCustomerAdvisors(CustomerAdvisors customerAdvisors) {

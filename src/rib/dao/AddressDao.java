@@ -36,12 +36,6 @@ public class AddressDao implements EntityDao<Address, Integer>{
 		session.close();
 	}
 
-
-	@Override
-	public Address findByNo(int no) {
-		return session.get(Address.class, no);
-	}
-
 	@Override
 	public void delete(Address entity) {
 		session.delete(entity);
@@ -88,10 +82,5 @@ public class AddressDao implements EntityDao<Address, Integer>{
 	@Override
 	public List<Address> showAll() {
 		return session.createQuery("from Address", Address.class).list();
-	}
-
-	@Override
-	public void update(Address entity) {
-		session.saveOrUpdate(entity);
 	}
 }

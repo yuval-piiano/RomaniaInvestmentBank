@@ -33,11 +33,13 @@ public class ClientService {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		query = session.createNativeQuery(
-				"INSERT INTO Client (Id, FirstName, LastName, CNP, Email, PhoneNumber, account_ID, Address_No, customerAdvisors_ID) values(?1,?2,?3,?4,?5,?6,?7,?8,?9)");
+				"INSERT INTO Client (Id, FirstName, LastName, CNP, Email, PhoneNumber, bankAccount_ID, Address_No, customerAdvisors_No) values(?1,?2,?3,?4,?5,?6,?7,?8,?9)");
+		System.out.println("If a parameter doesn't exist, you enter \"-\"");
 		System.out.print("ID: ");
 		client.setId(scanner.next());
 		System.out.print("First name: ");
-		client.setFirstName(scanner.next());
+		scanner.nextLine();
+		client.setFirstName(scanner.nextLine());
 		System.out.print("Last name: ");
 		client.setLastName(scanner.next());
 		System.out.print("CNP: ");
@@ -46,11 +48,12 @@ public class ClientService {
 		client.setEmail(scanner.next());
 		System.out.print("Phone number: ");
 		client.setPhoneNumber(scanner.next());
+		System.out.println("If a parameter doesn't exist, you enter \"0\"");
 		System.out.print("Account ID: ");
 		bankAccount.setId(scanner.nextInt());
 		System.out.print("Address No: ");
 		address.setNo(scanner.nextInt());
-		System.out.print("Customers advisors ID: ");
+		System.out.print("Customers advisor ID: ");
 		customerAdvisors.setId(scanner.nextInt());
 
 		query.setParameter(1, client.getId());
@@ -59,9 +62,9 @@ public class ClientService {
 		query.setParameter(4, client.getCnp());
 		query.setParameter(5, client.getEmail().equals("-") ? null : client.getEmail());
 		query.setParameter(6, client.getPhoneNumber());
-		query.setParameter(7, bankAccount.getId());
-		query.setParameter(8, address.getNo());
-		query.setParameter(9, customerAdvisors.getId());
+		query.setParameter(7, bankAccount.getId() == 0 ? null : bankAccount.getId());
+		query.setParameter(8, address.getNo() == 0 ? null : address.getNo());
+		query.setParameter(9, customerAdvisors.getId() == 0 ? null : customerAdvisors.getId());
 		System.err.println("Client successfully added!");
 		query.executeUpdate();
 		session.getTransaction().commit();
@@ -74,11 +77,18 @@ public class ClientService {
 		return lista;
 	}
 
-	public Client findClientByNo(int no) {
+	public Client findClientByCnp(int cnp) {
 		clientDao.openCurrentSession();
-		Client client = clientDao.findByNo(no);
+		Client client = clientDao.findByCnp(cnp);
 		clientDao.closeCurrentSession();
 		return client;
+	}
+	
+	public List<Client> findClientById(String id) throws Exception {
+		clientDao.openCurrentSession();
+		List<Client> lista = clientDao.findClientById(id);
+		clientDao.closeCurrentSession();
+		return lista;
 	}
 
 	public void deleteClient(Client client) {
@@ -148,9 +158,51 @@ public class ClientService {
 		return lista;
 	}
 
-	public void updateClient(Client client) {
-		clientDao.openCurrentSessionwithTransaction();
-		clientDao.update(client);
-		clientDao.closeCurrentSessionwithTransaction();
+	public void updateClientEmail(Client client) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		query = session.createNativeQuery("UPDATE CLIENT SET Email=?1 where Id=?2");
+		System.out.print("Email: ");
+		client.setEmail(scanner.next());
+		System.out.print("ID: ");
+		client.setId(scanner.next());
+		
+		query.setParameter(1, client.getEmail());
+		query.setParameter(2, client.getId());
+		System.err.println("Client successfully updated!");
+		query.executeUpdate();
+		session.getTransaction().commit();
+	}
+	
+	public void updateClientPhoneNumber(Client client) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		query = session.createNativeQuery("UPDATE CLIENT SET PhoneNumber=?1 where Id=?2");
+		System.out.print("Phoner number: ");
+		client.setEmail(scanner.next());
+		System.out.print("ID: ");
+		client.setId(scanner.next());
+		
+		query.setParameter(1, client.getPhoneNumber());
+		query.setParameter(2, client.getId());
+		System.err.println("Client successfully updated!");
+		query.executeUpdate();
+		session.getTransaction().commit();
+	}
+	
+	public void updateClientFirstName(Client client) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		query = session.createNativeQuery("UPDATE CLIENT SET FirstName=?1 where Id=?2");
+		System.out.print("First name: ");
+		client.setEmail(scanner.next());
+		System.out.print("ID: ");
+		client.setId(scanner.next());
+		
+		query.setParameter(1, client.getFirstName());
+		query.setParameter(2, client.getId());
+		System.err.println("Client successfully updated!");
+		query.executeUpdate();
+		session.getTransaction().commit();
 	}
 }

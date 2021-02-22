@@ -40,3 +40,5 @@ INSERT INTO Address (City, County, HouseNumber, BlockOfFlatsNumber,Apartment, St
 INSERT INTO Address (City, County, HouseNumber, BlockOfFlatsNumber,Apartment, Street) values("Timisoara","Timis","8",null,null,"Zborului")
 INSERT INTO Address (City, County, HouseNumber, BlockOfFlatsNumber,Apartment, Street) values("Sibiu","Sibiu","39",null,null,"Nicolae Balcescu")
 INSERT INTO Address (City, County, HouseNumber, BlockOfFlatsNumber,Apartment, Street) values("Sibiu","Sibiu",null,"137",2,"Calea Dumbravei")
+
+INSERT INTO Deposit (Deposit_RON, Deposit_EUR, Deposit_USD,Deposit_GBP, Client_No) values (12000, 5000,100,null,10)

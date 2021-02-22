@@ -98,11 +98,5 @@ public class BankAgencyDao implements EntityDao<BankAgency, Integer> {
 	public List<BankAgency> showAll() {
 		return session.createQuery("FROM BankAgency", BankAgency.class).list();
 	}
-
-	@Override
-	public void update(BankAgency entity) {
-		session.saveOrUpdate(entity);
-
-	}
 }
 

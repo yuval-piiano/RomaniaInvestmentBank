@@ -38,12 +38,11 @@ public class Main {
 //		System.out.println(clientService.findClientByFirstName(firstName));
 		// System.out.println(bankAgencyDao.findByNo(1));
 		// System.out.println(clientService.findClientByNo(5));
-		// clientService.addClient(clientService.readClient());
-		// System.out.print("\nClient adaugat!\n\n");
-		 addressService.addAddress(address);
-		System.out.print("Introduceti numarul adresei cautate: ");
-		int no=scanner.nextInt();
-		System.out.println(addressService.findAddressByNo(no));
+		
+//		 addressService.addAddress(address);
+//		System.out.print("Introduceti numarul adresei cautate: ");
+//		int no=scanner.nextInt();
+//		System.out.println(addressService.findAddressByNo(no));
 
 		// System.out.println(addressService.orderAddressesByCountyDesc());
 		// addressService.addAddress(address);
@@ -56,6 +55,10 @@ public class Main {
 //		System.out.print("Introduceti username-ul: ");
 //		String username=scanner.next();
 //		System.out.println(bankAccountService.findPasswordByUsername(username));
+		
+		//clientService.addClient(client);
+		//clientService.updateClientEmail(client);
+		addressService.updateAddress(address);
 	}
 
 }

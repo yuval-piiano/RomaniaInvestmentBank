@@ -1,5 +1,6 @@
 package rib.service;
 
+import java.util.List;
 import java.util.Scanner;
 
 import javax.persistence.Query;
@@ -66,5 +67,61 @@ public class CustomerAdvisorsSevice {
 		customerAdvisorsDao.openCurrentSessionwithTransaction();
 		customerAdvisorsDao.deleteAll();
 		customerAdvisorsDao.closeCurrentSessionwithTransaction();
+	}
+	
+	public List<CustomerAdvisors> orderCustomerAdvisorsbyFirstNameAsc(){
+		customerAdvisorsDao.openCurrentSession();
+		List<CustomerAdvisors> list=customerAdvisorsDao.orderByFirstNameAsc();
+		customerAdvisorsDao.closeCurrentSession();
+		return list;
+	}
+	
+	public List<CustomerAdvisors> orderCustomerAdvisorsbyFirstNameDesc(){
+		customerAdvisorsDao.openCurrentSession();
+		List<CustomerAdvisors> list=customerAdvisorsDao.orderByFirstNameDesc();
+		customerAdvisorsDao.closeCurrentSession();
+		return list;
+	}
+	
+	public List<CustomerAdvisors> orderCustomerAdvisorsbyLastNameAsc(){
+		customerAdvisorsDao.openCurrentSession();
+		List<CustomerAdvisors> list=customerAdvisorsDao.orderByLastNameAsc();
+		customerAdvisorsDao.closeCurrentSession();
+		return list;
+	}
+	
+	public List<CustomerAdvisors> orderCustomerAdvisorsbyLastNameDesc(){
+		customerAdvisorsDao.openCurrentSession();
+		List<CustomerAdvisors> list=customerAdvisorsDao.orderByLastNameDesc();
+		customerAdvisorsDao.closeCurrentSession();
+		return list;
+	}
+	
+	public void updateCustomerAdvisors(CustomerAdvisors customerAdvisors) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query=session.createNativeQuery("UPDATE CustomerAdvisors set FirstName=:firstName, LastName=:lastName, PhoneNumber=:phoneNumber, address_No=:address_No, bankAgency_No=:bankAgency_No where CNP=:cnp");
+		System.out.print("First name: ");
+		customerAdvisors.setFirstName(scanner.next());
+		System.out.print("Last name: ");
+		customerAdvisors.setLastName(scanner.next());
+		System.out.print("Phone: ");
+		customerAdvisors.setPhoneNumber(scanner.next());
+		System.out.print("Address no.: ");
+		address.setNo(scanner.nextInt());
+		System.out.print("Bank agency no.: ");
+		bankAgency.setNo(scanner.nextInt());
+		System.out.print("CNP: ");
+		customerAdvisors.setCnp(scanner.next());
+		
+		query.setParameter(1, customerAdvisors.getFirstName());
+		query.setParameter(2, customerAdvisors.getLastName());
+		query.setParameter(3, customerAdvisors.getPhoneNumber());
+		query.setParameter(4, address.getNo());
+		query.setParameter(5, bankAgency.getNo());
+		query.setParameter(6, customerAdvisors.getCnp());
+		System.err.println("Customer advisors successfully updated!");
+		query.executeUpdate();
+		session.getTransaction().commit();
 	}
 }

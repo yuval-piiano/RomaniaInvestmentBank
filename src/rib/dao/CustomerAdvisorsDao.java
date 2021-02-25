@@ -37,7 +37,6 @@ public class CustomerAdvisorsDao implements EntityDao<CustomerAdvisors, Integer>
 		session.close();
 	}
 
-	@Override
 	public void delete(CustomerAdvisors entity) {
 		session.delete(entity);
 	}
@@ -48,49 +47,39 @@ public class CustomerAdvisorsDao implements EntityDao<CustomerAdvisors, Integer>
 
 	}
 
-	@Override
-	public List<CustomerAdvisors> orderByCityAsc() {
-		//return session.createQuery("from ");
-		return null;
+	public List<CustomerAdvisors> orderByFirstNameAsc() {
+		return session.createQuery("FROM CustomerAdvisors order by FirstName ASC", CustomerAdvisors.class).list();
 	}
 
-	@Override
-	public List<CustomerAdvisors> orderByCityDesc() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CustomerAdvisors> orderByFirstNameDesc() {
+		return session.createQuery("FROM CustomerAdvisors order by FirstName DESC", CustomerAdvisors.class).list();
+	}
+
+	public List<CustomerAdvisors> orderByLastNameAsc() {
+		return session.createQuery("FROM CustomerAdvisors order by LastName ASC", CustomerAdvisors.class).list();
+	}
+
+	public List<CustomerAdvisors> orderByLastNameDesc() {
+		return session.createQuery("FROM CustomerAdvisors order by LastName DESC", CustomerAdvisors.class).list();
 	}
 
 	@Override
 	public List<CustomerAdvisors> orderByNoAsc() {
-		// TODO Auto-generated method stub
-		return null;
+		return session.createQuery("FROM CustomerAdvisors Order by NO asc", CustomerAdvisors.class).list();
 	}
 
 	@Override
 	public List<CustomerAdvisors> orderByNoDesc() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<CustomerAdvisors> orderByIdAsc() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<CustomerAdvisors> orderByIdDesc() {
-		// TODO Auto-generated method stub
-		return null;
+		return session.createQuery("FROM CustomerAdvisors ORDER BY NO DESC", CustomerAdvisors.class).list();
 	}
 
 	@Override
 	public void persist(CustomerAdvisors entity) {
-		// TODO Auto-generated method stub
-
+		session.save(entity);
 	}
 
 	@Override
 	public List<CustomerAdvisors> showAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return session.createQuery("from CustomerAdvisors", CustomerAdvisors.class).list();
 	}
 }

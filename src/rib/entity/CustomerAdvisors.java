@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -45,10 +46,10 @@ public class CustomerAdvisors{
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "customerAdvisors")
 	private List<Client> client;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private BankAgency bankAgency;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Address address;
 
 	public CustomerAdvisors(String firstName, String lastName, String cnp, Address address, String phoneNumber,
@@ -66,14 +67,13 @@ public class CustomerAdvisors{
 	public String toString() {
 		String finalString;
 		finalString = "\nCustomer advisor " + id + "\nName: " + firstName + " " + lastName + "\nCNP: " + cnp
-				+ super.toString() + "\nPhone number: " + phoneNumber;
-		if (Hibernate.isInitialized(this.bankAgency) && this.bankAgency != null) {
-			finalString += "\nId: ";
-			finalString += this.bankAgency.getId();
-			finalString += "\n";
-		}
+				 + "\nPhone number: " + phoneNumber;
 		if (Hibernate.isInitialized(this.address) && this.address != null)
-			finalString += this.address;
+			finalString += "\nCustomer advisors address: "+this.address;
+		if (Hibernate.isInitialized(this.bankAgency) && this.bankAgency != null) {
+			finalString += "Bank address: "+this.bankAgency.getAddress();
+		}
+		
 //		else
 //			finalString += "\n";
 		return finalString;

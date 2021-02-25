@@ -83,7 +83,7 @@ public class ClientService {
 		clientDao.closeCurrentSession();
 		return client;
 	}
-	
+
 	public List<Client> findClientById(String id) throws Exception {
 		clientDao.openCurrentSession();
 		List<Client> lista = clientDao.findClientById(id);
@@ -91,9 +91,9 @@ public class ClientService {
 		return lista;
 	}
 
-	public void deleteClient(Client client) {
+	public void deleteClient(Client id) throws Exception {
 		clientDao.openCurrentSessionwithTransaction();
-		clientDao.delete(client);
+		clientDao.delete(id);
 		clientDao.closeCurrentSessionwithTransaction();
 	}
 
@@ -117,16 +117,30 @@ public class ClientService {
 		return lista;
 	}
 
-	public List<Client> orderClientsByCityAsc() {
+	public List<Client> orderClientsByFirstNameAsc() {
 		clientDao.openCurrentSession();
-		List<Client> lista = clientDao.orderByCityAsc();
+		List<Client> lista = clientDao.orderByFirstNameAsc();
 		clientDao.closeCurrentSession();
 		return lista;
 	}
 
-	public List<Client> orderClientsByCityDesc() {
+	public List<Client> orderClientsByFirstNameDesc() {
 		clientDao.openCurrentSession();
-		List<Client> lista = clientDao.orderByCityDesc();
+		List<Client> lista = clientDao.orderByFirstNameDesc();
+		clientDao.closeCurrentSession();
+		return lista;
+	}
+
+	public List<Client> orderClientsByLastNameAsc() {
+		clientDao.openCurrentSession();
+		List<Client> lista = clientDao.orderByLastNameAsc();
+		clientDao.closeCurrentSession();
+		return lista;
+	}
+
+	public List<Client> orderClientsByLastNameDesc() {
+		clientDao.openCurrentSession();
+		List<Client> lista = clientDao.orderByLastNameDesc();
 		clientDao.closeCurrentSession();
 		return lista;
 	}
@@ -166,40 +180,72 @@ public class ClientService {
 		client.setEmail(scanner.next());
 		System.out.print("ID: ");
 		client.setId(scanner.next());
-		
+
 		query.setParameter(1, client.getEmail());
 		query.setParameter(2, client.getId());
 		System.err.println("Client successfully updated!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}
-	
+
 	public void updateClientPhoneNumber(Client client) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		query = session.createNativeQuery("UPDATE CLIENT SET PhoneNumber=?1 where Id=?2");
 		System.out.print("Phoner number: ");
-		client.setEmail(scanner.next());
+		client.setPhoneNumber(scanner.next());
 		System.out.print("ID: ");
 		client.setId(scanner.next());
-		
+
 		query.setParameter(1, client.getPhoneNumber());
 		query.setParameter(2, client.getId());
 		System.err.println("Client successfully updated!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}
-	
+
 	public void updateClientFirstName(Client client) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		query = session.createNativeQuery("UPDATE CLIENT SET FirstName=?1 where Id=?2");
 		System.out.print("First name: ");
-		client.setEmail(scanner.next());
+		client.setFirstName(scanner.next());
 		System.out.print("ID: ");
 		client.setId(scanner.next());
-		
+
 		query.setParameter(1, client.getFirstName());
+		query.setParameter(2, client.getId());
+		System.err.println("Client successfully updated!");
+		query.executeUpdate();
+		session.getTransaction().commit();
+	}
+
+	public void updateClientLastName(Client client) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		query = session.createNativeQuery("UPDATE CLIENT SET LastName=?1 where Id=?2");
+		System.out.print("Last name: ");
+		client.setLastName(scanner.next());
+		System.out.print("ID: ");
+		client.setId(scanner.next());
+
+		query.setParameter(1, client.getLastName());
+		query.setParameter(2, client.getId());
+		System.err.println("Client successfully updated!");
+		query.executeUpdate();
+		session.getTransaction().commit();
+	}
+
+	public void updateClientAddress(Client client) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		query = session.createNativeQuery("UPDATE CLIENT SET Address_No=?1 where Id=?2");
+		System.out.print("Address no: ");
+		address.setNo(scanner.nextInt());
+		System.out.print("ID: ");
+		client.setId(scanner.next());
+
+		query.setParameter(1, address.getNo());
 		query.setParameter(2, client.getId());
 		System.err.println("Client successfully updated!");
 		query.executeUpdate();

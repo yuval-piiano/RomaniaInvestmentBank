@@ -1,5 +1,7 @@
 package rib.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -42,8 +46,10 @@ public class BankAgency {
 	@Column(name = "LunchBreak")
 	private String lunchBreak;
 
-	@OneToOne(mappedBy = "bankAgency")
-	private CustomerAdvisors customerAdvisors;
+	@OneToMany(cascade = { CascadeType.ALL, CascadeType.MERGE }, mappedBy = "bankAgency")
+	private List<CustomerAdvisors> customerAdvisors;
+//	@ManyToOne(mappedBy = "bankAgency")
+//	private CustomerAdvisors customerAdvisors;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Address address;
@@ -67,7 +73,7 @@ public class BankAgency {
 				+ "\nSaturday and Sunday: closed" + "\nLunch break: " + lunchBreak;
 
 		if (Hibernate.isInitialized(this.address) && this.address != null)
-			finalString += this.address;
+			finalString += "Bank agency address: "+this.address;
 //		else
 //			finalString += "\n".toString();
 

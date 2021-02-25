@@ -1,7 +1,9 @@
 package rib.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,13 +31,14 @@ public class BankAccount {
 	@Column(name="Password")
 	private int password;
 	
-	@OneToOne(mappedBy = "bankAccount")
-	private Client client;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Deposit deposit;
 	
-	public BankAccount(String username, int password) {
+	public BankAccount(String username, int password, Deposit deposit) {
 		super();
 		this.username=username;
 		this.password=password;
+		this.deposit=deposit;
 	}
 }
 

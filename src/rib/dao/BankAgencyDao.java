@@ -51,7 +51,6 @@ public class BankAgencyDao implements EntityDao<BankAgency, Integer> {
 		return session.get(BankAgency.class, no);
 	}
 	
-	@Override
 	public void delete(BankAgency entity) {
 		session.delete(entity);
 	}
@@ -69,14 +68,12 @@ public class BankAgencyDao implements EntityDao<BankAgency, Integer> {
 		return session.createQuery("FROM bankagency order by ID DESC", BankAgency.class).list();
 	}
 	
-	@Override
-	public List<BankAgency> orderByCityAsc() {
-		return session.createQuery("FROM bankAgency order by city ASC", BankAgency.class).list();
+	public List<BankAgency> orderByOperatingMorningHoursAsc() {
+		return session.createQuery("FROM bankAgency order by operatingMorningHours ASC", BankAgency.class).list();
 	}
 
-	@Override
-	public List<BankAgency> orderByCityDesc() {
-		return session.createQuery("FROM BankAgency order by City DESC", BankAgency.class).list();
+	public List<BankAgency> orderByOperatingMorningHoursDesc() {
+		return session.createQuery("FROM BankAgency order by operatingMorningHours DESC", BankAgency.class).list();
 	}
 
 	@Override

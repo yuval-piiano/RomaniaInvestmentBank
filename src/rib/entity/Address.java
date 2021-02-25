@@ -39,7 +39,7 @@ public class Address {
 	private String blockOfFlatsNumber;
 
 	@Column(name = "Apartment")
-	private String apartment;
+	private Integer apartment;
 
 	@Column(name = "Street")
 	private String street;
@@ -54,7 +54,7 @@ public class Address {
 	private BankAgency bankAgency;
 
 	public Address(String county, String city, String street, String houseNumber, String blockOfFlatsNumber,
-			String apartment) {
+			int apartment) {
 		super();
 		this.county = county;
 		this.city = city;
@@ -67,7 +67,7 @@ public class Address {
 	@Override
 	public String toString() {
 		String finalString;
-		finalString = "\nAddress: " + county + " County, " + city + ", St. " + street;
+		finalString =  county + " County, " + city + ", St. " + street;
 		if (Hibernate.isInitialized(this.houseNumber) && this.houseNumber != null)
 			finalString += ", No. " + this.houseNumber;
 		if (Hibernate.isInitialized(this.blockOfFlatsNumber) && this.blockOfFlatsNumber != null)

@@ -40,7 +40,7 @@ public class AddressService {
 		System.out.print("Block of flats number: ");
 		address.setBlockOfFlatsNumber(scanner.next());
 		System.out.print("Apartment: ");
-		address.setApartment(scanner.next());
+		address.setApartment(scanner.nextInt());
 		System.out.print("Street: ");
 		scanner.nextLine();
 		address.setStreet(scanner.nextLine());
@@ -49,7 +49,7 @@ public class AddressService {
 		query.setParameter(2, address.getCounty());
 		query.setParameter(3, address.getHouseNumber().equals("-") ? null : address.getHouseNumber());
 		query.setParameter(4, address.getBlockOfFlatsNumber().equals("-") ? null : address.getBlockOfFlatsNumber());
-		query.setParameter(5, address.getApartment().equals("-") ? null : address.getApartment());
+		query.setParameter(5, address.getApartment()==0 ? null : address.getApartment());
 		query.setParameter(6, address.getStreet());
 		System.err.println("Address successfully added!");
 		query.executeUpdate();
@@ -128,6 +128,7 @@ public class AddressService {
 		session.beginTransaction();
 		query = session.createNativeQuery(
 				"UPDATE Address SET County=:county, City=:city, Street=:street, HouseNumber=:houseNumber, BlockOfFlatsNumber=:blockOfFlatsNumber, Apartment=:apartment where No in (SELECT Address_No from Client where ID=:id)");
+		System.out.println("If a parameter doesn't exist, you set \"-\"");
 		System.out.print("County: ");
 		address.setCounty(scanner.next());
 		System.out.print("City: ");
@@ -135,22 +136,21 @@ public class AddressService {
 		System.out.print("Street: ");
 		scanner.nextLine();
 		address.setStreet(scanner.nextLine());
-		System.out.println("If a parameter doesn't exist, you set \"-\"");
 		System.out.print("House number: ");
 		address.setHouseNumber(scanner.next());
 		System.out.print("Block of flats number: ");
 		address.setBlockOfFlatsNumber(scanner.next());
 		System.out.print("Apartment: ");
-		address.setApartment(scanner.next());
+		address.setApartment(scanner.nextInt());
 		System.out.print("ID-ul clientului a carui adresa o modificati: ");
 		client.setId(scanner.next());
 		
 		query.setParameter("county", address.getCounty());
 		query.setParameter("city", address.getCity());
-		query.setParameter("street", address.getStreet());
+		query.setParameter("street", address.getStreet().equals("-") ? null : address.getStreet());
 		query.setParameter("houseNumber", address.getHouseNumber().equals("-") ? null : address.getHouseNumber());
 		query.setParameter("blockOfFlatsNumber", address.getBlockOfFlatsNumber().equals("-") ? null : address.getBlockOfFlatsNumber());
-		query.setParameter("apartment", address.getApartment().equals("-") ? null : address.getApartment());
+		query.setParameter("apartment", address.getApartment()==0? null : address.getApartment());
 		query.setParameter("id", client.getId());
 		System.err.println("Address successfully updated!");
 		query.executeUpdate();

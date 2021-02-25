@@ -4,13 +4,7 @@ import java.util.List;
 
 public interface EntityDao<Entity, No> {
 
-	public void delete(Entity entity);
-
 	public void deleteAll();
-	
-	public List<Entity> orderByCityAsc();
-
-	public List<Entity> orderByCityDesc();
 
 	public List<Entity> orderByNoAsc();
 

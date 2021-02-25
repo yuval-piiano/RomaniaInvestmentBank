@@ -36,7 +36,6 @@ public class AddressDao implements EntityDao<Address, Integer>{
 		session.close();
 	}
 
-	@Override
 	public void delete(Address entity) {
 		session.delete(entity);
 	}
@@ -46,12 +45,10 @@ public class AddressDao implements EntityDao<Address, Integer>{
 		session.createQuery("delete from Address").executeUpdate();
 	}
 
-	@Override
 	public List<Address> orderByCityAsc() {
 		return session.createQuery("FROM Address order by city asc", Address.class).list();
 	}
 
-	@Override
 	public List<Address> orderByCityDesc() {
 		return session.createQuery("FROM Address order by city desc", Address.class).list();
 	}

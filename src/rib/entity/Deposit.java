@@ -1,13 +1,10 @@
 package rib.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,22 +25,21 @@ public class Deposit {
 	private int no;
 	
 	@Column(name="Deposit_RON")
-	private long ron;
+	private Integer ron;
 	
 	@Column(name="Deposit_EUR")
-	private long eur;
+	private Integer eur;
 	
 	@Column(name="Deposit_USD")
-	private long usd;
+	private Integer usd;
 	
 	@Column(name="Deposit_GBP")
-	private long gbp;
+	private Integer gbp;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "Client_No")
+	@OneToOne(mappedBy = "bankAccount")
 	private Client client;
 
-	public Deposit(int no, long ron, long eur, long usd, long gbp, Client client) {
+	public Deposit(int no, int ron, int eur, int usd, int gbp, Client client) {
 		super();
 		this.no = no;
 		this.ron = ron;

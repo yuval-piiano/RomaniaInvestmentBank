@@ -5,8 +5,6 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.sun.xml.bind.v2.TODO;
-
 import rib.entity.BankAccount;
 import rib.util.HibernateUtils;
 

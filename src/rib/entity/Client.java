@@ -50,9 +50,9 @@ public class Client {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private BankAccount bankAccount;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "Deposit_ID")
-	private Deposit deposit;
+//	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	@JoinColumn(name = "Deposit_ID")
+//	private Deposit deposit;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "Address_No")
@@ -62,7 +62,7 @@ public class Client {
 	private CustomerAdvisors customerAdvisors;
 
 	public Client(String id, String firstName, String lastName, long cnp, String email, Address address,
-			String phoneNumber, CustomerAdvisors customerAdvisors, BankAccount bankAccount, Deposit deposit) {
+			String phoneNumber, CustomerAdvisors customerAdvisors, BankAccount bankAccount) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -70,23 +70,20 @@ public class Client {
 		this.cnp = cnp;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
-		this.customerAdvisors = customerAdvisors;
 		this.bankAccount=bankAccount;
 		this.address = address;
-		this.deposit=deposit;
+		this.customerAdvisors = customerAdvisors;
 	}
 
 	@Override
 	public String toString() {
 		String finalString;
 		finalString = "\nClient no. " + no + "\nId: " + id + "\nFirst name: " + firstName + "\nLast name: " + lastName
-				+ "\nCNP: " + cnp + "\nEmail: " + email + "\nPhone: " + phoneNumber;
-//		if (Hibernate.isInitialized(this.customerAdvisors) && this.customerAdvisors != null)
-//			finalString += this.customerAdvisors;
+				+ "\nCNP: " + cnp + "\nEmail: " + email + "\nPhone: " + phoneNumber+"\n";
 		if (Hibernate.isInitialized(this.address) && this.address != null)
-			finalString += this.address;
-		else
-			finalString += "\n";
+			finalString += "Client address: " +this.address;
+		if (Hibernate.isInitialized(this.customerAdvisors) && this.customerAdvisors != null)
+			finalString += this.customerAdvisors;
 		return finalString;
 	}
 }

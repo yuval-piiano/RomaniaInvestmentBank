@@ -9,8 +9,8 @@ INSERT INTO Client(id, firstName, lastName, cnp, email, phoneNumber, Address_No)
 INSERT INTO Client(id, firstName, lastName, cnp, email, phoneNumber, Address_No, bankAccount_ID) values("hnurb","Proca","Daria","2800417016563","dariaaa_proca7@yahoo.com","0702040669", 8, 2)
 INSERT INTO Client(id, firstName, lastName, cnp, email, phoneNumber, Address_No) values("mzdqm","Bogoescu","Cristina","2750501186493","bogoescu.cristinutza69@yahoo.com","0711376404",9)
 
-INSERT INTO bankAccount(username, password) values("abc", 123)
-INSERT INTO bankAccount(username, password) values("def", 987)
+INSERT INTO bankAccount(username, password, Deposit_ID) values("abc", 123, 1)
+INSERT INTO bankAccount(username, password, Deposit_ID) values("def", 987, null)
 
 INSERT INTO Customer_Advisors(FirstName, LastName, CNP, PhoneNumber, bankAgency_No,Address_No) values("Vladimirescu","Aurel","4321091239781","0781267832",1, 10)
 
@@ -41,4 +41,4 @@ INSERT INTO Address (City, County, HouseNumber, BlockOfFlatsNumber,Apartment, St
 INSERT INTO Address (City, County, HouseNumber, BlockOfFlatsNumber,Apartment, Street) values("Sibiu","Sibiu","39",null,null,"Nicolae Balcescu")
 INSERT INTO Address (City, County, HouseNumber, BlockOfFlatsNumber,Apartment, Street) values("Sibiu","Sibiu",null,"137",2,"Calea Dumbravei")
 
-INSERT INTO Deposit (Deposit_RON, Deposit_EUR, Deposit_USD,Deposit_GBP, Client_No) values (12000, 5000,100,null,10)
+INSERT INTO Deposit (Deposit_RON, Deposit_EUR, Deposit_USD, Deposit_GBP) values (12000, 5000,100, NULL)

@@ -57,10 +57,9 @@ public class ClientDao implements EntityDao<Client, Integer> {
 			throw new Exception("There is not client with first name: " + firstName);
 		return clients;
 	}
-
-	@Override
-	public void delete(Client entity) {
-		session.delete(entity);
+//TODO trebuie refacuta
+	public void delete(Client id) {
+		session.delete(id);
 	}
 
 	@Override
@@ -76,14 +75,21 @@ public class ClientDao implements EntityDao<Client, Integer> {
 		return session.createQuery("FROM Client order by id desc", Client.class).list();
 	}
 
-	@Override
-	public List<Client> orderByCityAsc() {
-		return session.createQuery("FROM Client order by city asc", Client.class).list();
+	public List<Client> orderByFirstNameAsc() {
+		return session.createQuery("FROM Client order by FirstName ASC", Client.class).list();
+	//FROM Client INNER JOIN Address on Client.address_No=Address.no order by Address.city asc
 	}
 
-	@Override
-	public List<Client> orderByCityDesc() {
-		return session.createQuery("FROM Client order by City desc", Client.class).list();
+	public List<Client> orderByFirstNameDesc() {
+		return session.createQuery("FROM Client order by FirstName DESC", Client.class).list();
+	}
+	
+	public List<Client> orderByLastNameAsc() {
+		return session.createQuery("FROM Client order by LastName ASC", Client.class).list();
+	}
+
+	public List<Client> orderByLastNameDesc() {
+		return session.createQuery("FROM Client order by LastName DESC", Client.class).list();
 	}
 
 	@Override

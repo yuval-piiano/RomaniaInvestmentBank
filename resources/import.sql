@@ -1,5 +1,5 @@
 use RomaniaInvestmentBank;
-INSERT INTO Client(id, firstName, lastName, cnp, email, phoneNumber, Address_No, bankAccount_ID, customerAdvisors_No) values("30s60","Suciu","Laurentiu","1870214106069","suciu.lau@gmail.com","0706190058",1,1,1)
+INSERT INTO Client(id, firstName, lastName, cnp, email, phoneNumber, Address_No, bankAccount_ID, customerAdvisors_No, ClientPassword_No) values("30s60","Suciu","Laurentiu","1870214106069","suciu.lau@gmail.com","0706190058",1,1,1,1)
 INSERT INTO Client(id, firstName, lastName, cnp, email, phoneNumber, Address_No) values("t3ayy","Antonescu","Iancu","1941118327494","iancu_antonescu10@yahoo.com","0702060769",2)
 INSERT INTO Client(id, firstName, lastName, cnp, email, phoneNumber, Address_No) values("pgzen","Stoica","Vladimir","5000112356574","stoicavladimir@yahoo.com","0706683324",3)
 INSERT INTO Client(id, firstName, lastName, cnp, email, phoneNumber, Address_No) values("xkwmp","Gusa","Costache","1950310198829","costi_gusa5@gmail.com","0702053921",4)
@@ -12,7 +12,7 @@ INSERT INTO Client(id, firstName, lastName, cnp, email, phoneNumber, Address_No)
 INSERT INTO bankAccount(username, password, Deposit_ID) values("abc", 123, 1)
 INSERT INTO bankAccount(username, password, Deposit_ID) values("def", 987, null)
 
-INSERT INTO Customer_Advisors(FirstName, LastName, CNP, PhoneNumber, bankAgency_No,Address_No) values("Vladimirescu","Aurel","4321091239781","0781267832",1, 10)
+INSERT INTO Customer_Advisors(FirstName, LastName, CNP, PhoneNumber, bankAgency_No,Address_No, CustomerAdvisorsPassword_No) values("Dan","Aurel","4321091239781","0781267832",1, 10,1)
 
 INSERT INTO bankAgency(id, phoneBankNumber, operatingMorningHours, operatingAfternoonHours, lunchBreak,Address_No) values("fk39z", "0256302014", "09:15-13:00","13:30-17:00", "13:00-13:30", 11)
 INSERT INTO bankAgency(id, phoneBankNumber, operatingMorningHours, operatingAfternoonHours, lunchBreak,Address_No) values("pz6g1", "0374477294", "09:15-13:00","13:30-17:00", "13:00-13:30", 12)
@@ -41,4 +41,20 @@ INSERT INTO Address (City, County, HouseNumber, BlockOfFlatsNumber,Apartment, St
 INSERT INTO Address (City, County, HouseNumber, BlockOfFlatsNumber,Apartment, Street) values("Sibiu","Sibiu","39",null,null,"Nicolae Balcescu")
 INSERT INTO Address (City, County, HouseNumber, BlockOfFlatsNumber,Apartment, Street) values("Sibiu","Sibiu",null,"137",2,"Calea Dumbravei")
 
+--Depozite clienti
 INSERT INTO Deposit (Deposit_RON, Deposit_EUR, Deposit_USD, Deposit_GBP) values (12000, 5000,100, NULL)
+
+--Parole angajati banca
+INSERT INTO CustomerAdvisorsPassword(password) values (1234)
+INSERT INTO CustomerAdvisorsPassword(password) values (7777)
+INSERT INTO CustomerAdvisorsPassword(password) values (9123)
+INSERT INTO CustomerAdvisorsPassword(password) values (0321)
+INSERT INTO CustomerAdvisorsPassword(password) values (5483)
+INSERT INTO CustomerAdvisorsPassword(password) values (9822)
+INSERT INTO CustomerAdvisorsPassword(password) values (8743)
+INSERT INTO CustomerAdvisorsPassword(password) values (1177)
+INSERT INTO CustomerAdvisorsPassword(password) values (8754)
+INSERT INTO CustomerAdvisorsPassword(password) values (3963)
+
+--Parole clienti banca
+INSERT INTO ClientPassword(password) values (1515)

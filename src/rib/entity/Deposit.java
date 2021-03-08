@@ -7,6 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
+
+import org.hibernate.Hibernate;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,25 +21,30 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@Positive
 public class Deposit {
 
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int no;
-	
-	@Column(name="Deposit_RON")
+
+	@Column(name = "Deposit_RON")
+	@Min(value = 0)
 	private Integer ron;
-	
-	@Column(name="Deposit_EUR")
+
+	@Column(name = "Deposit_EUR")
+	@Min(value = 0)
 	private Integer eur;
-	
-	@Column(name="Deposit_USD")
+
+	@Column(name = "Deposit_USD")
+	@Min(value = 0)
 	private Integer usd;
-	
-	@Column(name="Deposit_GBP")
+
+	@Column(name = "Deposit_GBP")
+	@Min(value = 0)
 	private Integer gbp;
-	
+
 	@OneToOne(mappedBy = "bankAccount")
 	private Client client;
 
@@ -48,6 +57,27 @@ public class Deposit {
 		this.gbp = gbp;
 		this.client = client;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		String finalString = "SOLD ";
+		if (Hibernate.isInitialized(this.ron) && this.getRon() != null)
+			finalString += "RON: " + this.ron;
+		else if (this.getRon() == null)
+			finalString += ", RON: " + 0;
+		if (Hibernate.isInitialized(this.eur) && this.getEur() != null)
+			finalString += ", EUR: " + this.eur;
+		else if (this.getEur() == null)
+			finalString += ", EUR: " + 0;
+		if (Hibernate.isInitialized(this.usd) && this.getUsd() != null)
+			finalString += ", USD: " + this.usd;
+		else if (this.getUsd() == null)
+			finalString += ", USD: " + 0;
+		if (Hibernate.isInitialized(this.gbp) && this.getGbp() != null)
+			finalString += ", GBP: " + this.gbp;
+		else if (this.getGbp() == null)
+			finalString += ", GBP: " + 0;
+		return finalString;
+	}
+
 }

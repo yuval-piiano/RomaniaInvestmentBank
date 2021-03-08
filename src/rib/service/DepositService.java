@@ -1,13 +1,11 @@
 package rib.service;
 
-import org.hibernate.SessionFactory;
+import java.util.List;
 
 import rib.dao.DepositDao;
 import rib.entity.Deposit;
-import rib.util.HibernateUtils;
 
 public class DepositService {
-	private static SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 	DepositDao depositDao = new DepositDao();
 
 	public DepositService() {
@@ -37,10 +35,42 @@ public class DepositService {
 		depositDao.addGbp(deposit);
 		depositDao.closeCurrentSessionwithTransaction();
 	}
-	
-	public void withdrowRon(Deposit deposit) {
+
+	public void withdrawalRon(Deposit deposit) {
 		depositDao.openCurrentSessionwithTransaction();
-		depositDao.removeRon(deposit);
+		depositDao.withdrawRon(deposit);
 		depositDao.closeCurrentSessionwithTransaction();
+	}
+
+	public void withdrawalEur(Deposit deposit) {
+		depositDao.openCurrentSessionwithTransaction();
+		depositDao.withdrawEur(deposit);
+		depositDao.closeCurrentSessionwithTransaction();
+	}
+
+	public void withdrawalUsd(Deposit deposit) {
+		depositDao.openCurrentSessionwithTransaction();
+		depositDao.withdrawUsd(deposit);
+		depositDao.closeCurrentSessionwithTransaction();
+	}
+
+	public void withdrawalGbp(Deposit deposit) {
+		depositDao.openCurrentSessionwithTransaction();
+		depositDao.withdrawGbp(deposit);
+		depositDao.closeCurrentSessionwithTransaction();
+	}
+
+	public List<Deposit> showAll() {
+		depositDao.openCurrentSession();
+		List<Deposit> list = depositDao.showAll();
+		depositDao.closeCurrentSession();
+		return list;
+	}
+
+	public List<Deposit> showPersonalDeposit(int password) {
+		depositDao.openCurrentSession();
+		List<Deposit> list = depositDao.showPersonalDeposit(password);
+		depositDao.closeCurrentSession();
+		return list;
 	}
 }

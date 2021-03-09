@@ -1,6 +1,7 @@
 package rib.dao;
 
-import javax.persistence.Query;
+import java.util.List;
+
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -35,11 +36,16 @@ public class BankAccountDao {
 		transaction.commit();
 		session.close();
 	}
-	//TODO repara asta
-	public BankAccount findPasswordByUser(String username) throws Exception {
-		Query query=session.createQuery("from BankAccount where Username=:username").setParameter("username", username);
-		if(query==null)
-			throw new Exception("The username "+username+" is wrong or don't exist");
-	return (BankAccount) query;
+
+	// TODO repara asta
+	@SuppressWarnings("unchecked")
+	public List<BankAccount> findPasswordByUser(String username) throws Exception {
+		List<BankAccount> list = session.createQuery("select password from BankAccount where Username=:username")
+				.setParameter("username", username).list();
+		if (list.isEmpty())
+			throw new Exception("Numele de utilizator " + username + " a fost introdus gresit sau nu exista");
+		else
+			System.err.print("Parola: ");
+		return list;
 	}
 }

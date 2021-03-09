@@ -9,41 +9,41 @@ public class Warehouse {
 	public void exit() {
 		String answer;
 		do {
-			System.out.println("Sunteti sigur ca doriti sa parasiti contul?");
-			System.out.print("Answer (yes or no): ");
+			System.out.println("\nSunteti sigur ca doriti sa parasiti contul?");
+			System.out.print("Raspuns (da sau nu): ");
 			answer = scanner.next();
 			switch (answer.toLowerCase()) {
-			case "yes": {
+			case "da": {
 				System.err.println("La revedere!");
 				System.exit(0);
 				break;
 			}
-			case "no": {
+			case "nu": {
 				break;
 			}
 			default: {
-				System.err.println("Optiunea introdusa este inexistenta!");
+				System.err.println("Optiunea este invalida!");
 			}
 			}
-		} while (!answer.toLowerCase().equals("no"));
+		} while (!answer.toLowerCase().equals("nu"));
 	}
 
 	public void hello() {
 		Calendar calendar = Calendar.getInstance();
 		int timeOfDay = calendar.get(Calendar.HOUR_OF_DAY);
 		if (timeOfDay >= 0 && timeOfDay < 12) {
-			System.out.println("\nGood morning!\n");
+			System.out.println("\nBuna dimineata!\n");
 		} else if (timeOfDay >= 12 && timeOfDay < 16) {
-			System.out.println("\nGood afternoon!\n");
+			System.out.println("\nBuna ziua!\n");
 		} else if (timeOfDay >= 16 && timeOfDay < 24) {
-			System.out.println("\nGood evening!\n");
+			System.out.println("\nBuna seara!\n");
 		}
 	}
 
 	public void progressBar() {
 		char[] animationChars = new char[] { '|', '/', '-', '\\' };
 		for (int i = 0; i <= 100; i++) {
-			System.out.print("Processing: " + i + "% " + animationChars[i % 4] + "\r");
+			System.out.print("Se verifica: " + i + "% " + animationChars[i % 4] + "\r");
 
 			try {
 				Thread.sleep(100);
@@ -51,6 +51,6 @@ public class Warehouse {
 				e.printStackTrace();
 			}
 		}
-		System.out.print("Processing: ");
+		System.out.print("Verificare: ");
 	}
 }

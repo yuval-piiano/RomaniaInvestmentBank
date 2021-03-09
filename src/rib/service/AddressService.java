@@ -30,18 +30,18 @@ public class AddressService {
 		session.beginTransaction();
 		query = session.createNativeQuery(
 				"INSERT INTO Address(City, County, HouseNumber, BlockOfFlatsNumber, Apartment, Street) values(?1,?2,?3,?4,?5,?6)");
-		System.out.println("If a parameter doesn't exist, you set \"-\"");
-		System.out.print("City: ");
+		System.out.println("Daca un parametru este momentan indisponibil, introduceti \"-\"");
+		System.out.print("Oras: ");
 		address.setCity(scanner.next());
-		System.out.print("County: ");
+		System.out.print("Judet: ");
 		address.setCounty(scanner.next());
-		System.out.print("House number: ");
+		System.out.print("Numar casa: ");
 		address.setHouseNumber(scanner.next());
-		System.out.print("Block of flats number: ");
+		System.out.print("Numar bloc: ");
 		address.setBlockOfFlatsNumber(scanner.next());
-		System.out.print("Apartment: ");
+		System.out.print("Apartament: ");
 		address.setApartment(scanner.nextInt());
-		System.out.print("Street: ");
+		System.out.print("Strada: ");
 		scanner.nextLine();
 		address.setStreet(scanner.nextLine());
 
@@ -51,7 +51,7 @@ public class AddressService {
 		query.setParameter(4, address.getBlockOfFlatsNumber().equals("-") ? null : address.getBlockOfFlatsNumber());
 		query.setParameter(5, address.getApartment()==0 ? null : address.getApartment());
 		query.setParameter(6, address.getStreet());
-		System.err.println("Address successfully added!");
+		System.err.println("Adresa adaugata cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}
@@ -128,19 +128,19 @@ public class AddressService {
 		session.beginTransaction();
 		query = session.createNativeQuery(
 				"UPDATE Address SET County=:county, City=:city, Street=:street, HouseNumber=:houseNumber, BlockOfFlatsNumber=:blockOfFlatsNumber, Apartment=:apartment where No in (SELECT Address_No from Client where ID=:id)");
-		System.out.println("If a parameter doesn't exist, you set \"-\"");
-		System.out.print("County: ");
+		System.out.println("Daca un parametru este momentan indisponibil, introduceti \"-\"");
+		System.out.print("Judet: ");
 		address.setCounty(scanner.next());
-		System.out.print("City: ");
+		System.out.print("Oras: ");
 		address.setCity(scanner.next());
-		System.out.print("Street: ");
+		System.out.print("Strada: ");
 		scanner.nextLine();
 		address.setStreet(scanner.nextLine());
-		System.out.print("House number: ");
+		System.out.print("Numar casa: ");
 		address.setHouseNumber(scanner.next());
-		System.out.print("Block of flats number: ");
+		System.out.print("Numar bloc: ");
 		address.setBlockOfFlatsNumber(scanner.next());
-		System.out.print("Apartment: ");
+		System.out.print("Apartament: ");
 		address.setApartment(scanner.nextInt());
 		System.out.print("ID-ul clientului a carui adresa o modificati: ");
 		client.setId(scanner.next());
@@ -152,7 +152,7 @@ public class AddressService {
 		query.setParameter("blockOfFlatsNumber", address.getBlockOfFlatsNumber().equals("-") ? null : address.getBlockOfFlatsNumber());
 		query.setParameter("apartment", address.getApartment()==0? null : address.getApartment());
 		query.setParameter("id", client.getId());
-		System.err.println("Address successfully updated!");
+		System.err.println("Adresa actualizata cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}

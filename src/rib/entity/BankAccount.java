@@ -7,8 +7,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.Hibernate;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +35,7 @@ public class BankAccount {
 	private int password;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "Deposit_ID")
 	private Deposit deposit;
 	
 	public BankAccount(String username, int password, Deposit deposit) {
@@ -39,6 +43,16 @@ public class BankAccount {
 		this.username=username;
 		this.password=password;
 		this.deposit=deposit;
+	}
+
+	@Override
+	public String toString() {
+		String finalString = "Id cont: " + id + ", nume de utilizator: " + username + ", parola: " + password ;
+		if (Hibernate.isInitialized(this.deposit) && this.deposit != null)
+			finalString += "\nDepozit: " + this.deposit + "\n";
+		else
+			finalString+="\n";
+		return finalString;
 	}
 }
 

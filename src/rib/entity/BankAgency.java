@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -68,12 +67,12 @@ public class BankAgency {
 	@Override
 	public String toString() {
 		String finalString;
-		finalString = "\nBank agency " + "\nId: " + id + "\nPhone: " + phoneBankNumber
-				+ "\nOperating hours\nMonday-Friday: " + operatingMorningHours + " and " + operatingAfternoonHours
-				+ "\nSaturday and Sunday: closed" + "\nLunch break: " + lunchBreak;
+		finalString = "\nAgentie bancara " + "\nId: " + id + "\nTelefon: " + phoneBankNumber
+				+ "\nProgram\nLuni-Vineri: " + operatingMorningHours + " si " + operatingAfternoonHours
+				+ "\nSambata si Duminica: inchis" + "\nPauza de masa: " + lunchBreak + "\n";
 
 		if (Hibernate.isInitialized(this.address) && this.address != null)
-			finalString += "Bank agency address: "+this.address;
+			finalString += "Adresa agentie bancara: " + this.address;
 //		else
 //			finalString += "\n".toString();
 
@@ -81,4 +80,3 @@ public class BankAgency {
 	}
 
 }
-

@@ -32,18 +32,18 @@ public class CustomerAdvisorsSevice {
 		session.beginTransaction();
 		Query query = session.createNativeQuery(
 				"INSERT INTO CustomersAdvisors(FirstName, LastName, CNP, PhoneNumber, address_No, bankAgency_No) values(?1,?2,?3,?4,?5,?6)");
-		System.out.print("First name: ");
+		System.out.print("Prenume: ");
 		customerAdvisors.setFirstName(scanner.next());
-		System.out.print("Last name: ");
+		System.out.print("Nume: ");
 		customerAdvisors.setLastName(scanner.next());
 		System.out.print("CNP: ");
 		customerAdvisors.setCnp(scanner.next());
-		System.out.print("Phone: ");
+		System.out.print("Telefon: ");
 		customerAdvisors.setPhoneNumber(scanner.next());
-		System.out.println("If a parameter doesn't exist, you enter \"0\"");
-		System.out.print("Address no.: ");
+		System.out.println("Daca un parametru este momentan indisponibil, introduceti \"0\"");
+		System.out.print("Nmarul adresei: ");
 		address.setNo(scanner.nextInt());
-		System.out.print("Bank agency no.: ");
+		System.out.print("Numarul agentiei bancare: ");
 		bankAgency.setNo(scanner.nextInt());
 
 		query.setParameter(1, customerAdvisors.getFirstName());
@@ -52,9 +52,15 @@ public class CustomerAdvisorsSevice {
 		query.setParameter(4, customerAdvisors.getPhoneNumber());
 		query.setParameter(5, address.getNo()==0?null:address.getNo());
 		query.setParameter(6, bankAgency.getNo()==0?null:bankAgency.getNo());
-		System.err.println("Customer advisors successfully added!");
+		System.err.println("Bancher adaugat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
+	}
+	
+	public void customerAdvisorsLogin(){
+		customerAdvisorsDao.openCurrentSession();
+		customerAdvisorsDao.customerAdvisorsLogin();
+		customerAdvisorsDao.closeCurrentSession();
 	}
 	
 	public void deleteCustomerAdvisors(CustomerAdvisors customerAdvisors) {
@@ -67,6 +73,13 @@ public class CustomerAdvisorsSevice {
 		customerAdvisorsDao.openCurrentSessionwithTransaction();
 		customerAdvisorsDao.deleteAll();
 		customerAdvisorsDao.closeCurrentSessionwithTransaction();
+	}
+	
+	public List<CustomerAdvisors> findCustomerAdvisorsByBankAgency(String bankID) {
+		customerAdvisorsDao.openCurrentSession();
+		List<CustomerAdvisors> list=customerAdvisorsDao.findBankEmployees(bankID);
+		customerAdvisorsDao.closeCurrentSession();
+		return list;
 	}
 	
 	public List<CustomerAdvisors> orderCustomerAdvisorsbyFirstNameAsc(){
@@ -97,19 +110,26 @@ public class CustomerAdvisorsSevice {
 		return list;
 	}
 	
+	public List<CustomerAdvisors> showAll() throws Exception {
+		customerAdvisorsDao.openCurrentSessionwithTransaction();
+		List<CustomerAdvisors> lista = customerAdvisorsDao.showAll();
+		customerAdvisorsDao.closeCurrentSessionwithTransaction();
+		return lista;
+	}
+	
 	public void updateCustomerAdvisors(CustomerAdvisors customerAdvisors) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Query query=session.createNativeQuery("UPDATE CustomerAdvisors set FirstName=:firstName, LastName=:lastName, PhoneNumber=:phoneNumber, address_No=:address_No, bankAgency_No=:bankAgency_No where CNP=:cnp");
-		System.out.print("First name: ");
+		System.out.print("Prenume: ");
 		customerAdvisors.setFirstName(scanner.next());
-		System.out.print("Last name: ");
+		System.out.print("Nume: ");
 		customerAdvisors.setLastName(scanner.next());
-		System.out.print("Phone: ");
+		System.out.print("Telefon: ");
 		customerAdvisors.setPhoneNumber(scanner.next());
-		System.out.print("Address no.: ");
+		System.out.print("Numarul adresei: ");
 		address.setNo(scanner.nextInt());
-		System.out.print("Bank agency no.: ");
+		System.out.print("Numarul agentiei bancare: ");
 		bankAgency.setNo(scanner.nextInt());
 		System.out.print("CNP: ");
 		customerAdvisors.setCnp(scanner.next());
@@ -120,7 +140,7 @@ public class CustomerAdvisorsSevice {
 		query.setParameter(4, address.getNo());
 		query.setParameter(5, bankAgency.getNo());
 		query.setParameter(6, customerAdvisors.getCnp());
-		System.err.println("Customer advisors successfully updated!");
+		System.err.println("Bancher actualizat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}

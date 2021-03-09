@@ -67,10 +67,22 @@ public class DepositService {
 		return list;
 	}
 
-	public List<Deposit> showPersonalDeposit(int password) {
+	public List<Deposit> showPersonalDeposit() {
 		depositDao.openCurrentSession();
-		List<Deposit> list = depositDao.showPersonalDeposit(password);
+		List<Deposit> list = depositDao.showPersonalDeposit();
 		depositDao.closeCurrentSession();
 		return list;
+	}
+
+	public void convertAllMoneyToRON() {
+		depositDao.openCurrentSession();
+		depositDao.convertAllMoneyToRON();
+		depositDao.closeCurrentSession();
+	}
+
+	public void convertAllMoneyToEUR() {
+		depositDao.openCurrentSession();
+		depositDao.convertAllMoneyToEUR();
+		depositDao.closeCurrentSession();
 	}
 }

@@ -66,12 +66,17 @@ public class Address {
 
 	@Override
 	public String toString() {
-		String finalString;
-		finalString =  county + " County, " + city + ", St. " + street;
+		String finalString = null;
+		if (Hibernate.isInitialized(this.county) && this.county != null)
+			finalString =this.county+" Judet, ";
+		if (Hibernate.isInitialized(this.city) && this.city != null)
+			finalString +=this.city;
+		if (Hibernate.isInitialized(this.street) && this.street != null)
+			finalString += ", Str. " + this.street;
 		if (Hibernate.isInitialized(this.houseNumber) && this.houseNumber != null)
-			finalString += ", No. " + this.houseNumber;
+			finalString += ", Nr. " + this.houseNumber;
 		if (Hibernate.isInitialized(this.blockOfFlatsNumber) && this.blockOfFlatsNumber != null)
-			finalString += ", Block No. " + this.blockOfFlatsNumber;
+			finalString += ", Nr. bloc. " + this.blockOfFlatsNumber;
 		if (Hibernate.isInitialized(this.apartment) && this.apartment != null)
 			finalString += ", Ap. " + this.apartment + "\n";
 		else

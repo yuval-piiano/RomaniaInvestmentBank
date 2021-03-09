@@ -3,11 +3,13 @@ package rib;
 import java.util.Scanner;
 
 import rib.entity.Address;
+import rib.entity.BankAccount;
 import rib.entity.BankAgency;
 import rib.entity.Client;
 import rib.entity.CustomerAdvisors;
 import rib.entity.Deposit;
 import rib.service.AddressService;
+import rib.service.BankAccountService;
 import rib.service.BankAgencyService;
 import rib.service.ClientService;
 import rib.service.CustomerAdvisorsSevice;
@@ -21,6 +23,8 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		Address address = new Address();
 		AddressService addressService = new AddressService();
+		BankAccount bankAccount=new BankAccount();
+		BankAccountService bankAccountService=new BankAccountService();
 		BankAgency bankAgency = new BankAgency();
 		BankAgencyService bankAgencyService = new BankAgencyService();
 		CustomerAdvisors customerAdvisors = new CustomerAdvisors();
@@ -34,22 +38,23 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 
 		int key;
-		System.out.println("Enter 1 for admin, 2 for client");
-		System.out.print("Please enter your option: ");
+		System.out.println("\n\n1 ADMIN   2 CLIENT");
+		System.out.print("Introduceti optiunea dumneavoastra: ");
 		key = scanner.nextInt();
-
 		switch (key) {
 		case 1: {
 			int option1;
-			customerAdvisorsSevice.customerAdvisorsLogin();
+		//	customerAdvisorsSevice.customerAdvisorsLogin();
+			for (int i = 0; i < 50; ++i)
+				System.out.println();
 			warehouse.hello();
 			do {
-				System.out.println("\nMAIN MENU");
-				System.out.println("1. Address menu");
-				System.out.println("2. Clienti");
+				System.out.println("\nMENIUL PRINCIPAL");
+				System.out.println("1. Adresa");
+				System.out.println("2. Client");
 				System.out.println("3. Banca");
-				System.out.println("4. Exit");
-				System.out.print("Please enter your option: ");
+				System.out.println("4. Iesire");
+				System.out.print("Introduceti optiunea dumneavoastra: ");
 				option1 = scanner.nextInt();
 				switch (option1) {
 				case 1: {
@@ -61,8 +66,8 @@ public class Main {
 						System.out.println("3. Stergere adresa");
 						System.out.println("4. Ordonare adrese");
 						System.out.println("5. Actualizare adresa");
-						System.out.println("0. Return to main menu");
-						System.out.print("Please enter your option: ");
+						System.out.println("0. Meniul principal");
+						System.out.print("Introduceti optiunea dumneavoastra: ");
 						option1_1 = scanner.nextInt();
 						if (option1_1 >= 1 && option1_1 <= 5)
 							System.out.println();
@@ -80,8 +85,8 @@ public class Main {
 							do {
 								System.out.println("1. Stergeti o anumita adresa");
 								System.out.println("2. Stergeti toate adresele");
-								System.out.println("0. Return to previous menu");
-								System.out.print("Please enter your option: ");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option1_3 = scanner.nextInt();
 								System.out.println();
 								switch (option1_3) {
@@ -97,7 +102,7 @@ public class Main {
 									break;
 								}
 								default: {
-									System.err.println("The option entered is non-existent!");
+									System.err.println("Optiune introdusa invalida!");
 									continue;
 								}
 								}
@@ -107,12 +112,12 @@ public class Main {
 						case 4: {
 							int option1_4;
 							do {
-								System.out.println("1. Order address by no");
-								System.out.println("2. Order address by county");
-								System.out.println("3. Order address by city");
-								System.out.println("9. Exit");
-								System.out.println("0. Return to previous menu");
-								System.out.print("Please enter your option: ");
+								System.out.println("1. Ordonati adresele dupa no");
+								System.out.println("2. Ordonati adresele dupa judet");
+								System.out.println("3. Ordonati adresele dupa oras");
+								System.out.println("9. Iesire");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option1_4 = scanner.nextInt();
 								System.out.println();
 								switch (option1_4) {
@@ -121,8 +126,8 @@ public class Main {
 									do {
 										System.out.println("1. Ascendent");
 										System.out.println("2. Descendent");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option1_4_1 = scanner.nextInt();
 										switch (option1_4_1) {
 										case 1: {
@@ -137,7 +142,7 @@ public class Main {
 											break;
 										}
 										default: {
-											System.err.println("The option entered is non-existent!");
+											System.err.println("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -150,8 +155,8 @@ public class Main {
 									do {
 										System.out.println("1. Ascendent");
 										System.out.println("2. Descendent");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option1_4_2 = scanner.nextInt();
 										switch (option1_4_2) {
 										case 1: {
@@ -166,7 +171,7 @@ public class Main {
 											break;
 										}
 										default: {
-											System.err.println("The option entered is non-existent!");
+											System.err.println("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -178,8 +183,8 @@ public class Main {
 									do {
 										System.out.println("1. Ascendent");
 										System.out.println("2. Descendent");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option1_4_3 = scanner.nextInt();
 										switch (option1_4_3) {
 										case 1: {
@@ -194,7 +199,7 @@ public class Main {
 											break;
 										}
 										default: {
-											System.err.println("The option entered is non-existent!");
+											System.err.println("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -209,7 +214,7 @@ public class Main {
 									break;
 								}
 								default:
-									System.err.println("The option entered is non-existent!");
+									System.err.println("Optiune introdusa invalida!");
 									continue;
 								}
 							} while (option1_4 != 0);
@@ -224,7 +229,7 @@ public class Main {
 							break;
 						}
 						default:
-							System.err.println("The option entered is non-existent!");
+							System.err.println("Optiune introdusa invalida!");
 							continue;
 						}
 					} while (option1_1 != 0);
@@ -233,20 +238,23 @@ public class Main {
 				case 2: {
 					int option2_1;
 					do {
-						System.out.println();
-						System.out.println("MENIU CLIENT");
+						System.out.println("\nMENIU CLIENT");
 						System.out.println("1. Adaugare client");
 						System.out.println("2. Afisare clienti");
 						System.out.println("3. Stergere client");
 						System.out.println("4. Ordonare clienti");
 						System.out.println("5. Actualizare date client");
 						System.out.println("6. Cautare client");
-						System.out.println("0. Return to main menu");
-						System.out.print("Please enter your option: ");
+						System.out.println("0. Meniul principal");
+						System.out.print("Introduceti optiunea dumneavoastra: ");
 						option2_1 = scanner.nextInt();
-						System.out.println();
 						switch (option2_1) {
 						case 1: {
+							System.err.println("Introduceti adresa!");
+							addressService.addAddress(address);
+							System.err.println("Introduceti contul bancar");
+							bankAccountService.addBankAccount(bankAccount);
+							System.err.println("Introduceti datele personale");
 							clientService.addClient(client);
 							break;
 						}
@@ -257,10 +265,10 @@ public class Main {
 						case 3: {
 							int option2_1_3;
 							do {
-								System.out.println("1. Stergeti un anumit client");
+								System.out.println("\n1. Stergeti un anumit client");
 								System.out.println("2. Stergeti toti clientii");
-								System.out.println("0. Return to previous menu");
-								System.out.print("Please enter your option: ");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option2_1_3 = scanner.nextInt();
 								System.out.println();
 								switch (option2_1_3) {
@@ -276,7 +284,7 @@ public class Main {
 									break;
 								}
 								default: {
-									System.err.println("The option entered is non-existent!");
+									System.err.print("\nOptiune introdusa invalida!");
 									continue;
 								}
 								}
@@ -286,13 +294,13 @@ public class Main {
 						case 4: {
 							int option2_1_4;
 							do {
-								System.out.println("1. Order clients by no");
-								System.out.println("2. Order clients by id");
-								System.out.println("3. Order clients by first name");
-								System.out.println("4. Order clients by last name");
-								System.out.println("9. Exit");
-								System.out.println("0. Return to previous menu");
-								System.out.print("Please enter your option: ");
+								System.out.println("\n1. Ordonati clientii dupa no");
+								System.out.println("2. Ordonati clientii dupa id");
+								System.out.println("3. Ordonati clientii dupa nume");
+								System.out.println("4. Ordonati clientii dupa prenume");
+								System.out.println("9. Iesire");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option2_1_4 = scanner.nextInt();
 								System.out.println();
 								switch (option2_1_4) {
@@ -301,8 +309,8 @@ public class Main {
 									do {
 										System.out.println("1. Ascendent");
 										System.out.println("2. Descendent");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option5_1 = scanner.nextInt();
 										switch (option5_1) {
 										case 1: {
@@ -317,7 +325,7 @@ public class Main {
 											break;
 										}
 										default: {
-											System.err.println("The option entered is non-existent!");
+											System.err.println("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -329,8 +337,8 @@ public class Main {
 									do {
 										System.out.println("1. Ascendent");
 										System.out.println("2. Descendent");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option5_2 = scanner.nextInt();
 										switch (option5_2) {
 										case 1: {
@@ -345,7 +353,7 @@ public class Main {
 											break;
 										}
 										default: {
-											System.err.println("The option entered is non-existent!");
+											System.err.println("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -357,8 +365,8 @@ public class Main {
 									do {
 										System.out.println("1. Ascendent");
 										System.out.println("2. Descendent");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option5_3 = scanner.nextInt();
 										switch (option5_3) {
 										case 1: {
@@ -373,7 +381,7 @@ public class Main {
 											break;
 										}
 										default: {
-											System.err.println("The option entered is non-existent!");
+											System.err.println("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -385,8 +393,8 @@ public class Main {
 									do {
 										System.out.println("1. Ascendent");
 										System.out.println("2. Descendent");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option5_4 = scanner.nextInt();
 										switch (option5_4) {
 										case 1: {
@@ -401,7 +409,7 @@ public class Main {
 											break;
 										}
 										default: {
-											System.err.println("The option entered is non-existent!");
+											System.err.println("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -416,7 +424,7 @@ public class Main {
 									break;
 								}
 								default:
-									System.err.println("The option entered is non-existent!");
+									System.err.println("Optiune introdusa invalida!");
 									continue;
 								}
 							} while (option2_1_4 != 0);
@@ -425,14 +433,14 @@ public class Main {
 						case 5: {
 							int option2_1_5;
 							do {
-								System.out.println("1. Update client email");
-								System.out.println("2. Update client phone");
-								System.out.println("3. Update client first name");
-								System.out.println("4. Update client last name");
-								System.out.println("5. Update client address");
-								System.out.println("9. Exit");
-								System.out.println("0. Return to previous menu");
-								System.out.print("Please enter your option: ");
+								System.out.println("\n1. Actualizati email-ul clientului");
+								System.out.println("2. Actualizati telefonul clientului");
+								System.out.println("3. Actualizati prenumele clientului");
+								System.out.println("4. Actualizati numele clientului");
+								System.out.println("5. Actualizati adresa clientului");
+								System.out.println("9. Iesire");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option2_1_5 = scanner.nextInt();
 								System.out.println();
 								switch (option2_1_5) {
@@ -464,7 +472,7 @@ public class Main {
 									break;
 								}
 								default:
-									System.err.println("The option entered is non-existent!");
+									System.err.println("Optiune introdusa invalida!");
 									continue;
 								}
 							} while (option2_1_5 != 0);
@@ -473,37 +481,36 @@ public class Main {
 						case 6: {
 							int option2_1_6;
 							do {
-								System.out.println("1. Find by first name");
-								System.out.println("2. Find by CNP");
-								System.out.println("3. Find by ID");
-								System.out.println("0. Return to previous menu");
-								System.out.print("Please enter your option: ");
+								System.out.println("\n1. Cautati dupa nume");
+								System.out.println("2. Cautati dupa CNP");
+								System.out.println("3. Cautati dupa id");
+								System.out.println("4. Cautati dupa cont");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option2_1_6 = scanner.nextInt();
 								System.out.println();
 								switch (option2_1_6) {
 								case 1: {
-									System.out.print("Introduceti numele clientului cautat: ");
-									String firstName = scanner.next();
-									System.out.println(clientService.findClientByFirstName(firstName));
+									System.out.println(clientService.findClientByFirstName());
 									break;
 								}
 								case 2: {
-									System.out.print("Introduceti CNP-ul clientului cautat: ");
-									int cnp = scanner.nextInt();
-									System.out.println(clientService.findClientByCnp(cnp));
+									System.out.println(clientService.findClientByCnp());
 									break;
 								}
 								case 3: {
-									System.out.print("Introduceti ID-ul clientului cautat: ");
-									String id = scanner.next();
-									System.out.println(clientService.findClientById(id));
+									System.out.println(clientService.findClientById());
+									break;
+								}
+								case 4:{
+									System.out.println(clientService.findClientByAccount());
 									break;
 								}
 								case 0: {
 									break;
 								}
 								default: {
-									System.err.println("The option entered is non-existent!");
+									System.err.println("Optiune introdusa invalida!");
 									continue;
 								}
 								}
@@ -514,7 +521,7 @@ public class Main {
 							break;
 						}
 						default: {
-							System.err.println("The option entered is non-existent!-------");
+							System.err.println("Optiune introdusa invalida!");
 							continue;
 						}
 						}
@@ -526,9 +533,9 @@ public class Main {
 					do {
 						System.out.println("\nMENIU BANCA");
 						System.out.println("1. Agentie bancara");
-						System.out.println("2. Angajati");
-						System.out.println("0. Return to main menu");
-						System.out.print("Please enter your option: ");
+						System.out.println("2. angajati");
+						System.out.println("0. Meniul principal");
+						System.out.print("Introduceti optiunea dumneavoastra: ");
 						option3_1 = scanner.nextInt();
 						switch (option3_1) {
 						case 1: {
@@ -541,9 +548,9 @@ public class Main {
 								System.out.println("4. Ordonare agentii");
 								System.out.println("5. Actualizare date agentii");
 								System.out.println("6. Cautare agentii");
-								System.out.println("9. Exit");
-								System.out.println("0. Return to previous menu");
-								System.out.print("Please enter your option: ");
+								System.out.println("9. Iesire");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option3_1_1 = scanner.nextInt();
 								if (option3_1_1 >= 1 && option3_1_1 <= 6)
 									System.out.println();
@@ -561,8 +568,8 @@ public class Main {
 									do {
 										System.out.println("1. Stergeti o anumita agentie");
 										System.out.println("2. Stergeti toate agentiile");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option3_1_1_3 = scanner.nextInt();
 										System.out.println();
 										switch (option3_1_1_3) {
@@ -578,7 +585,7 @@ public class Main {
 											break;
 										}
 										default: {
-											System.err.print("The option entered is non-existent!");
+											System.err.print("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -588,11 +595,11 @@ public class Main {
 								case 4: {
 									int option3_1_1_4;
 									do {
-										System.out.println("1. Order bank agency by no");
-										System.out.println("2. Order bank agency by id");
-										System.out.println("3. Order bank agency by operating hours");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("1. Ordonati agentiile bancare dupa no");
+										System.out.println("2. Ordonati agentiile bancare dupa id");
+										System.out.println("3. Ordonati agentiile bancare dupa orele de program");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option3_1_1_4 = scanner.nextInt();
 										System.out.println();
 										switch (option3_1_1_4) {
@@ -601,8 +608,8 @@ public class Main {
 											do {
 												System.out.println("1. Ascendent");
 												System.out.println("2. Descendent");
-												System.out.println("0. Return to previous menu");
-												System.out.print("Please enter your option: ");
+												System.out.println("0. Meniul anterior");
+												System.out.print("Introduceti optiunea dumneavoastra: ");
 												option3_1_1_4_1 = scanner.nextInt();
 												switch (option3_1_1_4_1) {
 												case 1: {
@@ -617,7 +624,7 @@ public class Main {
 													break;
 												}
 												default: {
-													System.err.print("The option entered is non-existent!");
+													System.err.print("Optiune introdusa invalida!");
 													continue;
 												}
 												}
@@ -629,8 +636,8 @@ public class Main {
 											do {
 												System.out.println("1. Ascendent");
 												System.out.println("2. Descendent");
-												System.out.println("0. Return to previous menu");
-												System.out.print("Please enter your option: ");
+												System.out.println("0. Meniul anterior");
+												System.out.print("Introduceti optiunea dumneavoastra: ");
 												option3_1_1_4_2 = scanner.nextInt();
 												switch (option3_1_1_4_2) {
 												case 1: {
@@ -645,7 +652,7 @@ public class Main {
 													break;
 												}
 												default: {
-													System.err.print("The option entered is non-existent!");
+													System.err.print("Optiune introdusa invalida!");
 													continue;
 												}
 												}
@@ -657,8 +664,8 @@ public class Main {
 											do {
 												System.out.println("1. Ascendent");
 												System.out.println("2. Descendent");
-												System.out.println("0. Return to previous menu");
-												System.out.print("Please enter your option: ");
+												System.out.println("0. Meniul anterior");
+												System.out.print("Introduceti optiunea dumneavoastra: ");
 												option3_1_1_4_3 = scanner.nextInt();
 												switch (option3_1_1_4_3) {
 												case 1: {
@@ -673,7 +680,7 @@ public class Main {
 													break;
 												}
 												default: {
-													System.err.print("The option entered is non-existent!");
+													System.err.print("Optiune introdusa invalida!");
 													continue;
 												}
 												}
@@ -684,7 +691,7 @@ public class Main {
 											break;
 										}
 										default: {
-											System.err.println("The option entered is non-existent!");
+											System.err.println("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -698,32 +705,27 @@ public class Main {
 								case 6: {
 									int option3_1_1_6;
 									do {
-										System.out.println("1. Find by no");
-										System.out.println("2. Find by city");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("1. Cautati dupa no");
+										System.out.println("2. Cautare dupa oras");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option3_1_1_6 = scanner.nextInt();
 										System.out.println();
 										switch (option3_1_1_6) {
 										case 1: {
-											int no;
-											System.out.print("Introduceti numarul agentiei pe care o cautati: ");
-											no = scanner.nextInt();
-											System.out.println(bankAgencyService.findBankAgencyByNo(no));
+											
+											System.out.println(bankAgencyService.findBankAgencyByNo());
 											break;
 										}
 										case 2: {
-											String city;
-											System.out.print("Introduceti orasul in care doriti sa cautati: ");
-											city = scanner.next();
-											System.out.println(bankAgencyService.findBankAgencyByCity(city));
+											System.out.println(bankAgencyService.findBankAgencyByCity());
 											break;
 										}
 										case 0: {
 											break;
 										}
 										default: {
-											System.err.print("The option entered is non-existent!");
+											System.err.print("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -738,7 +740,7 @@ public class Main {
 									break;
 								}
 								default: {
-									System.err.print("The option entered is non-existent!");
+									System.err.print("Optiune introdusa invalida!");
 									continue;
 								}
 								}
@@ -748,16 +750,16 @@ public class Main {
 						case 2: {
 							int option3_1_2;
 							do {
-								System.out.println("\nMENIU ANGAJATI BANCA");
-								System.out.println("1. Adaugare angajat");
-								System.out.println("2. Afisare angajati");
-								System.out.println("3. Stergere angajat");
-								System.out.println("4. Ordonare angajati");
-								System.out.println("5. Actualizare date angajat");
-								System.out.println("6. Cautare angajat");
-								System.out.println("9. Exit");
-								System.out.println("0. Return to previous menu");
-								System.out.print("Please enter your option: ");
+								System.out.println("\nMENIU BANCHERI");
+								System.out.println("1. Adaugare bancher");
+								System.out.println("2. Lista bancheri");
+								System.out.println("3. Stergere bancher");
+								System.out.println("4. Ordonare bancheri");
+								System.out.println("5. Actualizare date bancher");
+								System.out.println("6. Cautare bancher");
+								System.out.println("9. Iesire");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option3_1_2 = scanner.nextInt();
 								if (option3_1_2 >= 1 && option3_1_2 <= 6)
 									System.out.println();
@@ -773,10 +775,10 @@ public class Main {
 								case 3: {
 									int option3_1_2_3;
 									do {
-										System.out.println("1. Stergeti un anumit angajat");
+										System.out.println("1. Stergeti un anumit bancher");
 										System.out.println("2. Stergeti toti angajatii");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option3_1_2_3 = scanner.nextInt();
 										switch (option3_1_2_3) {
 										case 1: {
@@ -791,7 +793,7 @@ public class Main {
 											break;
 										}
 										default: {
-											System.err.println("The option entered is non-existent!");
+											System.err.println("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -801,10 +803,10 @@ public class Main {
 								case 4: {
 									int option3_1_2_4;
 									do {
-										System.out.println("1. Order customer advisors by first name");
-										System.out.println("2. Order customer advisors by last name");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("1. Ordonati bancheri dupa nume");
+										System.out.println("2. Ordonati bancheri dupa prenume");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option3_1_2_4 = scanner.nextInt();
 										switch (option3_1_2_4) {
 										case 1: {
@@ -812,8 +814,8 @@ public class Main {
 											do {
 												System.out.println("1. Ascendent");
 												System.out.println("2. Descendent");
-												System.out.println("0. Return to previous menu");
-												System.out.print("Please enter your option: ");
+												System.out.println("0. Meniul anterior");
+												System.out.print("Introduceti optiunea dumneavoastra: ");
 												option3_1_2_4_1 = scanner.nextInt();
 												switch (option3_1_2_4_1) {
 												case 1: {
@@ -830,7 +832,7 @@ public class Main {
 													break;
 												}
 												default: {
-													System.err.println("The option entered is non-existent!");
+													System.err.println("Optiune introdusa invalida!");
 													continue;
 												}
 												}
@@ -842,8 +844,8 @@ public class Main {
 											do {
 												System.out.println("1. Ascendent");
 												System.out.println("2. Descendent");
-												System.out.println("0. Return to previous menu");
-												System.out.print("Please enter your option: ");
+												System.out.println("0. Meniul anterior");
+												System.out.print("Introduceti optiunea dumneavoastra: ");
 												option3_1_2_4_2 = scanner.nextInt();
 												switch (option3_1_2_4_2) {
 												case 1: {
@@ -860,7 +862,7 @@ public class Main {
 													break;
 												}
 												default: {
-													System.err.println("The option entered is non-existent!");
+													System.err.println("Optiune introdusa invalida!");
 													continue;
 												}
 												}
@@ -871,7 +873,7 @@ public class Main {
 											break;
 										}
 										default: {
-											System.err.println("The option entered is non-existent!");
+											System.err.println("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -885,9 +887,9 @@ public class Main {
 								case 6: {
 									int option3_1_2_6;
 									do {
-										System.out.println("1. Find by bank agency");
-										System.out.println("0. Return to previous menu");
-										System.out.print("Please enter your option: ");
+										System.out.println("1. Cautare dupa agentia bancara");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option3_1_2_6 = scanner.nextInt();
 										switch (option3_1_2_6) {
 										case 1: {
@@ -901,7 +903,7 @@ public class Main {
 											break;
 										}
 										default: {
-											System.err.println("The option entered is non-existent!");
+											System.err.println("Optiune introdusa invalida!");
 											continue;
 										}
 										}
@@ -916,7 +918,7 @@ public class Main {
 									break;
 								}
 								default: {
-									System.err.println("The option entered is non-existent!");
+									System.err.println("Optiune introdusa invalida!");
 									continue;
 								}
 								}
@@ -924,25 +926,22 @@ public class Main {
 							break;
 						}
 						default: {
-							System.err.println("The option entered is non-existent!");
+							System.err.println("Optiune introdusa invalida!");
 							continue;
 						}
 						case 0: {
 							break;
 						}
 						}
-
 					} while (option3_1 != 0);
 					break;
 				}
-
 				case 4: {
 					warehouse.exit();
 					break;
 				}
-
 				default: {
-					System.err.println("The option entered is non-existent!");
+					System.err.println("Optiune introdusa invalida!");
 					continue;
 				}
 				}
@@ -951,38 +950,41 @@ public class Main {
 		}
 
 		case 2: {
-			// clientService.clientLogin();
-			System.out.println("Ai reusit sa te autentifici ca si client!");
+			 clientService.clientLogin();
+			for (int i = 0; i < 50; ++i)
+				System.out.println();
 			warehouse.hello();
 			int option2;
 			do {
-				System.out.println("\nMAIN MENU");
-				System.out.println("1. Personal account");
-				System.out.println("2. Bank agency");
-				System.out.println("3. Exit");
-				System.out.print("Please enter your option: ");
+				System.out.println("\nMENIUL PRINCIPAL");
+				System.out.println("1. Cont personal");
+				System.out.println("2. Agentie bancara");
+				System.out.println("3. Iesire");
+				System.out.print("Introduceti optiunea dumneavoastra: ");
 				option2 = scanner.nextInt();
 				switch (option2) {
 				case 1: {
 					int option2_1;
 					do {
-						System.out.println("1. Cash deposits");
-						System.out.println("2. Withdrawal");
+						System.out.println("\nCONT PERSONAL");
+						System.out.println("1. Depunere numerar");
+						System.out.println("2. Retragere numerar");
 						System.out.println("3. Vizualizare sold");
-						System.out.println("0. Return to main menu");
-						System.out.print("Please enter your option: ");
+						System.out.println("4. Simulare");
+						System.out.println("0. Meniul principal");
+						System.out.print("Introduceti optiunea dumneavoastra: ");
 						option2_1 = scanner.nextInt();
 						switch (option2_1) {
 						case 1: {
 							int option2_1_1;
 							do {
-								System.out.println("\nMENU OF CASH DEPOSITS");
-								System.out.println("1. Ron");
-								System.out.println("2. Euro");
+								System.out.println("\nMENIUL DE DEPUNERI");
+								System.out.println("1. RON");
+								System.out.println("2. EUR");
 								System.out.println("3. USD");
 								System.out.println("4. GBP");
-								System.out.println("0. Return to previous menu");
-								System.out.print("Please enter your option: ");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option2_1_1 = scanner.nextInt();
 								switch (option2_1_1) {
 								case 1: {
@@ -1005,7 +1007,7 @@ public class Main {
 									break;
 								}
 								default: {
-									System.err.println("The option entered is non-existent!");
+									System.err.println("Optiune introdusa invalida!");
 									continue;
 								}
 								}
@@ -1015,13 +1017,13 @@ public class Main {
 						case 2: {
 							int option2_1_2;
 							do {
-								System.out.println("\n MENU OF WITHDRAWALS");
-								System.out.println("1. Ron");
-								System.out.println("2. Euro");
+								System.out.println("\n MENIUL DE RETRAGERI");
+								System.out.println("1. RON");
+								System.out.println("2. EUR");
 								System.out.println("3. USD");
 								System.out.println("4. GBP");
-								System.out.println("0. Return to previous menu");
-								System.out.print("Please enter your option: ");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option2_1_2 = scanner.nextInt();
 								switch (option2_1_2) {
 								case 1: {
@@ -1044,7 +1046,7 @@ public class Main {
 									break;
 								}
 								default: {
-									System.err.println("The option entered is non-existent!");
+									System.err.println("Optiune introdusa invalida!");
 									continue;
 								}
 								}
@@ -1052,16 +1054,43 @@ public class Main {
 							break;
 						}
 						case 3: {
-							System.out.print("Enter the password: ");
-							int password = scanner.nextInt();
-							System.out.println(depositService.showPersonalDeposit(password));
+							System.out.println(depositService.showPersonalDeposit());
+							break;
+						}
+						case 4: {
+							int option2_1_4;
+							do {
+								System.out.println("\n Convertiti toti banii in:");
+								System.out.println("1. RON");
+								System.out.println("2. EUR");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
+								option2_1_4 = scanner.nextInt();
+								switch (option2_1_4) {
+								case 1: {
+									depositService.convertAllMoneyToRON();
+									break;
+								}
+								case 2: {
+									depositService.convertAllMoneyToEUR();
+									break;
+								}
+								case 0: {
+									break;
+								}
+								default: {
+									System.err.println("Optiune introdusa invalida!");
+									continue;
+								}
+								}
+							} while (option2_1_4 != 0);
 							break;
 						}
 						case 0: {
 							break;
 						}
 						default: {
-							System.err.println("The option entered is non-existent!");
+							System.err.println("Optiune introdusa invalida!");
 							continue;
 						}
 						}
@@ -1071,10 +1100,10 @@ public class Main {
 				case 2: {
 					int option2_2;
 					do {
-						System.out.println("1. Banking agencies list");
-						System.out.println("2. Search banking agencies");
-						System.out.println("0. Return to main menu");
-						System.out.print("Please enter your option: ");
+						System.out.println("\n1. Lista agentii bancare");
+						System.out.println("2. Cautare agentie bancara");
+						System.out.println("0. Meniul principal");
+						System.out.print("Introduceti optiunea dumneavoastra: ");
 						option2_2 = scanner.nextInt();
 						switch (option2_2) {
 						case 1: {
@@ -1084,29 +1113,25 @@ public class Main {
 						case 2: {
 							int option2_2_2;
 							do {
-								System.out.println("1. Search by county");
-								System.out.println("2. Search by city");
-								System.out.println("0. Return to main menu");
-								System.out.print("Please enter your option: ");
+								System.out.println("\n1. Cautare dupa judet");
+								System.out.println("2. Cautare dupa oras");
+								System.out.println("0. Meniul principal");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option2_2_2 = scanner.nextInt();
 								switch (option2_2_2) {
 								case 1: {
-									System.out.print("Please enter the county: ");
-									String county = scanner.next();
-									System.out.println(bankAgencyService.findBankAgencyByCounty(county));
+									System.out.println(bankAgencyService.findBankAgencyByCounty());
 									break;
 								}
 								case 2: {
-									System.out.print("Please enter the city: ");
-									String city = scanner.next();
-									System.out.println(bankAgencyService.findBankAgencyByCity(city));
+									System.out.println(bankAgencyService.findBankAgencyByCity());
 									break;
 								}
 								case 0: {
 									break;
 								}
 								default: {
-									System.err.println("The option entered is non-existent!");
+									System.err.println("Optiune introdusa invalida!");
 									continue;
 								}
 								}
@@ -1117,7 +1142,7 @@ public class Main {
 							break;
 						}
 						default: {
-							System.err.println("The option entered is non-existent!");
+							System.err.println("Optiune introdusa invalida!");
 							continue;
 						}
 						}
@@ -1129,7 +1154,7 @@ public class Main {
 					break;
 				}
 				default: {
-					System.err.println("The option entered is non-existent!");
+					System.err.println("Optiune introdusa invalida!");
 					continue;
 				}
 				}
@@ -1137,7 +1162,7 @@ public class Main {
 			break;
 		}
 		default: {
-			System.err.println("The option entered is non-existent!");
+			System.err.println("Optiune introdusa invalida!");
 			break;
 		}
 		}

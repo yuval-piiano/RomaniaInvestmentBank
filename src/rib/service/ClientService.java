@@ -34,26 +34,26 @@ public class ClientService {
 		session.beginTransaction();
 		query = session.createNativeQuery(
 				"INSERT INTO Client (Id, FirstName, LastName, CNP, Email, PhoneNumber, bankAccount_ID, Address_No, customerAdvisors_No) values(?1,?2,?3,?4,?5,?6,?7,?8,?9)");
-		System.out.println("If a parameter doesn't exist, you enter \"-\"");
+		System.out.println("Daca un parametru este momentan indisponibil, introduceti \"-\"");
 		System.out.print("ID: ");
 		client.setId(scanner.next());
-		System.out.print("First name: ");
+		System.out.print("Prenume: ");
 		scanner.nextLine();
 		client.setFirstName(scanner.nextLine());
-		System.out.print("Last name: ");
+		System.out.print("Nume: ");
 		client.setLastName(scanner.next());
 		System.out.print("CNP: ");
 		client.setCnp(scanner.nextLong());
 		System.out.print("Email: ");
 		client.setEmail(scanner.next());
-		System.out.print("Phone number: ");
+		System.out.print("Telefon: ");
 		client.setPhoneNumber(scanner.next());
-		System.out.println("If a parameter doesn't exist, you enter \"0\"");
-		System.out.print("Account ID: ");
+		System.out.println("Daca un parametru este momentan indisponibil, introduceti \"0\"");
+		System.out.print("Id-ul contului: ");
 		bankAccount.setId(scanner.nextInt());
-		System.out.print("Address No: ");
+		System.out.print("Numarul adresei: ");
 		address.setNo(scanner.nextInt());
-		System.out.print("Customers advisor ID: ");
+		System.out.print("Id-ul bancherului: ");
 		customerAdvisors.setId(scanner.nextInt());
 
 		query.setParameter(1, client.getId());
@@ -65,35 +65,55 @@ public class ClientService {
 		query.setParameter(7, bankAccount.getId() == 0 ? null : bankAccount.getId());
 		query.setParameter(8, address.getNo() == 0 ? null : address.getNo());
 		query.setParameter(9, customerAdvisors.getId() == 0 ? null : customerAdvisors.getId());
-		System.err.println("Client successfully added!");
+		System.err.println("Client adaugat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}
-
-	public List<Client> findClientByFirstName(String firstName) throws Exception {
+	
+	public void clientLogin() {
 		clientDao.openCurrentSession();
-		List<Client> lista = clientDao.findClientByName(firstName);
+		clientDao.clientLogin();
+		clientDao.closeCurrentSession();
+	}
+
+	public List<Client> findClientByFirstName(){
+		clientDao.openCurrentSession();
+		List<Client> lista = clientDao.findClientByName();
 		clientDao.closeCurrentSession();
 		return lista;
 	}
 
-	public Client findClientByCnp(int cnp) {
+	public List<Client> findClientByCnp() {
 		clientDao.openCurrentSession();
-		Client client = clientDao.findByCnp(cnp);
+		List<Client> list = clientDao.findByCnp();
 		clientDao.closeCurrentSession();
-		return client;
+		return list;
+	}
+	
+	public List<Client> findClientByAccount() {
+		clientDao.openCurrentSession();
+		List<Client> list = clientDao.findClientByPassAndUser();
+		clientDao.closeCurrentSession();
+		return list;
 	}
 
-	public List<Client> findClientById(String id) throws Exception {
+	public List<Client> findClientById(){
 		clientDao.openCurrentSession();
-		List<Client> lista = clientDao.findClientById(id);
+		List<Client> list = clientDao.findClientById();
 		clientDao.closeCurrentSession();
-		return lista;
+		return list;
 	}
+	
+//	public List<Client> findClientByPasswordAndUsername(int password, String username){
+//		clientDao.openCurrentSession();
+//		List<Client> list = clientDao.findClientByPassAndUser(password, username);
+//		clientDao.closeCurrentSession();
+//		return list;
+//	}
 
-	public void deleteClient(Client id) throws Exception {
+	public void deleteClient() throws Exception {
 		clientDao.openCurrentSessionwithTransaction();
-		clientDao.delete(id);
+		clientDao.delete();
 		clientDao.closeCurrentSessionwithTransaction();
 	}
 
@@ -183,7 +203,7 @@ public class ClientService {
 
 		query.setParameter(1, client.getEmail());
 		query.setParameter(2, client.getId());
-		System.err.println("Client successfully updated!");
+		System.err.println("Client actualizat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}
@@ -192,14 +212,14 @@ public class ClientService {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		query = session.createNativeQuery("UPDATE CLIENT SET PhoneNumber=?1 where Id=?2");
-		System.out.print("Phoner number: ");
+		System.out.print("Telefon: ");
 		client.setPhoneNumber(scanner.next());
 		System.out.print("ID: ");
 		client.setId(scanner.next());
 
 		query.setParameter(1, client.getPhoneNumber());
 		query.setParameter(2, client.getId());
-		System.err.println("Client successfully updated!");
+		System.err.println("Client actualizat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}
@@ -208,14 +228,14 @@ public class ClientService {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		query = session.createNativeQuery("UPDATE CLIENT SET FirstName=?1 where Id=?2");
-		System.out.print("First name: ");
+		System.out.print("Prenume: ");
 		client.setFirstName(scanner.next());
 		System.out.print("ID: ");
 		client.setId(scanner.next());
 
 		query.setParameter(1, client.getFirstName());
 		query.setParameter(2, client.getId());
-		System.err.println("Client successfully updated!");
+		System.err.println("Client actualizat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}
@@ -224,14 +244,14 @@ public class ClientService {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		query = session.createNativeQuery("UPDATE CLIENT SET LastName=?1 where Id=?2");
-		System.out.print("Last name: ");
+		System.out.print("Nume: ");
 		client.setLastName(scanner.next());
 		System.out.print("ID: ");
 		client.setId(scanner.next());
 
 		query.setParameter(1, client.getLastName());
 		query.setParameter(2, client.getId());
-		System.err.println("Client successfully updated!");
+		System.err.println("Client actualizat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}
@@ -240,14 +260,14 @@ public class ClientService {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		query = session.createNativeQuery("UPDATE CLIENT SET Address_No=?1 where Id=?2");
-		System.out.print("Address no: ");
+		System.out.print("Numarul adresei: ");
 		address.setNo(scanner.nextInt());
 		System.out.print("ID: ");
 		client.setId(scanner.next());
 
 		query.setParameter(1, address.getNo());
 		query.setParameter(2, client.getId());
-		System.err.println("Client successfully updated!");
+		System.err.println("Client actualizat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}

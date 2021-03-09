@@ -33,19 +33,19 @@ public class BankAgencyService {
 		Session session = sessionFactory.openSession();
 		Query query = session.createNativeQuery(
 				"INSERT INTO BankAgency(ID, LunchBreak, OperatingMorningHours, OperatingAfternoonHours, PhoneBankNumber, address_No) values(?1,?2,?3,?4,?5,?6)");
-		System.out.println("If a parameter doesn't exist, you enter \"-\"");
+		System.err.println("Daca un parametru este momentan indisponibil, introduceti \"-\"");
 		System.out.print("ID: ");
 		bankAgency.setId(scanner.next());
-		System.out.print("Lunch break: ");
+		System.out.print("Pauza de masa: ");
 		bankAgency.setLunchBreak(scanner.next());
-		System.out.print("Operating morning hours: ");
+		System.out.print("Programul de dimineata: ");
 		bankAgency.setOperatingMorningHours(scanner.next());
-		System.out.print("Operating afternoon hours: ");
+		System.out.print("Programul de dupa-amiaza: ");
 		bankAgency.setOperatingAfternoonHours(scanner.next());
-		System.out.print("Phone: ");
+		System.out.print("Telefon: ");
 		bankAgency.setPhoneBankNumber(scanner.next());
-		System.out.println("If the parameter doesn't exist, you enter \"0\"");
-		System.out.print("Address no: ");
+		System.err.println("Daca adresa este momentan indisponibila introduceti \"0\"");
+		System.out.print("Numarul adresei: ");
 		address.setNo(scanner.nextInt());
 
 		query.setParameter(1, bankAgency.getId());
@@ -56,14 +56,28 @@ public class BankAgencyService {
 				bankAgency.getOperatingAfternoonHours().equals("-") ? null : bankAgency.getOperatingAfternoonHours());
 		query.setParameter(5, bankAgency.getPhoneBankNumber().equals("-") ? null : bankAgency.getPhoneBankNumber());
 		query.setParameter(6, address.getNo() == 0 ? null : address.getNo());
-		System.err.println("Bank agency successfully added!");
+		System.err.println("Agentia bancara a fost adaugata cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}
 
-	public BankAgency findBankAgencyByNo(int no) {
+	public List<BankAgency> findBankAgencyByCity(){
+		bankAgencyDao.openCurrentSessionwithTransaction();
+		List<BankAgency> list = bankAgencyDao.findBankAgencyByCity();
+		bankAgencyDao.closeCurrentSessionwithTransaction();
+		return list;
+	}
+	
+	public List<BankAgency> findBankAgencyByCounty(){
+		bankAgencyDao.openCurrentSessionwithTransaction();
+		List<BankAgency> list = bankAgencyDao.findBankAgencyByCounty();
+		bankAgencyDao.closeCurrentSessionwithTransaction();
+		return list;
+	}
+	
+	public BankAgency findBankAgencyByNo() {
 		bankAgencyDao.openCurrentSession();
-		BankAgency bankAgency = bankAgencyDao.findByNo(no);
+		BankAgency bankAgency = bankAgencyDao.findByNo();
 		bankAgencyDao.closeCurrentSession();
 		return bankAgency;
 	}
@@ -82,44 +96,44 @@ public class BankAgencyService {
 
 	public List<BankAgency> orderBankByIdAsc() {
 		bankAgencyDao.openCurrentSession();
-		List<BankAgency> lista = bankAgencyDao.orderByIdAsc();
+		List<BankAgency> list = bankAgencyDao.orderByIdAsc();
 		bankAgencyDao.closeCurrentSession();
-		return lista;
+		return list;
 	}
 
 	public List<BankAgency> orderBankByIdDesc() {
 		bankAgencyDao.openCurrentSession();
-		List<BankAgency> lista = bankAgencyDao.orderByIdDesc();
+		List<BankAgency> list = bankAgencyDao.orderByIdDesc();
 		bankAgencyDao.closeCurrentSession();
-		return lista;
+		return list;
 	}
 
 	public List<BankAgency> orderBankByOperatingMorningHoursAsc() {
 		bankAgencyDao.openCurrentSession();
-		List<BankAgency> lista = bankAgencyDao.orderByOperatingMorningHoursAsc();
+		List<BankAgency> list = bankAgencyDao.orderByOperatingMorningHoursAsc();
 		bankAgencyDao.closeCurrentSession();
-		return lista;
+		return list;
 	}
 
 	public List<BankAgency> orderBankByOperatingMorningHoursDesc() {
 		bankAgencyDao.openCurrentSession();
-		List<BankAgency> lista = bankAgencyDao.orderByOperatingMorningHoursDesc();
+		List<BankAgency> list = bankAgencyDao.orderByOperatingMorningHoursDesc();
 		bankAgencyDao.closeCurrentSession();
-		return lista;
+		return list;
 	}
 
 	public List<BankAgency> orderBankByNoAsc() {
 		bankAgencyDao.openCurrentSession();
-		List<BankAgency> lista = bankAgencyDao.orderByNoAsc();
+		List<BankAgency> list = bankAgencyDao.orderByNoAsc();
 		bankAgencyDao.closeCurrentSession();
-		return lista;
+		return list;
 	}
 
 	public List<BankAgency> orderBankByNoDesc() {
 		bankAgencyDao.openCurrentSession();
-		List<BankAgency> lista = bankAgencyDao.orderByNoDesc();
+		List<BankAgency> list = bankAgencyDao.orderByNoDesc();
 		bankAgencyDao.closeCurrentSession();
-		return lista;
+		return list;
 	}
 
 	public void saveBankAgency(BankAgency bankAgency) {
@@ -130,16 +144,9 @@ public class BankAgencyService {
 
 	public List<BankAgency> showAllBankAgency() {
 		bankAgencyDao.openCurrentSession();
-		List<BankAgency> lista = bankAgencyDao.showAll();
+		List<BankAgency> list = bankAgencyDao.showAll();
 		bankAgencyDao.closeCurrentSession();
-		return lista;
-	}
-
-	public List<BankAgency> findBankAgencyByCity(String city) throws Exception {
-		bankAgencyDao.openCurrentSessionwithTransaction();
-		List<BankAgency> lista = bankAgencyDao.findBankAgencyByCity(city);
-		bankAgencyDao.closeCurrentSessionwithTransaction();
-		return lista;
+		return list;
 	}
 
 	public void updateBankAgency(BankAgency bankAgency) {
@@ -147,17 +154,17 @@ public class BankAgencyService {
 		session.beginTransaction();
 		query = session.createNativeQuery(
 				"UPDATE BankAgency SET PhoneBankNumber=?1, OperatingMorningHours=?2, OperatingAfternoonHours=?3, LunchBreak=?4, Address_no=?5 where ID=?6");
-		System.out.println("If a parameter doesn't exist, you set \"-\"");
-		System.out.print("Phone: ");
+		System.err.println("Daca un parametru este momentan indisponibil, introduceti \"-\"");
+		System.out.print("Telefon: ");
 		bankAgency.setPhoneBankNumber(scanner.next());
-		System.out.print("Operating morning hours: ");
+		System.out.print("Programul de dimineata: ");
 		bankAgency.setOperatingMorningHours(scanner.next());
-		System.out.print("Operating afternoon hours: ");
+		System.out.print("Programul de dupa-amiaza: ");
 		bankAgency.setOperatingAfternoonHours(scanner.next());
-		System.out.print("Lunch break: ");
+		System.out.print("Pauza de masa: ");
 		bankAgency.setLunchBreak(scanner.next());
-		System.out.println("If the parameter doesn't exist, you enter \"0\"");
-		System.out.print("Address no: ");
+		System.err.println("Daca adresa este momentan indisponibila introduceti \"0\"");
+		System.out.print("Numarul adresei: ");
 		address.setNo(scanner.nextInt());
 		System.out.print("Introduceti ID-ul bancii pe care doriti sa o modificati: ");
 		bankAgency.setId(scanner.next());
@@ -170,7 +177,7 @@ public class BankAgencyService {
 		query.setParameter(4, bankAgency.getLunchBreak().equals("-") ? null : bankAgency.getLunchBreak());
 		query.setParameter(5, address.getNo() == 0 ? null : address.getNo());
 		query.setParameter(6, bankAgency.getId());
-		System.err.println("Bank agency successfully updated!");
+		System.err.println("Datele agentiei bancare s-au actualizat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}

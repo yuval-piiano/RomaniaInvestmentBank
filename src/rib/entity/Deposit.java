@@ -25,7 +25,7 @@ import lombok.Setter;
 public class Deposit {
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "No")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int no;
 

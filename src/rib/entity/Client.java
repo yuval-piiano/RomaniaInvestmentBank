@@ -49,9 +49,9 @@ public class Client {
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private BankAccount bankAccount;
-	
+
 //	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//	@JoinColumn(name = "Deposit_ID")
+//	@JoinColumn(name = "Deposit_No")
 //	private Deposit deposit;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -70,21 +70,35 @@ public class Client {
 		this.cnp = cnp;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
-		this.bankAccount=bankAccount;
+		this.bankAccount = bankAccount;
 		this.address = address;
 		this.customerAdvisors = customerAdvisors;
 	}
 
 	@Override
 	public String toString() {
-		String finalString;
-		finalString = "\nClient no. " + no + "\nId: " + id + "\nFirst name: " + firstName + "\nLast name: " + lastName
-				+ "\nCNP: " + cnp + "\nEmail: " + email + "\nPhone: " + phoneNumber+"\n";
+		String finalString = "\nNr. client " + no + "\nId: " + id + "\nPrenume: " + firstName + "\nNume: "
+				+ lastName + "\nCNP: " + cnp + "\nEmail: " + email + "\nTelefon: " + phoneNumber + "\n";
+//		String finalString = null;
+//		if (Hibernate.isInitialized(this.no))
+//			finalString = "Client no. " + this.no;
+//		if (Hibernate.isInitialized(this.id))
+//			finalString += "\nId: " + this.id;
+//		if (Hibernate.isInitialized(this.firstName))
+//			finalString += "\nFirst name: " + this.firstName;
+//		if (Hibernate.isInitialized(this.lastName))
+//			finalString += "\nLast name: " + this.lastName;
+//		if (Hibernate.isInitialized(this.cnp) && this.cnp != 0)
+//			finalString += "\nCNP: " + this.cnp;
+//		if (Hibernate.isInitialized(this.email) && this.email != null)
+//			finalString += "\nEmail: " + this.email;
+//		if (Hibernate.isInitialized(this.phoneNumber) && this.phoneNumber != null)
+//			finalString += "\nPhone: " + this.phoneNumber + "\n";
+		
 		if (Hibernate.isInitialized(this.address) && this.address != null)
-			finalString += "Client address: " +this.address;
+			finalString += "Adresa clientului: " + this.address;
 		if (Hibernate.isInitialized(this.customerAdvisors) && this.customerAdvisors != null)
 			finalString += this.customerAdvisors;
 		return finalString;
 	}
 }
-

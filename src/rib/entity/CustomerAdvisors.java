@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -46,14 +47,18 @@ public class CustomerAdvisors{
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "customerAdvisors")
 	private List<Client> client;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private BankAgency bankAgency;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Address address;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "CustomerAdvisorsPassword_No")
+	private CustomerAdvisorsPassword customerAdvisorsPassword;
 
 	public CustomerAdvisors(String firstName, String lastName, String cnp, Address address, String phoneNumber,
-			BankAgency bankAgency) {
+			BankAgency bankAgency, CustomerAdvisorsPassword customerAdvisorsPassword) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -61,17 +66,18 @@ public class CustomerAdvisors{
 		this.phoneNumber = phoneNumber;
 		this.bankAgency = bankAgency;
 		this.address = address;
+		this.customerAdvisorsPassword=customerAdvisorsPassword;
 	}
 
 	@Override
 	public String toString() {
 		String finalString;
-		finalString = "\nCustomer advisor " + id + "\nName: " + firstName + " " + lastName + "\nCNP: " + cnp
-				 + "\nPhone number: " + phoneNumber;
+		finalString = "\nBancher " + id + "\nNume: " + firstName + " " + lastName + "\nCNP: " + cnp
+				 + "\nTelefon: " + phoneNumber;
 		if (Hibernate.isInitialized(this.address) && this.address != null)
-			finalString += "\nCustomer advisors address: "+this.address;
+			finalString += "\nAdresa bancher: "+this.address;
 		if (Hibernate.isInitialized(this.bankAgency) && this.bankAgency != null) {
-			finalString += "Bank address: "+this.bankAgency.getAddress();
+			finalString += "Adresa agentie bancara: "+this.bankAgency.getAddress();
 		}
 		
 //		else

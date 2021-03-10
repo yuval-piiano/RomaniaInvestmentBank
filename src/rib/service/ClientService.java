@@ -69,18 +69,53 @@ public class ClientService {
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}
-	
+
+	public void addClientBankingData(Client client) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		query = session.createNativeQuery(
+				"UPDATE Client SET bankAccount_ID=?1, Address_No=?2, customerAdvisors_No=?3 WHERE LastName=?4 and FirstName=?5");
+		System.out.println("Daca un parametru este momentan indisponibil, introduceti \"0\"");
+		System.out.print("Id-ul contului: ");
+		bankAccount.setId(scanner.nextInt());
+		System.out.print("Numarul adresei: ");
+		address.setNo(scanner.nextInt());
+		System.out.print("Id-ul bancherului: ");
+		customerAdvisors.setId(scanner.nextInt());
+		System.out.print("Prenume client: ");
+		scanner.nextLine();
+		client.setFirstName(scanner.nextLine());
+		System.out.print("Nume client: ");
+		client.setLastName(scanner.next());
+
+		query.setParameter(1, bankAccount.getId() == 0 ? null : bankAccount.getId());
+		query.setParameter(2, address.getNo() == 0 ? null : address.getNo());
+		query.setParameter(3, customerAdvisors.getId() == 0 ? null : customerAdvisors.getId());
+		query.setParameter(4, client.getLastName());
+		query.setParameter(5, client.getFirstName());
+		System.err.println("Date adaugate cu succes!");
+		query.executeUpdate();
+		session.getTransaction().commit();
+	}
+
 	public void clientLogin() {
 		clientDao.openCurrentSession();
 		clientDao.clientLogin();
 		clientDao.closeCurrentSession();
 	}
+	
+	public List<Address> findClientAddress(){
+			clientDao.openCurrentSession();
+			List<Address> list = clientDao.findClientAddress();
+			clientDao.closeCurrentSession();
+			return list;
+	}
 
-	public List<Client> findClientByFirstName(){
+	public List<Client> findClientByName() {
 		clientDao.openCurrentSession();
-		List<Client> lista = clientDao.findClientByName();
+		List<Client> list = clientDao.findClientByName();
 		clientDao.closeCurrentSession();
-		return lista;
+		return list;
 	}
 
 	public List<Client> findClientByCnp() {
@@ -89,7 +124,7 @@ public class ClientService {
 		clientDao.closeCurrentSession();
 		return list;
 	}
-	
+
 	public List<Client> findClientByAccount() {
 		clientDao.openCurrentSession();
 		List<Client> list = clientDao.findClientByPassAndUser();
@@ -97,13 +132,13 @@ public class ClientService {
 		return list;
 	}
 
-	public List<Client> findClientById(){
+	public List<Client> findClientById() {
 		clientDao.openCurrentSession();
 		List<Client> list = clientDao.findClientById();
 		clientDao.closeCurrentSession();
 		return list;
 	}
-	
+
 //	public List<Client> findClientByPasswordAndUsername(int password, String username){
 //		clientDao.openCurrentSession();
 //		List<Client> list = clientDao.findClientByPassAndUser(password, username);

@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 //import org.hibernate.query.Query;
 
+import rib.entity.Address;
 import rib.entity.BankAccount;
 import rib.entity.Client;
 import rib.util.HibernateUtils;
@@ -80,6 +81,23 @@ public class ClientDao implements EntityDao<Client, Integer> {
 	}
 
 	@SuppressWarnings("unchecked")
+	public List<Address> findClientAddress() {
+		System.out.print("Introduceti numele clientului: ");
+		String lastName = scanner.next();
+		System.out.print("Introduceti prenumele clientului: ");
+		String firstName = scanner.next();
+		List<Address> list = session.createQuery(
+				"FROM Address where No in (SELECT Address_No from Client where LastName=:lastName and Firstname=:firstName)")
+				.setParameter("lastName", lastName).setParameter("firstName", firstName).list();
+		while (list.isEmpty()) {
+			System.err.println(
+					"Nu s-a gasit adresa clientului " + lastName.toUpperCase() + " " + firstName.toUpperCase());
+			break;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<Client> findByCnp() {
 		System.out.print("Introduceti CNP-ul clientului: ");
 		long cnp = scanner.nextLong();
@@ -105,12 +123,15 @@ public class ClientDao implements EntityDao<Client, Integer> {
 
 	@SuppressWarnings("unchecked")
 	public List<Client> findClientByName() {
-		System.out.print("Introduceti numele clientului: ");
+		System.out.print("Introduceti numele clientului (nume de familie): ");
+		String lastName = scanner.next();
+		System.out.print("Introduceti prenumele: ");
 		String firstName = scanner.next();
-		List<Client> list = session.createQuery("from Client where FirstName=:firstName")
-				.setParameter("firstName", firstName).list();
+		List<Client> list = session.createQuery("from Client where LastName=:lastName and Firstname=:firstName")
+				.setParameter("lastName", lastName).setParameter("firstName", firstName).list();
 		while (list.isEmpty()) {
-			System.err.println("Nu s-a gasit client cu numele " + firstName.toUpperCase());
+			System.err
+					.println("Nu s-a gasit client cu numele " + lastName.toUpperCase() + " " + firstName.toUpperCase());
 			break;
 		}
 		return list;

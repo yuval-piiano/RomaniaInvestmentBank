@@ -197,6 +197,12 @@ public class DepositDao {
 	public List<Deposit> showAll() {
 		return session.createQuery("FROM Deposit", Deposit.class).list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Deposit> selectTheLastDepositCreated(){
+		List<Deposit> list= session.createQuery("FROM Deposit where No=(Select max(Deposit.no) from Deposit)").list();
+		return list;
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Deposit> showPersonalDeposit() {
@@ -238,5 +244,11 @@ public class DepositDao {
 		}
 		if (!list.isEmpty())
 			System.err.print("Sold EUR: " + list + "\n");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void totalSumInEUR() {
+		List<Deposit> list=session.createQuery("SELECT sum(round((Deposit_RON*4.8849)+Deposit_EUR+(Deposit_GBP*1.16551)+(Deposit_USD*0.840084),2)) from Deposit").list();
+		System.err.print("Sold total EUR: " + list + "\n");
 	}
 }

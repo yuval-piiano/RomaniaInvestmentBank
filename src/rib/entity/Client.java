@@ -77,23 +77,23 @@ public class Client {
 
 	@Override
 	public String toString() {
-		String finalString = "\nNr. client " + no + "\nId: " + id + "\nPrenume: " + firstName + "\nNume: "
-				+ lastName + "\nCNP: " + cnp + "\nEmail: " + email + "\nTelefon: " + phoneNumber + "\n";
-//		String finalString = null;
-//		if (Hibernate.isInitialized(this.no))
-//			finalString = "Client no. " + this.no;
-//		if (Hibernate.isInitialized(this.id))
-//			finalString += "\nId: " + this.id;
-//		if (Hibernate.isInitialized(this.firstName))
-//			finalString += "\nFirst name: " + this.firstName;
-//		if (Hibernate.isInitialized(this.lastName))
-//			finalString += "\nLast name: " + this.lastName;
-//		if (Hibernate.isInitialized(this.cnp) && this.cnp != 0)
-//			finalString += "\nCNP: " + this.cnp;
-//		if (Hibernate.isInitialized(this.email) && this.email != null)
-//			finalString += "\nEmail: " + this.email;
-//		if (Hibernate.isInitialized(this.phoneNumber) && this.phoneNumber != null)
-//			finalString += "\nPhone: " + this.phoneNumber + "\n";
+//		String finalString = "\nNr. client " + no + "\nId: " + id + "\nPrenume: " + firstName + "\nNume: "
+//				+ lastName + "\nCNP: " + cnp + "\nEmail: " + email + "\nTelefon: " + phoneNumber + "\n";
+		String finalString = null;
+		if (Hibernate.isInitialized(this.no))
+			finalString = "Client no. " + this.no;
+		if (Hibernate.isInitialized(this.id))
+			finalString += "\nId: " + this.id;
+		if (Hibernate.isInitialized(this.firstName))
+			finalString += "\nFirst name: " + this.firstName;
+		if (Hibernate.isInitialized(this.lastName))
+			finalString += "\nLast name: " + this.lastName;
+		if (Hibernate.isInitialized(this.cnp) && this.cnp != 0)
+			finalString += "\nCNP: " + this.cnp;
+		if (Hibernate.isInitialized(this.email) && this.email != null)
+			finalString += "\nEmail: " + this.email;
+		if (Hibernate.isInitialized(this.phoneNumber) && this.phoneNumber != null)
+			finalString += "\nPhone: " + this.phoneNumber + "\n";
 		
 		if (Hibernate.isInitialized(this.address) && this.address != null)
 			finalString += "Adresa clientului: " + this.address;

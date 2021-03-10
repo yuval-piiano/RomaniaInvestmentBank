@@ -23,8 +23,8 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		Address address = new Address();
 		AddressService addressService = new AddressService();
-		BankAccount bankAccount=new BankAccount();
-		BankAccountService bankAccountService=new BankAccountService();
+		BankAccount bankAccount = new BankAccount();
+		BankAccountService bankAccountService = new BankAccountService();
 		BankAgency bankAgency = new BankAgency();
 		BankAgencyService bankAgencyService = new BankAgencyService();
 		CustomerAdvisors customerAdvisors = new CustomerAdvisors();
@@ -44,7 +44,7 @@ public class Main {
 		switch (key) {
 		case 1: {
 			int option1;
-		//	customerAdvisorsSevice.customerAdvisorsLogin();
+			// customerAdvisorsSevice.customerAdvisorsLogin();
 			for (int i = 0; i < 50; ++i)
 				System.out.println();
 			warehouse.hello();
@@ -66,6 +66,7 @@ public class Main {
 						System.out.println("3. Stergere adresa");
 						System.out.println("4. Ordonare adrese");
 						System.out.println("5. Actualizare adresa");
+						// System.out.println("6. Cautare adresa");
 						System.out.println("0. Meniul principal");
 						System.out.print("Introduceti optiunea dumneavoastra: ");
 						option1_1 = scanner.nextInt();
@@ -225,6 +226,10 @@ public class Main {
 							addressService.updateAddress(address);
 							break;
 						}
+//						case 6:{
+//							System.out.println(clientService.findClientAddress());
+//							break;
+//						}
 						case 0: {
 							break;
 						}
@@ -250,12 +255,18 @@ public class Main {
 						option2_1 = scanner.nextInt();
 						switch (option2_1) {
 						case 1: {
-							System.err.println("Introduceti adresa!");
-							addressService.addAddress(address);
-							System.err.println("Introduceti contul bancar");
-							bankAccountService.addBankAccount(bankAccount);
-							System.err.println("Introduceti datele personale");
+							System.err.println("\nIntroduceti datele personale");
 							clientService.addClient(client);
+							System.out.println(clientService.findClientByName());
+							System.err.println("\nIntroduceti adresa!");
+							addressService.addAddress(address);
+							// System.out.println(clientService.findClientAddress());
+							System.err.println("\nCreare contul bancar");
+							bankAccountService.addBankAccount(bankAccount);
+							System.err.println("\nCreare deposit");
+							depositService.createDeposit(deposit);
+							System.err.println("\nCompletati datele finale");
+							clientService.addClientBankingData(client);
 							break;
 						}
 						case 2: {
@@ -305,14 +316,14 @@ public class Main {
 								System.out.println();
 								switch (option2_1_4) {
 								case 1: {
-									int option5_1;
+									int option2_1_4_1;
 									do {
 										System.out.println("1. Ascendent");
 										System.out.println("2. Descendent");
 										System.out.println("0. Meniul anterior");
 										System.out.print("Introduceti optiunea dumneavoastra: ");
-										option5_1 = scanner.nextInt();
-										switch (option5_1) {
+										option2_1_4_1 = scanner.nextInt();
+										switch (option2_1_4_1) {
 										case 1: {
 											System.out.println(clientService.orderClientsByNoAsc());
 											break;
@@ -329,18 +340,18 @@ public class Main {
 											continue;
 										}
 										}
-									} while (option5_1 != 0);
+									} while (option2_1_4_1 != 0);
 									break;
 								}
 								case 2: {
-									int option5_2;
+									int option2_1_4_2;
 									do {
 										System.out.println("1. Ascendent");
 										System.out.println("2. Descendent");
 										System.out.println("0. Meniul anterior");
 										System.out.print("Introduceti optiunea dumneavoastra: ");
-										option5_2 = scanner.nextInt();
-										switch (option5_2) {
+										option2_1_4_2 = scanner.nextInt();
+										switch (option2_1_4_2) {
 										case 1: {
 											System.out.println(clientService.orderClientsByIdAsc());
 											break;
@@ -357,18 +368,18 @@ public class Main {
 											continue;
 										}
 										}
-									} while (option5_2 != 0);
+									} while (option2_1_4_2 != 0);
 									break;
 								}
 								case 3: {
-									int option5_3;
+									int option2_1_4_3;
 									do {
 										System.out.println("1. Ascendent");
 										System.out.println("2. Descendent");
 										System.out.println("0. Meniul anterior");
 										System.out.print("Introduceti optiunea dumneavoastra: ");
-										option5_3 = scanner.nextInt();
-										switch (option5_3) {
+										option2_1_4_3 = scanner.nextInt();
+										switch (option2_1_4_3) {
 										case 1: {
 											System.out.println(clientService.orderClientsByFirstNameAsc());
 											break;
@@ -385,18 +396,18 @@ public class Main {
 											continue;
 										}
 										}
-									} while (option5_3 != 0);
+									} while (option2_1_4_3 != 0);
 									break;
 								}
 								case 4: {
-									int option5_4;
+									int option2_1_4_4;
 									do {
 										System.out.println("1. Ascendent");
 										System.out.println("2. Descendent");
 										System.out.println("0. Meniul anterior");
 										System.out.print("Introduceti optiunea dumneavoastra: ");
-										option5_4 = scanner.nextInt();
-										switch (option5_4) {
+										option2_1_4_4 = scanner.nextInt();
+										switch (option2_1_4_4) {
 										case 1: {
 											System.out.println(clientService.orderClientsByLastNameAsc());
 											break;
@@ -413,7 +424,7 @@ public class Main {
 											continue;
 										}
 										}
-									} while (option5_4 != 0);
+									} while (option2_1_4_4 != 0);
 									break;
 								}
 								case 9: {
@@ -491,7 +502,7 @@ public class Main {
 								System.out.println();
 								switch (option2_1_6) {
 								case 1: {
-									System.out.println(clientService.findClientByFirstName());
+									System.out.println(clientService.findClientByName());
 									break;
 								}
 								case 2: {
@@ -502,7 +513,7 @@ public class Main {
 									System.out.println(clientService.findClientById());
 									break;
 								}
-								case 4:{
+								case 4: {
 									System.out.println(clientService.findClientByAccount());
 									break;
 								}
@@ -533,7 +544,8 @@ public class Main {
 					do {
 						System.out.println("\nMENIU BANCA");
 						System.out.println("1. Agentie bancara");
-						System.out.println("2. angajati");
+						System.out.println("2. Angajati");
+						System.out.println("3. Depozit");
 						System.out.println("0. Meniul principal");
 						System.out.print("Introduceti optiunea dumneavoastra: ");
 						option3_1 = scanner.nextInt();
@@ -713,7 +725,7 @@ public class Main {
 										System.out.println();
 										switch (option3_1_1_6) {
 										case 1: {
-											
+
 											System.out.println(bankAgencyService.findBankAgencyByNo());
 											break;
 										}
@@ -925,6 +937,13 @@ public class Main {
 							} while (option3_1_2 != 0);
 							break;
 						}
+						case 3: {
+							int option3_1_3;
+							System.out.println("1. Lista depozite");
+							System.out.println("2. Cautare depozit");
+							System.out.println("3. Simulare - convertiti in euro si afisati soldul total");
+							break;
+						}
 						default: {
 							System.err.println("Optiune introdusa invalida!");
 							continue;
@@ -935,6 +954,7 @@ public class Main {
 						}
 					} while (option3_1 != 0);
 					break;
+
 				}
 				case 4: {
 					warehouse.exit();
@@ -950,7 +970,7 @@ public class Main {
 		}
 
 		case 2: {
-			 clientService.clientLogin();
+			clientService.clientLogin();
 			for (int i = 0; i < 50; ++i)
 				System.out.println();
 			warehouse.hello();

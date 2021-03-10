@@ -45,7 +45,7 @@ public class DepositDao {
 	@SuppressWarnings("unchecked")
 	public void addRon(Deposit deposit) {
 		query = session.createNativeQuery(
-				"UPDATE Deposit d set d.deposit_RON=d.deposit_RON+?1 where Id in (SELECT Deposit_ID from BankAccount where Password=?2)");
+				"UPDATE Deposit d set d.deposit_RON=d.deposit_RON+?1 where No in (SELECT deposit_No from BankAccount where Password=?2)");
 		System.out.print("Introduceti suma pe care o depuneti: ");
 		deposit.setRon(scanner.nextInt());
 		System.out.print("Introduceti parola: ");
@@ -56,7 +56,7 @@ public class DepositDao {
 		query.executeUpdate();
 
 		List<Deposit> list = session.createNativeQuery(
-				"SELECT Deposit.deposit_RON from Deposit where Id in (SELECT Deposit_ID from BankAccount where Password=?1)")
+				"SELECT Deposit.deposit_RON from Deposit where No in (SELECT deposit_No from BankAccount where Password=?1)")
 				.setParameter(1, bankAccount.getPassword()).list();
 		System.err.print("Sold RON: " + list + "\n");
 	}
@@ -64,7 +64,7 @@ public class DepositDao {
 	@SuppressWarnings("unchecked")
 	public void addEur(Deposit deposit) {
 		query = session.createNativeQuery(
-				"UPDATE Deposit d set d.deposit_EUR=d.deposit_EUR+?1 where Id in (SELECT Deposit_ID from BankAccount where Password=?2)");
+				"UPDATE Deposit d set d.deposit_EUR=d.deposit_EUR+?1 where No in (SELECT deposit_No from BankAccount where Password=?2)");
 		System.out.print("Introduceti suma pe care o depuneti: ");
 		deposit.setEur(scanner.nextInt());
 		System.out.print("Introduceti parola: ");
@@ -75,7 +75,7 @@ public class DepositDao {
 		query.executeUpdate();
 
 		List<Deposit> list = session.createNativeQuery(
-				"SELECT Deposit.deposit_EUR from Deposit where Id in (SELECT Deposit_ID from BankAccount where Password=?1)")
+				"SELECT Deposit.deposit_EUR from Deposit where No in (SELECT Deposit_No from BankAccount where Password=?1)")
 				.setParameter(1, bankAccount.getPassword()).list();
 		System.err.print("Sold EUR: " + list + "\n");
 	}
@@ -83,7 +83,7 @@ public class DepositDao {
 	@SuppressWarnings("unchecked")
 	public void addUsd(Deposit deposit) {
 		query = session.createNativeQuery(
-				"UPDATE Deposit d set d.deposit_USD=d.deposit_USD+?1 where Id in (SELECT Deposit_ID from BankAccount where Password=?2)");
+				"UPDATE Deposit d set d.deposit_USD=d.deposit_USD+?1 where No in (SELECT Deposit_No from BankAccount where Password=?2)");
 		System.out.print("Introduceti suma pe care o depuneti: ");
 		deposit.setUsd(scanner.nextInt());
 		System.out.print("Introduceti parola: ");
@@ -94,7 +94,7 @@ public class DepositDao {
 		query.executeUpdate();
 
 		List<Deposit> list = session.createNativeQuery(
-				"SELECT Deposit.deposit_USD from Deposit where Id in (SELECT Deposit_ID from BankAccount where Password=?1)")
+				"SELECT Deposit.deposit_USD from Deposit where No in (SELECT Deposit_No from BankAccount where Password=?1)")
 				.setParameter(1, bankAccount.getPassword()).list();
 		System.err.print("Sold USD: " + list + "\n");
 	}
@@ -102,7 +102,7 @@ public class DepositDao {
 	@SuppressWarnings("unchecked")
 	public void addGbp(Deposit deposit) {
 		query = session.createNativeQuery(
-				"UPDATE Deposit d set d.deposit_GBP=d.deposit_GBP+?1 where Id in (SELECT Deposit_ID from BankAccount where Password=?2)");
+				"UPDATE Deposit d set d.deposit_GBP=d.deposit_GBP+?1 where No in (SELECT Deposit_No from BankAccount where Password=?2)");
 		System.out.print("Introduceti suma pe care o depuneti: ");
 		deposit.setGbp(scanner.nextInt());
 		System.out.print("Introduceti parola: ");
@@ -113,7 +113,7 @@ public class DepositDao {
 		query.executeUpdate();
 
 		List<Deposit> list = session.createNativeQuery(
-				"SELECT Deposit.deposit_GBP from Deposit where Id in (SELECT Deposit_ID from BankAccount where Password=?1)")
+				"SELECT Deposit.deposit_GBP from Deposit where No in (SELECT Deposit_No from BankAccount where Password=?1)")
 				.setParameter(1, bankAccount.getPassword()).list();
 		System.err.print("Sold GBP: " + list + "\n");
 	}
@@ -121,7 +121,7 @@ public class DepositDao {
 	@SuppressWarnings("unchecked")
 	public void withdrawRon(Deposit deposit) {
 		query = session.createNativeQuery(
-				"UPDATE Deposit d set d.deposit_RON=d.deposit_RON-?1 where Id in (SELECT Deposit_ID from BankAccount where Password=?2) and d.deposit_RON-?1>=0");
+				"UPDATE Deposit d set d.deposit_RON=d.deposit_RON-?1 where No in (SELECT Deposit_No from BankAccount where Password=?2) and d.deposit_RON-?1>=0");
 		System.out.print("Introduceti suma pe care doriti sa o retrageti: ");
 		deposit.setRon(scanner.nextInt());
 		System.out.print("Introduceti parola: ");
@@ -132,7 +132,7 @@ public class DepositDao {
 		query.executeUpdate();
 
 		List<Deposit> list = session.createNativeQuery(
-				"SELECT Deposit.deposit_RON from Deposit where Id in (SELECT Deposit_ID from BankAccount where Password=?1)")
+				"SELECT Deposit.deposit_RON from Deposit where No in (SELECT Deposit_No from BankAccount where Password=?1)")
 				.setParameter(1, bankAccount.getPassword()).list();
 		System.err.print("Sold RON: " + list + "\n");
 	}
@@ -140,9 +140,9 @@ public class DepositDao {
 	@SuppressWarnings("unchecked")
 	public void withdrawEur(Deposit deposit) {
 		query = session.createNativeQuery(
-				"UPDATE Deposit d set d.deposit_EUR=d.deposit_EUR-?1 where Id in (SELECT Deposit_ID from BankAccount where Password=?2) and d.deposit_EUR-?1>=0");
+				"UPDATE Deposit d set d.deposit_EUR=d.deposit_EUR-?1 where No in (SELECT Deposit_No from BankAccount where Password=?2) and d.deposit_EUR-?1>=0");
 		System.out.print("Introduceti suma pe care doriti sa o retrageti: ");
-		deposit.setRon(scanner.nextInt());
+		deposit.setEur(scanner.nextInt());
 		System.out.print("Introduceti parola: ");
 		bankAccount.setPassword(scanner.nextInt());
 
@@ -151,7 +151,7 @@ public class DepositDao {
 		query.executeUpdate();
 
 		List<Deposit> list = session.createNativeQuery(
-				"SELECT Deposit.deposit_EUR from Deposit where Id in (SELECT Deposit_ID from BankAccount where Password=?1)")
+				"SELECT Deposit.deposit_EUR from Deposit where No in (SELECT Deposit_No from BankAccount where Password=?1)")
 				.setParameter(1, bankAccount.getPassword()).list();
 		System.err.print("Sold EUR: " + list + "\n");
 	}
@@ -159,9 +159,9 @@ public class DepositDao {
 	@SuppressWarnings("unchecked")
 	public void withdrawUsd(Deposit deposit) {
 		query = session.createNativeQuery(
-				"UPDATE Deposit d set d.deposit_USD=d.deposit_USD-?1 where Id in (SELECT Deposit_ID from BankAccount where Password=?2) and d.deposit_USD-?1>=0");
+				"UPDATE Deposit d set d.deposit_USD=d.deposit_USD-?1 where No in (SELECT Deposit_No from BankAccount where Password=?2) and d.deposit_USD-?1>=0");
 		System.out.print("Introduceti suma pe care doriti sa o retrageti: ");
-		deposit.setRon(scanner.nextInt());
+		deposit.setUsd(scanner.nextInt());
 		System.out.print("Introduceti parola: ");
 		bankAccount.setPassword(scanner.nextInt());
 
@@ -170,17 +170,17 @@ public class DepositDao {
 		query.executeUpdate();
 
 		List<Deposit> list = session.createNativeQuery(
-				"SELECT Deposit.deposit_USD from Deposit where Id in (SELECT Deposit_ID from BankAccount where Password=?1)")
+				"SELECT Deposit.deposit_USD from Deposit where No in (SELECT Deposit_No from BankAccount where Password=?1)")
 				.setParameter(1, bankAccount.getPassword()).list();
-		System.err.print("Sold RON: " + list + "\n");
+		System.err.print("Sold USD: " + list + "\n");
 	}
 
 	@SuppressWarnings("unchecked")
 	public void withdrawGbp(Deposit deposit) {
 		query = session.createNativeQuery(
-				"UPDATE Deposit d set d.deposit_GBP=d.deposit_GBP-?1 where Id in (SELECT Deposit_ID from BankAccount where Password=?2) and d.deposit_GBP-?1>=0");
+				"UPDATE Deposit d set d.deposit_GBP=d.deposit_GBP-?1 where No in (SELECT Deposit_No from BankAccount where Password=?2) and d.deposit_GBP-?1>=0");
 		System.out.print("Introduceti suma pe care doriti sa o retrageti: ");
-		deposit.setRon(scanner.nextInt());
+		deposit.setGbp(scanner.nextInt());
 		System.out.print("Introduceti parola: ");
 		bankAccount.setPassword(scanner.nextInt());
 
@@ -189,7 +189,7 @@ public class DepositDao {
 		query.executeUpdate();
 
 		List<Deposit> list = session.createNativeQuery(
-				"SELECT Deposit.deposit_GBP from Deposit where Id in (SELECT Deposit_ID from BankAccount where Password=?1)")
+				"SELECT Deposit.deposit_GBP from Deposit where No in (SELECT Deposit_No from BankAccount where Password=?1)")
 				.setParameter(1, bankAccount.getPassword()).list();
 		System.err.print("Sold GBP: " + list + "\n");
 	}
@@ -200,7 +200,7 @@ public class DepositDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Deposit> selectTheLastDepositCreated(){
-		List<Deposit> list= session.createQuery("FROM Deposit where No=(Select max(Deposit.no) from Deposit)").list();
+		List<Deposit> list= session.createQuery("FROM Deposit where no=(Select max(no) from Deposit)").list();
 		return list;
 	}
 
@@ -209,10 +209,10 @@ public class DepositDao {
 		System.out.print("Introduceti parola: ");
 		int password = scanner.nextInt();
 		List<Deposit> list = session
-				.createQuery("FROM Deposit where ID in (SELECT id from BankAccount where Password=:password)")
+				.createQuery("FROM Deposit where No in (SELECT id from BankAccount where Password=:password)")
 				.setParameter("password", password).list();
 		if (list.isEmpty())
-			System.out.println("Nu s-a gasit cont asociat acestei parole!");
+			System.err.println("Nu s-a gasit cont asociat acestei parole!");
 		return list;
 	}
 
@@ -221,7 +221,7 @@ public class DepositDao {
 		System.out.print("Introduceti parola: ");
 		int password = scanner.nextInt();
 		List<Deposit> list = session.createQuery(
-				"SELECT round(Deposit_RON+(Deposit_EUR*4.8849)+(Deposit_GBP*5.7)+(Deposit_USD*4.1036),2) as TOTAL from Deposit where ID in (SELECT id from BankAccount where Password=:password)")
+				"SELECT round(Deposit_RON+(Deposit_EUR*4.8849)+(Deposit_GBP*5.7)+(Deposit_USD*4.1036),2) as TOTAL from Deposit where No in (SELECT id from BankAccount where Password=:password)")
 				.setParameter("password", password).list();
 		while (list.isEmpty()) {
 			System.err.println("Nu s-a gasit cont asociat acestei parole!");
@@ -236,7 +236,7 @@ public class DepositDao {
 		System.out.print("Introduceti parola: ");
 		int password = scanner.nextInt();
 		List<Deposit> list = session.createQuery(
-				"SELECT round((Deposit_RON*4.8849)+Deposit_EUR+(Deposit_GBP*1.16551)+(Deposit_USD*0.840084),2) as TOTAL from Deposit where ID in (SELECT id from BankAccount where Password=:password)")
+				"SELECT round((Deposit_RON/4.8849)+Deposit_EUR+(Deposit_GBP/1.16551)+(Deposit_USD/0.840084),2) as TOTAL from Deposit where No in (SELECT id from BankAccount where Password=:password)")
 				.setParameter("password", password).list();
 		while (list.isEmpty()) {
 			System.err.println("Nu s-a gasit cont asociat acestei parole!");

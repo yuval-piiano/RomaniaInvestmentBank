@@ -35,7 +35,6 @@ public class BankAccount {
 	private int password;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "Deposit_ID")
 	private Deposit deposit;
 	
 	public BankAccount(String username, int password, Deposit deposit) {

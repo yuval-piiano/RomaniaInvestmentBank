@@ -28,13 +28,12 @@
 		<property name="hibernate.dbcp.maxWaitMillis">-1</property>
 		
 		<!-- Mapping entities -->
-		<mapping class="rib.entity.Client" />
-		<mapping class="rib.entity.BankAgency" />
-		<mapping class="rib.entity.CustomerAdvisors" />
-		<mapping class="rib.entity.BankAccount" />
 		<mapping class="rib.entity.Address" />
 		<mapping class="rib.entity.BankAccount" />
-		<mapping class="rib.entity.Deposit" />
+		<mapping class="rib.entity.BankAgency" />
+		<mapping class="rib.entity.Client" />
+		<mapping class="rib.entity.CustomerAdvisors" />
 		<mapping class="rib.entity.CustomerAdvisorsPassword" />
+		<mapping class="rib.entity.Deposit" />
 	</session-factory>
 </hibernate-configuration>

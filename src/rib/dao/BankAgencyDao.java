@@ -47,7 +47,7 @@ public class BankAgencyDao implements EntityDao<BankAgency, Integer> {
 				.createQuery("from BankAgency where address_No in (SELECT no from Address where City=:city)")
 				.setParameter("city", city).list();
 		while (list.isEmpty()) {
-			System.err.println("Nu s-a gasit nicio agentie bancara in " + city.toUpperCase());
+			System.err.println("Nu s-a gasit nicio agentie bancara in " + city.toUpperCase()+"!");
 			break;
 		}
 		return list;
@@ -61,7 +61,7 @@ public class BankAgencyDao implements EntityDao<BankAgency, Integer> {
 				.createQuery("from BankAgency where address_No in (SELECT no from Address where County=:county)")
 				.setParameter("county", county).list();
 		while (list.isEmpty()) {
-			System.err.println("Nu s-a gasit nicio agentie bancara in " + county.toUpperCase());
+			System.err.println("Nu s-a gasit nicio agentie bancara in " + county.toUpperCase()+"!");
 			break;
 		}
 		return list;

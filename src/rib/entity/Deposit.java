@@ -45,22 +45,24 @@ public class Deposit {
 	@Min(value = 0)
 	private Integer gbp;
 
-	@OneToOne(mappedBy = "bankAccount")
-	private Client client;
+	@OneToOne(mappedBy = "deposit")
+	private BankAccount bankAccount;
 
-	public Deposit(int no, int ron, int eur, int usd, int gbp, Client client) {
+	public Deposit(int no, int ron, int eur, int usd, int gbp, BankAccount bankAccount) {
 		super();
 		this.no = no;
 		this.ron = ron;
 		this.eur = eur;
 		this.usd = usd;
 		this.gbp = gbp;
-		this.client = client;
+		this.bankAccount=bankAccount;
 	}
 
 	@Override
 	public String toString() {
 		String finalString = "SOLD ";
+		if (Hibernate.isInitialized(this.no))
+			finalString += this.no+": ";
 		if (Hibernate.isInitialized(this.ron) && this.getRon() != null)
 			finalString += "RON: " + this.ron;
 		else if (this.getRon() == null)

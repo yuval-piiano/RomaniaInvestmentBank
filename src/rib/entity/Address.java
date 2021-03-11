@@ -66,11 +66,11 @@ public class Address {
 
 	@Override
 	public String toString() {
-		String finalString = null;
+		String finalString = "Adresa ";
 		if (Hibernate.isInitialized(this.county) && this.county != null)
-			finalString =this.county+" Judet, ";
+			finalString ="Judet "+this.county;
 		if (Hibernate.isInitialized(this.city) && this.city != null)
-			finalString +=this.city;
+			finalString +=", Oras "+this.city;
 		if (Hibernate.isInitialized(this.street) && this.street != null)
 			finalString += ", Str. " + this.street;
 		if (Hibernate.isInitialized(this.houseNumber) && this.houseNumber != null)
@@ -79,7 +79,7 @@ public class Address {
 			finalString += ", Nr. bloc. " + this.blockOfFlatsNumber;
 		if (Hibernate.isInitialized(this.apartment) && this.apartment != null)
 			finalString += ", Ap. " + this.apartment + "\n";
-		else
+		//else
 			finalString += "\n";
 		return finalString;
 	}

@@ -63,9 +63,9 @@ public class CustomerAdvisorsSevice {
 		customerAdvisorsDao.closeCurrentSession();
 	}
 	
-	public void deleteCustomerAdvisors(CustomerAdvisors customerAdvisors) {
+	public void deleteCustomerAdvisors() {
 		customerAdvisorsDao.openCurrentSessionwithTransaction();
-		customerAdvisorsDao.delete(customerAdvisors);
+		customerAdvisorsDao.deleteCustomerAdvisorsByCnp();
 		customerAdvisorsDao.closeCurrentSessionwithTransaction();
 	}
 	
@@ -75,9 +75,9 @@ public class CustomerAdvisorsSevice {
 		customerAdvisorsDao.closeCurrentSessionwithTransaction();
 	}
 	
-	public List<CustomerAdvisors> findCustomerAdvisorsByBankAgency(String bankID) {
+	public List<CustomerAdvisors> findCustomerAdvisorsByBankAgency() {
 		customerAdvisorsDao.openCurrentSession();
-		List<CustomerAdvisors> list=customerAdvisorsDao.findBankEmployees(bankID);
+		List<CustomerAdvisors> list=customerAdvisorsDao.findBankEmployees();
 		customerAdvisorsDao.closeCurrentSession();
 		return list;
 	}

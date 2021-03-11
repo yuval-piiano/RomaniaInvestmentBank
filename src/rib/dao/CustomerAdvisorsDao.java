@@ -49,9 +49,9 @@ public class CustomerAdvisorsDao implements EntityDao<CustomerAdvisors, Integer>
 				System.exit(0);
 			} else {
 				System.out.print("Introduceti numele: ");
-				String firstName = scanner.next();
-				System.out.print("Introduceti prenumele: ");
 				String lastName = scanner.next();
+				System.out.print("Introduceti prenumele: ");
+				String firstName = scanner.next();
 				System.out.print("Introduceti parola: ");
 				int password = scanner.nextInt();
 				List<CustomerAdvisors> list = session.createQuery(
@@ -63,7 +63,7 @@ public class CustomerAdvisorsDao implements EntityDao<CustomerAdvisors, Integer>
 					System.err.print("");
 				} else {
 					warehouse.progressBar();
-					System.out.println("Done");
+					System.out.println("Terminata");
 					break;
 				}
 			}
@@ -75,8 +75,10 @@ public class CustomerAdvisorsDao implements EntityDao<CustomerAdvisors, Integer>
 		} while (attempts <= 3);
 	}
 
-	public void delete(CustomerAdvisors entity) {
-		session.delete(entity);
+	public void deleteCustomerAdvisorsByCnp() {
+		System.out.print("Introduceti CNP-ul clientului: ");
+		String cnp = scanner.next();
+		session.createQuery("delete from CustomerAdvisors where cnp=:cnp").setParameter("cnp", cnp).executeUpdate();
 	}
 
 	@Override
@@ -93,12 +95,16 @@ public class CustomerAdvisorsDao implements EntityDao<CustomerAdvisors, Integer>
 //	}
 
 	@SuppressWarnings("unchecked")
-	public List<CustomerAdvisors> findBankEmployees(String bankID) {
+	public List<CustomerAdvisors> findBankEmployees() {
+		System.out.print("Introduceti ID-ul bancii: ");
+		String id = scanner.next();
 		List<CustomerAdvisors> list = session
-				.createQuery("from CustomerAdvisors where bankAgency_No in (SELECT no from BankAgency where ID=:bankID")
-				.setParameter("ID", bankID).list();
-		if (list.isEmpty())
-			System.err.print("Nu exista bancher cu id-ul " + bankID);
+				.createQuery("FROM CustomerAdvisors where bankAgency_No in (SELECT no from BankAgency where Id=:id)")
+				.setParameter("id", id).list();
+		while (list.isEmpty()) {
+			System.err.print("Nu exista banca cu ID-ul " + id);
+			break;
+		}
 		return list;
 	}
 

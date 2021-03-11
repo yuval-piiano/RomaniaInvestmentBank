@@ -36,7 +36,8 @@ public class Warehouse {
 		} else if (timeOfDay >= 12 && timeOfDay < 16) {
 			System.out.println("\nBuna ziua!\n");
 		} else if (timeOfDay >= 16 && timeOfDay < 24) {
-			System.out.println("\nBuna seara!\n");
+			System.out.println("\nBuna seara!");
+			System.out.println();
 		}
 	}
 

@@ -26,7 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CustomerAdvisors{
+public class CustomerAdvisors {
 	@Id
 	@Column(name = "No")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +52,7 @@ public class CustomerAdvisors{
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Address address;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "CustomerAdvisorsPassword_No")
 	private CustomerAdvisorsPassword customerAdvisorsPassword;
@@ -66,24 +66,22 @@ public class CustomerAdvisors{
 		this.phoneNumber = phoneNumber;
 		this.bankAgency = bankAgency;
 		this.address = address;
-		this.customerAdvisorsPassword=customerAdvisorsPassword;
+		this.customerAdvisorsPassword = customerAdvisorsPassword;
 	}
 
 	@Override
 	public String toString() {
 		String finalString;
-		finalString = "\nBancher " + id + "\nNume: " + firstName + " " + lastName + "\nCNP: " + cnp
-				 + "\nTelefon: " + phoneNumber;
+		finalString = "\nBancher " + id + "\nNume: " + firstName + " " + lastName + "\nCNP: " + cnp + "\nTelefon: "
+				+ phoneNumber;
 		if (Hibernate.isInitialized(this.address) && this.address != null)
-			finalString += "\nAdresa bancher: "+this.address;
-		if (Hibernate.isInitialized(this.bankAgency) && this.bankAgency != null) {
-			finalString += "Adresa agentie bancara: "+this.bankAgency.getAddress();
-		}
-		
+			finalString += "\nAdresa bancher: " + this.address;
+		if (Hibernate.isInitialized(this.bankAgency) && this.bankAgency != null)
+			finalString += "Adresa agentie bancara: " + this.bankAgency.getAddress();
+		finalString+="\n";
 //		else
 //			finalString += "\n";
 		return finalString;
 	}
 
 }
-

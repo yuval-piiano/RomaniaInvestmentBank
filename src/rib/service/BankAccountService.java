@@ -16,6 +16,7 @@ import rib.util.HibernateUtils;
 public class BankAccountService {
 	private static SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 	BankAccountDao bankAccountDao = new BankAccountDao();
+	BankAccount bankAccount=new BankAccount();
 	Deposit deposit = new Deposit();
 	Scanner scanner = new Scanner(System.in);
 	private Query query;
@@ -28,7 +29,7 @@ public class BankAccountService {
 	public void addBankAccount(BankAccount bankAccount) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		query = session.createNativeQuery("INSERT INTO BankAccount (Username, Password, Deposit_ID) values(?1,?2,?3)");
+		query = session.createNativeQuery("INSERT INTO BankAccount (Username, Password, Deposit_No) values(?1,?2,?3)");
 		System.out.print("Username: ");
 		bankAccount.setUsername(scanner.next());
 		System.out.print("Parola: ");
@@ -40,6 +41,25 @@ public class BankAccountService {
 		query.setParameter(2, bankAccount.getPassword());
 		query.setParameter(3, deposit.getNo() == 0 ? null : deposit.getNo());
 		System.err.println("Contul bancar s-a creat cu succes!");
+		query.executeUpdate();
+		session.getTransaction().commit();
+	}
+
+	public void updateDoposit(Deposit deposit) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		query=session.createNativeQuery("UPDATE BankAccount SET Deposit_No=?1 where Username=?2 and Password=?3");
+		System.out.print("Numarul depozitului: ");
+		deposit.setNo(scanner.nextInt());
+		System.out.print("Username: ");
+		bankAccount.setUsername(scanner.next());
+		System.out.print("Parola: ");
+		bankAccount.setPassword(scanner.nextInt());
+		
+		query.setParameter(1, deposit.getNo());
+		query.setParameter(2, bankAccount.getUsername());
+		query.setParameter(3, bankAccount.getPassword());
+		System.err.println("Date adaugate cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
 	}

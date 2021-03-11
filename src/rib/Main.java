@@ -44,7 +44,7 @@ public class Main {
 		switch (key) {
 		case 1: {
 			int option1;
-			// customerAdvisorsSevice.customerAdvisorsLogin();
+			customerAdvisorsSevice.customerAdvisorsLogin();
 			for (int i = 0; i < 50; ++i)
 				System.out.println();
 			warehouse.hello();
@@ -257,15 +257,20 @@ public class Main {
 						case 1: {
 							System.err.println("\nIntroduceti datele personale");
 							clientService.addClient(client);
+							System.err.println("Verificare!");
 							System.out.println(clientService.findClientByName());
-							System.err.println("\nIntroduceti adresa!");
+							System.err.println("\n\nIntroduceti adresa!");
 							addressService.addAddress(address);
-							// System.out.println(clientService.findClientAddress());
-							System.err.println("\nCreare contul bancar");
+							System.err.println("Verificare!");
+							System.out.print(addressService.selectTheLastAddressCreated()+"\n");
+							System.err.println("\n\nCreare contul bancar");
 							bankAccountService.addBankAccount(bankAccount);
-							System.err.println("\nCreare deposit");
+							System.err.println("\n\nCreare deposit");
 							depositService.createDeposit(deposit);
-							System.err.println("\nCompletati datele finale");
+							System.err.println("Verificare!");
+							System.out.println(depositService.selectTheLastDepositCreated());
+							bankAccountService.updateDoposit(deposit);
+							System.err.println("\n\nCompletati datele finale");
 							clientService.addClientBankingData(client);
 							break;
 						}
@@ -276,7 +281,7 @@ public class Main {
 						case 3: {
 							int option2_1_3;
 							do {
-								System.out.println("\n1. Stergeti un anumit client");
+								System.out.println("\n1. Stergeti client dupa id");
 								System.out.println("2. Stergeti toti clientii");
 								System.out.println("0. Meniul anterior");
 								System.out.print("Introduceti optiunea dumneavoastra: ");
@@ -284,7 +289,7 @@ public class Main {
 								System.out.println();
 								switch (option2_1_3) {
 								case 1: {
-									clientService.deleteClient();
+									clientService.deleteClientById();
 									break;
 								}
 								case 2: {
@@ -939,17 +944,43 @@ public class Main {
 						}
 						case 3: {
 							int option3_1_3;
-							System.out.println("1. Lista depozite");
-							System.out.println("2. Cautare depozit");
-							System.out.println("3. Simulare - convertiti in euro si afisati soldul total");
+							do {
+								System.out.println("\n1. Lista depozite");
+								System.out.println("2. Cautare depozit");
+								System.out.println("3. Simulare - convertiti in euro si afisati soldul total");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
+								option3_1_3 = scanner.nextInt();
+								switch (option3_1_3) {
+								case 1: {
+									System.out.println(depositService.showAll());
+									break;
+								}
+								case 2: {
+									System.out.println(depositService.showPersonalDeposit());
+									break;
+								}
+								case 3: {
+									depositService.totalSumInEUR();
+									break;
+								}
+								case 0: {
+									break;
+								}
+								default: {
+									System.err.println("Optiune introdusa invalida!");
+									continue;
+								}
+								}
+								break;
+							} while (option3_1_3 != 0);
+						}
+						case 0: {
 							break;
 						}
 						default: {
 							System.err.println("Optiune introdusa invalida!");
 							continue;
-						}
-						case 0: {
-							break;
 						}
 						}
 					} while (option3_1 != 0);

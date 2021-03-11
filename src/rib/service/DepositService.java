@@ -126,7 +126,7 @@ public class DepositService {
 		depositDao.convertAllMoneyToEUR();
 		depositDao.closeCurrentSession();
 	}
-	
+
 	public void totalSumInEUR() {
 		depositDao.openCurrentSession();
 		depositDao.totalSumInEUR();

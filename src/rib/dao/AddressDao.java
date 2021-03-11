@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import rib.entity.Address;
+import rib.entity.Deposit;
 import rib.util.HibernateUtils;
 
 public class AddressDao implements EntityDao<Address, Integer>{
@@ -40,6 +41,12 @@ public class AddressDao implements EntityDao<Address, Integer>{
 		session.delete(entity);
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Address> selectTheLastAddressCreated(){
+		List<Address> list= session.createQuery("FROM Address where no=(Select max(no) from Address)").list();
+		return list;
+	}
+	
 	@Override
 	public void deleteAll() {
 		session.createQuery("delete from Address").executeUpdate();

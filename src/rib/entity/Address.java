@@ -39,7 +39,7 @@ public class Address {
 	private String blockOfFlatsNumber;
 
 	@Column(name = "Apartment")
-	private Integer apartment;
+	private String apartment;
 
 	@Column(name = "Street")
 	private String street;
@@ -54,7 +54,7 @@ public class Address {
 	private BankAgency bankAgency;
 
 	public Address(String county, String city, String street, String houseNumber, String blockOfFlatsNumber,
-			int apartment) {
+			String apartment) {
 		super();
 		this.county = county;
 		this.city = city;

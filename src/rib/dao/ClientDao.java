@@ -87,7 +87,7 @@ public class ClientDao implements EntityDao<Client, Integer> {
 		System.out.print("Introduceti prenumele clientului: ");
 		String firstName = scanner.next();
 		List<Address> list = session.createQuery(
-				"FROM Address where No in (SELECT Address_No from Client where LastName=:lastName and Firstname=:firstName)")
+				"FROM Address where No in (SELECT no from Client where LastName=:lastName and Firstname=:firstName)")
 				.setParameter("lastName", lastName).setParameter("firstName", firstName).list();
 		while (list.isEmpty()) {
 			System.err.println(

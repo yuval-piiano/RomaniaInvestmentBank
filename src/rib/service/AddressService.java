@@ -40,7 +40,7 @@ public class AddressService {
 		System.out.print("Numar bloc: ");
 		address.setBlockOfFlatsNumber(scanner.next());
 		System.out.print("Apartament: ");
-		address.setApartment(scanner.nextInt());
+		address.setApartment(scanner.next());
 		System.out.print("Strada: ");
 		scanner.nextLine();
 		address.setStreet(scanner.nextLine());
@@ -49,7 +49,7 @@ public class AddressService {
 		query.setParameter(2, address.getCounty());
 		query.setParameter(3, address.getHouseNumber().equals("-") ? null : address.getHouseNumber());
 		query.setParameter(4, address.getBlockOfFlatsNumber().equals("-") ? null : address.getBlockOfFlatsNumber());
-		query.setParameter(5, address.getApartment()==0 ? null : address.getApartment());
+		query.setParameter(5, address.getApartment().equals("-") ? null : address.getApartment());
 		query.setParameter(6, address.getStreet());
 		System.err.println("Adresa adaugata cu succes!");
 		query.executeUpdate();
@@ -141,19 +141,27 @@ public class AddressService {
 		System.out.print("Numar bloc: ");
 		address.setBlockOfFlatsNumber(scanner.next());
 		System.out.print("Apartament: ");
-		address.setApartment(scanner.nextInt());
+		address.setApartment(scanner.next());
 		System.out.print("ID-ul clientului a carui adresa o modificati: ");
 		client.setId(scanner.next());
-		
+
 		query.setParameter("county", address.getCounty());
 		query.setParameter("city", address.getCity());
 		query.setParameter("street", address.getStreet().equals("-") ? null : address.getStreet());
 		query.setParameter("houseNumber", address.getHouseNumber().equals("-") ? null : address.getHouseNumber());
-		query.setParameter("blockOfFlatsNumber", address.getBlockOfFlatsNumber().equals("-") ? null : address.getBlockOfFlatsNumber());
-		query.setParameter("apartment", address.getApartment()==0? null : address.getApartment());
+		query.setParameter("blockOfFlatsNumber",
+				address.getBlockOfFlatsNumber().equals("-") ? null : address.getBlockOfFlatsNumber());
+		query.setParameter("apartment", address.getApartment().equals("-") ? null : address.getApartment());
 		query.setParameter("id", client.getId());
 		System.err.println("Adresa actualizata cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
+	}
+
+	public List<Address> selectTheLastAddressCreated() {
+		addressDao.openCurrentSession();
+		List<Address> list = addressDao.selectTheLastAddressCreated();
+		addressDao.closeCurrentSession();
+		return list;
 	}
 }

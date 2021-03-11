@@ -146,9 +146,9 @@ public class ClientService {
 //		return list;
 //	}
 
-	public void deleteClient() throws Exception {
+	public void deleteClientById() throws Exception {
 		clientDao.openCurrentSessionwithTransaction();
-		clientDao.delete();
+		clientDao.deleteClientById();;
 		clientDao.closeCurrentSessionwithTransaction();
 	}
 

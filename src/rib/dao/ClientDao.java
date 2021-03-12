@@ -157,7 +157,6 @@ public class ClientDao implements EntityDao<Client, Integer> {
 		System.out.print("Introduceti id-ul clientului: ");
 		String id = scanner.next();
 		session.createQuery("delete from Client where id=:id").setParameter("id", id).executeUpdate();
-		
 	}
 
 	@Override
@@ -176,8 +175,6 @@ public class ClientDao implements EntityDao<Client, Integer> {
 
 	public List<Client> orderByFirstNameAsc() {
 		return session.createQuery("FROM Client order by FirstName ASC", Client.class).list();
-		// FROM Client INNER JOIN Address on Client.address_No=Address.no order by
-		// Address.city asc
 	}
 
 	public List<Client> orderByFirstNameDesc() {

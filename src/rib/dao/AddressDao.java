@@ -85,6 +85,6 @@ public class AddressDao implements EntityDao<Address, Integer>{
 
 	@Override
 	public List<Address> showAll() {
-		return session.createQuery("from Address", Address.class).list();
+		return session.createQuery("from Address",Address.class).list();
 	}
 }

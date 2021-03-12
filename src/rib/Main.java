@@ -7,6 +7,7 @@ import rib.entity.BankAccount;
 import rib.entity.BankAgency;
 import rib.entity.Client;
 import rib.entity.CustomerAdvisors;
+import rib.entity.CustomerAdvisorsPassword;
 import rib.entity.Deposit;
 import rib.service.AddressService;
 import rib.service.BankAccountService;
@@ -27,15 +28,16 @@ public class Main {
 		BankAccountService bankAccountService = new BankAccountService();
 		BankAgency bankAgency = new BankAgency();
 		BankAgencyService bankAgencyService = new BankAgencyService();
-		CustomerAdvisors customerAdvisors = new CustomerAdvisors();
-		CustomerAdvisorsSevice customerAdvisorsSevice = new CustomerAdvisorsSevice();
 		Client client = new Client();
 		ClientService clientService = new ClientService();
+		CustomerAdvisors customerAdvisors = new CustomerAdvisors();
+		CustomerAdvisorsSevice customerAdvisorsSevice = new CustomerAdvisorsSevice();
+		CustomerAdvisorsPassword customerAdvisorsPassword = new CustomerAdvisorsPassword();
 		DepositService depositService = new DepositService();
 		Deposit deposit = new Deposit();
-		Warehouse warehouse = new Warehouse();
 		HibernateUtils hibernateUtils = new HibernateUtils();
 		Scanner scanner = new Scanner(System.in);
+		Warehouse warehouse = new Warehouse();
 
 		int key;
 		System.out.println("\n\n1 ADMIN   2 CLIENT");
@@ -79,7 +81,7 @@ public class Main {
 							break;
 						}
 						case 2: {
-							System.out.println(addressService.showAllAddresses()+"\n");
+							System.out.println(addressService.showAllAddresses() + "\n");
 							break;
 						}
 						case 3: {
@@ -787,6 +789,14 @@ public class Main {
 								switch (option3_1_2) {
 								case 1: {
 									customerAdvisorsSevice.addCustomersAdvisors(customerAdvisors);
+									System.err.println("\n\nIntroduceti adresa!");
+									addressService.addAddress(address);
+									System.err.println("Verificare!");
+									System.out.print(addressService.selectTheLastAddressCreated() + "\n");
+									System.err.println("Creare parola personala client");
+									customerAdvisorsSevice.addCustomerAdvisorsPassword(customerAdvisorsPassword);
+									System.err.println("\n\nCompletati datele finale");
+									customerAdvisorsSevice.addCustomersAdvisors2(customerAdvisors);
 									break;
 								}
 								case 2: {
@@ -958,11 +968,11 @@ public class Main {
 								System.out.println();
 								switch (option3_1_3) {
 								case 1: {
-									System.out.println(depositService.showAll()+"\n");
+									System.out.println(depositService.showAll() + "\n");
 									break;
 								}
 								case 2: {
-									System.out.println(depositService.showPersonalDeposit()+"\n");
+									System.out.println(depositService.showPersonalDeposit() + "\n");
 									break;
 								}
 								case 3: {

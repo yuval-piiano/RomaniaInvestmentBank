@@ -126,8 +126,8 @@ public class Main {
 								case 1: {
 									int option1_4_1;
 									do {
-										System.out.println("1. Ascendent");
-										System.out.println("2. Descendent");
+										System.out.println("1. Crescator");
+										System.out.println("2. Descrescator");
 										System.out.println("0. Meniul anterior");
 										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option1_4_1 = scanner.nextInt();
@@ -155,8 +155,8 @@ public class Main {
 								case 2: {
 									int option1_4_2;
 									do {
-										System.out.println("1. Ascendent");
-										System.out.println("2. Descendent");
+										System.out.println("1. Crescator");
+										System.out.println("2. Descrescator");
 										System.out.println("0. Meniul anterior");
 										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option1_4_2 = scanner.nextInt();
@@ -183,8 +183,8 @@ public class Main {
 								case 3: {
 									int option1_4_3;
 									do {
-										System.out.println("1. Ascendent");
-										System.out.println("2. Descendent");
+										System.out.println("1. Crescator");
+										System.out.println("2. Descrescator");
 										System.out.println("0. Meniul anterior");
 										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option1_4_3 = scanner.nextInt();
@@ -266,10 +266,13 @@ public class Main {
 							System.out.print(addressService.selectTheLastAddressCreated() + "\n");
 							System.err.println("\n\nCreare contul bancar");
 							bankAccountService.addBankAccount(bankAccount);
+							System.err.println("Verificare!");
+							System.out.println(bankAccountService.showPersonalAccount());
 							System.err.println("\n\nCreare deposit");
 							depositService.createDeposit(deposit);
 							System.err.println("Verificare!");
 							System.out.println(depositService.selectTheLastDepositCreated());
+							System.err.println("\n\nCompletati datele finale, cont bancar");
 							bankAccountService.updateDoposit(deposit);
 							System.err.println("\n\nCompletati datele finale");
 							clientService.addClientBankingData(client);
@@ -324,8 +327,8 @@ public class Main {
 								case 1: {
 									int option2_1_4_1;
 									do {
-										System.out.println("1. Ascendent");
-										System.out.println("2. Descendent");
+										System.out.println("1. Crescator");
+										System.out.println("2. Descrescator");
 										System.out.println("0. Meniul anterior");
 										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option2_1_4_1 = scanner.nextInt();
@@ -352,8 +355,8 @@ public class Main {
 								case 2: {
 									int option2_1_4_2;
 									do {
-										System.out.println("1. Ascendent");
-										System.out.println("2. Descendent");
+										System.out.println("1. Crescator");
+										System.out.println("2. Descrescator");
 										System.out.println("0. Meniul anterior");
 										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option2_1_4_2 = scanner.nextInt();
@@ -380,8 +383,8 @@ public class Main {
 								case 3: {
 									int option2_1_4_3;
 									do {
-										System.out.println("1. Ascendent");
-										System.out.println("2. Descendent");
+										System.out.println("1. Crescator");
+										System.out.println("2. Descrescator");
 										System.out.println("0. Meniul anterior");
 										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option2_1_4_3 = scanner.nextInt();
@@ -408,8 +411,8 @@ public class Main {
 								case 4: {
 									int option2_1_4_4;
 									do {
-										System.out.println("1. Ascendent");
-										System.out.println("2. Descendent");
+										System.out.println("1. Crescator");
+										System.out.println("2. Descrescator");
 										System.out.println("0. Meniul anterior");
 										System.out.print("Introduceti optiunea dumneavoastra: ");
 										option2_1_4_4 = scanner.nextInt();
@@ -624,8 +627,8 @@ public class Main {
 										case 1: {
 											int option3_1_1_4_1;
 											do {
-												System.out.println("1. Ascendent");
-												System.out.println("2. Descendent");
+												System.out.println("1. Crescator");
+												System.out.println("2. Descrescator");
 												System.out.println("0. Meniul anterior");
 												System.out.print("Introduceti optiunea dumneavoastra: ");
 												option3_1_1_4_1 = scanner.nextInt();
@@ -652,8 +655,8 @@ public class Main {
 										case 2: {
 											int option3_1_1_4_2;
 											do {
-												System.out.println("1. Ascendent");
-												System.out.println("2. Descendent");
+												System.out.println("1. Crescator");
+												System.out.println("2. Descrescator");
 												System.out.println("0. Meniul anterior");
 												System.out.print("Introduceti optiunea dumneavoastra: ");
 												option3_1_1_4_2 = scanner.nextInt();
@@ -680,8 +683,8 @@ public class Main {
 										case 3: {
 											int option3_1_1_4_3;
 											do {
-												System.out.println("1. Ascendent");
-												System.out.println("2. Descendent");
+												System.out.println("1. Crescator");
+												System.out.println("2. Descrescator");
 												System.out.println("0. Meniul anterior");
 												System.out.print("Introduceti optiunea dumneavoastra: ");
 												option3_1_1_4_3 = scanner.nextInt();
@@ -831,8 +834,8 @@ public class Main {
 										case 1: {
 											int option3_1_2_4_1;
 											do {
-												System.out.println("1. Ascendent");
-												System.out.println("2. Descendent");
+												System.out.println("1. Crescator");
+												System.out.println("2. Descrescator");
 												System.out.println("0. Meniul anterior");
 												System.out.print("Introduceti optiunea dumneavoastra: ");
 												option3_1_2_4_1 = scanner.nextInt();
@@ -861,8 +864,8 @@ public class Main {
 										case 2: {
 											int option3_1_2_4_2;
 											do {
-												System.out.println("1. Ascendent");
-												System.out.println("2. Descendent");
+												System.out.println("1. Crescator");
+												System.out.println("2. Descrescator");
 												System.out.println("0. Meniul anterior");
 												System.out.print("Introduceti optiunea dumneavoastra: ");
 												option3_1_2_4_2 = scanner.nextInt();
@@ -955,11 +958,11 @@ public class Main {
 								System.out.println();
 								switch (option3_1_3) {
 								case 1: {
-									System.out.println(depositService.showAll());
+									System.out.println(depositService.showAll()+"\n");
 									break;
 								}
 								case 2: {
-									System.out.println(depositService.showPersonalDeposit());
+									System.out.println(depositService.showPersonalDeposit()+"\n");
 									break;
 								}
 								case 3: {

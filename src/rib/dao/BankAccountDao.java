@@ -1,7 +1,7 @@
 package rib.dao;
 
 import java.util.List;
-
+import java.util.Scanner;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -13,7 +13,7 @@ public class BankAccountDao {
 	private Session session = HibernateUtils.getSessionFactory().getCurrentSession();
 
 	private Transaction transaction;
-
+	Scanner scanner=new Scanner(System.in);
 	public BankAccountDao() {
 	}
 
@@ -46,6 +46,18 @@ public class BankAccountDao {
 			throw new Exception("Numele de utilizator " + username + " a fost introdus gresit sau nu exista");
 		else
 			System.err.print("Parola: ");
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<BankAccount> showPersonalAccount() {
+		System.out.print("Introduceti parola: ");
+		int password = scanner.nextInt();
+		List<BankAccount> list = session
+				.createQuery("FROM BankAccount where Password=:password")
+				.setParameter("password", password).list();
+		if (list.isEmpty())
+			System.err.println("Nu s-a gasit cont asociat acestei parole!");
 		return list;
 	}
 }

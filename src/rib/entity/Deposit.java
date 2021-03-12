@@ -76,7 +76,7 @@ public class Deposit {
 		else if (this.getUsd() == null)
 			finalString += ", USD: " + 0;
 		if (Hibernate.isInitialized(this.gbp) && this.getGbp() != null)
-			finalString += ", GBP: " + this.gbp;
+			finalString += ", GBP: " + this.gbp+"\n";
 		else if (this.getGbp() == null)
 			finalString += ", GBP: " + 0;
 		return finalString;

@@ -34,18 +34,19 @@ public class CustomerAdvisorsSevice {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		query = session.createNativeQuery(
-				"INSERT INTO Customer_Advisors (FirstName, LastName, CNP, PhoneNumber) values(?1,?2,?3,?4)");
-		System.out.print("Prenume: ");
-		customerAdvisors.setFirstName(scanner.next());
+				"INSERT INTO Customer_Advisors (LastName, FirstName, CNP, PhoneNumber) values(?1,?2,?3,?4)");
+		System.err.println("\nIntroduceti datele personale");
 		System.out.print("Nume: ");
 		customerAdvisors.setLastName(scanner.next());
+		System.out.print("Prenume: ");
+		customerAdvisors.setFirstName(scanner.next());
 		System.out.print("CNP: ");
 		customerAdvisors.setCnp(scanner.next());
 		System.out.print("Telefon: ");
 		customerAdvisors.setPhoneNumber(scanner.next());
 
-		query.setParameter(1, customerAdvisors.getFirstName());
-		query.setParameter(2, customerAdvisors.getLastName());
+		query.setParameter(1, customerAdvisors.getLastName());
+		query.setParameter(2, customerAdvisors.getFirstName());
 		query.setParameter(3, customerAdvisors.getCnp());
 		query.setParameter(4, customerAdvisors.getPhoneNumber());
 		System.err.println("Angajat adaugat cu succes!");

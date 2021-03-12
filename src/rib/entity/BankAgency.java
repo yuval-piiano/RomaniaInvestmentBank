@@ -47,8 +47,6 @@ public class BankAgency {
 
 	@OneToMany(cascade = { CascadeType.ALL, CascadeType.MERGE }, mappedBy = "bankAgency")
 	private List<CustomerAdvisors> customerAdvisors;
-//	@ManyToOne(mappedBy = "bankAgency")
-//	private CustomerAdvisors customerAdvisors;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Address address;

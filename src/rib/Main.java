@@ -337,10 +337,12 @@ public class Main {
 										switch (option2_1_4_1) {
 										case 1: {
 											System.out.println(clientService.orderClientsByNoAsc());
+											System.out.println();
 											break;
 										}
 										case 2: {
 											System.out.println(clientService.orderClientsByNoDesc());
+											System.out.println();
 											break;
 										}
 										case 0: {
@@ -365,10 +367,12 @@ public class Main {
 										switch (option2_1_4_2) {
 										case 1: {
 											System.out.println(clientService.orderClientsByIdAsc());
+											System.out.println();
 											break;
 										}
 										case 2: {
 											System.out.println(clientService.orderClientsByIdDesc());
+											System.out.println();
 											break;
 										}
 										case 0: {
@@ -393,10 +397,12 @@ public class Main {
 										switch (option2_1_4_3) {
 										case 1: {
 											System.out.println(clientService.orderClientsByFirstNameAsc());
+											System.out.println();
 											break;
 										}
 										case 2: {
 											System.out.println(clientService.orderClientsByFirstNameDesc());
+											System.out.println();
 											break;
 										}
 										case 0: {
@@ -421,10 +427,12 @@ public class Main {
 										switch (option2_1_4_4) {
 										case 1: {
 											System.out.println(clientService.orderClientsByLastNameAsc());
+											System.out.println();
 											break;
 										}
 										case 2: {
 											System.out.println(clientService.orderClientsByLastNameDesc());
+											System.out.println();
 											break;
 										}
 										case 0: {
@@ -851,13 +859,17 @@ public class Main {
 												option3_1_2_4_1 = scanner.nextInt();
 												switch (option3_1_2_4_1) {
 												case 1: {
+													System.out.println();
 													System.out.println(customerAdvisorsSevice
 															.orderCustomerAdvisorsbyLastNameAsc());
+													System.out.println();
 													break;
 												}
 												case 2: {
+													System.out.println();
 													System.out.println(customerAdvisorsSevice
 															.orderCustomerAdvisorsbyLastNameDesc());
+													System.out.println();
 													break;
 												}
 												case 0: {
@@ -881,13 +893,17 @@ public class Main {
 												option3_1_2_4_2 = scanner.nextInt();
 												switch (option3_1_2_4_2) {
 												case 1: {
+													System.out.println();
 													System.out.println(customerAdvisorsSevice
 															.orderCustomerAdvisorsbyFirstNameAsc());
+													System.out.println();
 													break;
 												}
 												case 2: {
+													System.out.println();
 													System.out.println(customerAdvisorsSevice
 															.orderCustomerAdvisorsbyFirstNameDesc());
+													System.out.println();
 													break;
 												}
 												case 0: {

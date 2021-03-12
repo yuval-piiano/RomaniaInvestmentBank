@@ -29,17 +29,17 @@ public class BankAccountService {
 	public void addBankAccount(BankAccount bankAccount) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		query = session.createNativeQuery("INSERT INTO BankAccount (Username, Password, Deposit_No) values(?1,?2,?3)");
+		query = session.createNativeQuery("INSERT INTO BankAccount (Username, Password) values(?1,?2)");
 		System.out.print("Username: ");
 		bankAccount.setUsername(scanner.next());
 		System.out.print("Parola: ");
 		bankAccount.setPassword(scanner.nextInt());
-		System.out.print("Id-ul depozitului: ");
-		deposit.setNo(scanner.nextInt());
+//		System.out.print("Id-ul depozitului: ");
+//		deposit.setNo(scanner.nextInt());
 
 		query.setParameter(1, bankAccount.getUsername());
 		query.setParameter(2, bankAccount.getPassword());
-		query.setParameter(3, deposit.getNo() == 0 ? null : deposit.getNo());
+		//query.setParameter(3, deposit.getNo() == 0 ? null : deposit.getNo());
 		System.err.println("Contul bancar s-a creat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
@@ -69,5 +69,12 @@ public class BankAccountService {
 		List<BankAccount> bankAccount = bankAccountDao.findPasswordByUser(username);
 		bankAccountDao.closeCurrentSession();
 		return bankAccount;
+	}
+	
+	public List<BankAccount> showPersonalAccount(){
+		bankAccountDao.openCurrentSession();
+		List<BankAccount> list=bankAccountDao.showPersonalAccount();
+		bankAccountDao.closeCurrentSession();
+		return list;
 	}
 }

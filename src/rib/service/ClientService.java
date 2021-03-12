@@ -33,7 +33,7 @@ public class ClientService {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		query = session.createNativeQuery(
-				"INSERT INTO Client (Id, FirstName, LastName, CNP, Email, PhoneNumber, bankAccount_ID, Address_No, customerAdvisors_No) values(?1,?2,?3,?4,?5,?6,?7,?8,?9)");
+				"INSERT INTO Client (Id, FirstName, LastName, CNP, Email, PhoneNumber) values(?1,?2,?3,?4,?5,?6)");
 		System.out.println("Daca un parametru este momentan indisponibil, introduceti \"-\"");
 		System.out.print("ID: ");
 		client.setId(scanner.next());
@@ -48,13 +48,13 @@ public class ClientService {
 		client.setEmail(scanner.next());
 		System.out.print("Telefon: ");
 		client.setPhoneNumber(scanner.next());
-		System.out.println("Daca un parametru este momentan indisponibil, introduceti \"0\"");
-		System.out.print("Id-ul contului: ");
-		bankAccount.setId(scanner.nextInt());
-		System.out.print("Numarul adresei: ");
-		address.setNo(scanner.nextInt());
-		System.out.print("Id-ul bancherului: ");
-		customerAdvisors.setId(scanner.nextInt());
+//		System.out.println("Daca un parametru este momentan indisponibil, introduceti \"0\"");
+//		System.out.print("Id-ul contului: ");
+//		bankAccount.setId(scanner.nextInt());
+//		System.out.print("Numarul adresei: ");
+//		address.setNo(scanner.nextInt());
+//		System.out.print("Id-ul bancherului: ");
+//		customerAdvisors.setId(scanner.nextInt());
 
 		query.setParameter(1, client.getId());
 		query.setParameter(2, client.getFirstName());
@@ -62,9 +62,9 @@ public class ClientService {
 		query.setParameter(4, client.getCnp());
 		query.setParameter(5, client.getEmail().equals("-") ? null : client.getEmail());
 		query.setParameter(6, client.getPhoneNumber());
-		query.setParameter(7, bankAccount.getId() == 0 ? null : bankAccount.getId());
-		query.setParameter(8, address.getNo() == 0 ? null : address.getNo());
-		query.setParameter(9, customerAdvisors.getId() == 0 ? null : customerAdvisors.getId());
+//		query.setParameter(7, bankAccount.getId() == 0 ? null : bankAccount.getId());
+//		query.setParameter(8, address.getNo() == 0 ? null : address.getNo());
+//		query.setParameter(9, customerAdvisors.getId() == 0 ? null : customerAdvisors.getId());
 		System.err.println("Client adaugat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();

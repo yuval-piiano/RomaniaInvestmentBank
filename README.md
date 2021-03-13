@@ -1,6 +1,1 @@
-#1.Descrierea aplicatiei
-Am realizat aplicatia unui sistem bancar.
-#2. Ce este?
-Este un program java conectat la o baza de date unde sunt stocati angajatii bancii, clientii, conturile acestora si datele aferente(adica adresele, datele de logare la cont(username, parola) si nu in ultimul rand depozitele de bani ale acestora). 
-#3. Ce face?
-In primul rand, ca sa accesezi aplicatie te autetifici prin username si parola in cazul clientilor sau nume, prenume si parola in cazul angajatilor.<br/>Un angajat al bancii poate sa adauge clienti noi, adrese noi, agentii bancare, poate sa caute, sa stearga, sa modifice date sau poate sa vada soldul total al bancii (cati bani sunt depusi in total in momentul verificarii in banca). <br/>Pe de alta parte, un client are acces la propriul cont(adica el poate sa depuna numerar, sa retraga, sa-si vizualizeze soldul sau poate daca doreste sa-si converteasca toate monedele(toti banii) intr-una singura). <br/>Tot din contul propriu, un client poate sa caute o agentie intr-un anumit oras sau judet sau poate sa vizualizeze lista totala de agentii bancare. 
+

@@ -74,9 +74,9 @@ public class ClientDao implements EntityDao<Client, Integer> {
 			}
 			attempts++;
 			if ((3 - attempts) == 2)
-				System.err.print("\nMAI AVETI 2 INCERCARI DISPONOBILE!\n");
+				System.err.print("\nAutentificare incorectă, vă rugăm să încercați din nou!\nMai aveți 2 încercări disponibile!\n");
 			if ((3 - attempts) == 1)
-				System.err.print("\nMAI AVETI O SINGURA INCERCARE DISPONIBILA!\n");
+				System.err.print("\nAutentificare incorectă, vă rugăm să încercați din nou!\nMai aveți o încercare disponibilă!\n");
 		} while (attempts <= 3);
 	}
 

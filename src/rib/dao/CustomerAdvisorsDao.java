@@ -69,9 +69,9 @@ public class CustomerAdvisorsDao implements EntityDao<CustomerAdvisors, Integer>
 			}
 			attempts++;
 			if ((3 - attempts) == 2)
-				System.err.print("\nMAI AVETI 2 INCERCARI DISPONOBILE!\n");
+				System.err.print("\nAutentificare incorecta, va rugam să incercati din nou!\nMai aveti 2 incercari disponibile!\n");
 			if ((3 - attempts) == 1)
-				System.err.print("\nMAI AVETI O SINGURA INCERCARE DISPONIBILA!\n");
+				System.err.print("\nAutentificare incorecta, va rugam sa incercati din nou!\nMai aveti o incercare disponibila!\n");
 		} while (attempts <= 3);
 	}
 
@@ -85,14 +85,6 @@ public class CustomerAdvisorsDao implements EntityDao<CustomerAdvisors, Integer>
 	public void deleteAll() {
 		session.createQuery("DELETE from CustomerAdvisors").executeUpdate();
 	}
-
-//	@SuppressWarnings("unchecked")
-//	public List<BankAgency> findBankAgencyByCity(String city)throws Exception  {
-//		List<BankAgency> bankBranches=session.createQuery("from BankAgency where address_No in (SELECT no from Address where City=:city)").setParameter("city", city).list();
-//		if(bankBranches.isEmpty())
-//			throw new Exception("There are not bank branches in "+city);
-//	return bankBranches;
-//	}
 
 	@SuppressWarnings("unchecked")
 	public List<CustomerAdvisors> findBankEmployees() {

@@ -50,7 +50,7 @@ public class Main {
 		switch (key) {
 		case 1: {
 			int option1;
-			//customerAdvisorsSevice.customerAdvisorsLogin();
+			customerAdvisorsSevice.customerAdvisorsLogin();
 			for (int i = 0; i < 50; ++i) {
 				System.out.println();
 			}

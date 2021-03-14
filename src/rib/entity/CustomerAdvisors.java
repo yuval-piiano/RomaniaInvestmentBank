@@ -31,7 +31,6 @@ public class CustomerAdvisors {
 	@Column(name = "No")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	@Column(name = "FirstName")
 	private String firstName;
 
@@ -40,6 +39,9 @@ public class CustomerAdvisors {
 
 	@Column(name = "CNP")
 	private String cnp;
+
+	@Column(name = "PositionHeld")
+	private String positionHeld;
 
 	@Column(name = "PhoneNumber")
 	private String phoneNumber;
@@ -57,12 +59,13 @@ public class CustomerAdvisors {
 	@JoinColumn(name = "CustomerAdvisorsPassword_No")
 	private CustomerAdvisorsPassword customerAdvisorsPassword;
 
-	public CustomerAdvisors(String firstName, String lastName, String cnp, Address address, String phoneNumber,
-			BankAgency bankAgency, CustomerAdvisorsPassword customerAdvisorsPassword) {
+	public CustomerAdvisors(String firstName, String lastName, String cnp, String positionHeld, Address address,
+			String phoneNumber, BankAgency bankAgency, CustomerAdvisorsPassword customerAdvisorsPassword) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.cnp = cnp;
+		this.positionHeld = positionHeld;
 		this.phoneNumber = phoneNumber;
 		this.bankAgency = bankAgency;
 		this.address = address;
@@ -72,13 +75,13 @@ public class CustomerAdvisors {
 	@Override
 	public String toString() {
 		String finalString;
-		finalString = "\nBancher " + id + "\nNume: " + firstName + " " + lastName + "\nCNP: " + cnp + "\nTelefon: "
-				+ phoneNumber;
+		finalString = "\nBancher " + id + "\nFunctie: " + positionHeld + "\nNume: " + firstName + " " + lastName
+				+ "\nCNP: " + cnp + "\nTelefon: " + phoneNumber;
 		if (Hibernate.isInitialized(this.address) && this.address != null)
 			finalString += "\nAdresa bancher: " + this.address;
 		if (Hibernate.isInitialized(this.bankAgency) && this.bankAgency != null)
 			finalString += "Adresa agentie bancara: " + this.bankAgency.getAddress();
-		finalString+="\n";
+		finalString += "\n";
 //		else
 //			finalString += "\n";
 		return finalString;

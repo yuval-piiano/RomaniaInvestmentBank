@@ -93,12 +93,12 @@ public class ClientService {
 		clientDao.clientLogin();
 		clientDao.closeCurrentSession();
 	}
-	
-	public List<Address> findClientAddress(){
-			clientDao.openCurrentSession();
-			List<Address> list = clientDao.findClientAddress();
-			clientDao.closeCurrentSession();
-			return list;
+
+	public List<Address> findClientAddress() {
+		clientDao.openCurrentSession();
+		List<Address> list = clientDao.findClientAddress();
+		clientDao.closeCurrentSession();
+		return list;
 	}
 
 	public List<Client> findClientByName() {
@@ -131,7 +131,8 @@ public class ClientService {
 
 	public void deleteClientById() throws Exception {
 		clientDao.openCurrentSessionwithTransaction();
-		clientDao.deleteClientById();;
+		clientDao.deleteClientById();
+		;
 		clientDao.closeCurrentSessionwithTransaction();
 	}
 

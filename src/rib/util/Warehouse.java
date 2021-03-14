@@ -47,7 +47,7 @@ public class Warehouse {
 			System.out.print("Se verifica: " + i + "% " + animationChars[i % 4] + "\r");
 
 			try {
-				Thread.sleep(100);
+				Thread.sleep(40);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

@@ -34,7 +34,7 @@ public class CustomerAdvisorsSevice {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		query = session.createNativeQuery(
-				"INSERT INTO Customer_Advisors (LastName, FirstName, CNP, PhoneNumber) values(?1,?2,?3,?4)");
+				"INSERT INTO Customer_Advisors (LastName, FirstName, CNP, PhoneNumber, PositionHeld) values(?1,?2,?3,?4,?5)");
 		System.err.println("\nIntroduceti datele personale");
 		System.out.print("Nume: ");
 		customerAdvisors.setLastName(scanner.next());
@@ -44,11 +44,14 @@ public class CustomerAdvisorsSevice {
 		customerAdvisors.setCnp(scanner.next());
 		System.out.print("Telefon: ");
 		customerAdvisors.setPhoneNumber(scanner.next());
+		System.out.print("Functie: ");
+		customerAdvisors.setPositionHeld(scanner.next());
 
 		query.setParameter(1, customerAdvisors.getLastName());
 		query.setParameter(2, customerAdvisors.getFirstName());
 		query.setParameter(3, customerAdvisors.getCnp());
 		query.setParameter(4, customerAdvisors.getPhoneNumber());
+		query.setParameter(5, customerAdvisors.getPositionHeld());
 		System.err.println("Angajat adaugat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
@@ -158,26 +161,30 @@ public class CustomerAdvisorsSevice {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Query query = session.createNativeQuery(
-				"UPDATE CustomerAdvisors set FirstName=:firstName, LastName=:lastName, PhoneNumber=:phoneNumber, address_No=:address_No, bankAgency_No=:bankAgency_No where CNP=:cnp");
+				"UPDATE CustomerAdvisors set FirstName=:firstName, LastName=:lastName, PhoneNumber=:phoneNumber, PositionHeld=:positionHeld address_No=:address_No, bankAgency_No=:bankAgency_No where CNP=:cnp");
 		System.out.print("Prenume: ");
 		customerAdvisors.setFirstName(scanner.next());
 		System.out.print("Nume: ");
 		customerAdvisors.setLastName(scanner.next());
 		System.out.print("Telefon: ");
 		customerAdvisors.setPhoneNumber(scanner.next());
+		System.out.print("Functie: ");
+		customerAdvisors.setPositionHeld(scanner.next());
 		System.out.print("Numarul adresei: ");
 		address.setNo(scanner.nextInt());
 		System.out.print("Numarul agentiei bancare: ");
 		bankAgency.setNo(scanner.nextInt());
 		System.out.print("CNP: ");
 		customerAdvisors.setCnp(scanner.next());
-
+		
+		
 		query.setParameter(1, customerAdvisors.getFirstName());
 		query.setParameter(2, customerAdvisors.getLastName());
 		query.setParameter(3, customerAdvisors.getPhoneNumber());
-		query.setParameter(4, address.getNo());
-		query.setParameter(5, bankAgency.getNo());
-		query.setParameter(6, customerAdvisors.getCnp());
+		query.setParameter(4, customerAdvisors.getPositionHeld());
+		query.setParameter(5, address.getNo());
+		query.setParameter(6, bankAgency.getNo());
+		query.setParameter(7, customerAdvisors.getCnp());
 		System.err.println("Bancher actualizat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();

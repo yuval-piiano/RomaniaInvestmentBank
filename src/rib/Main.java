@@ -20,6 +20,10 @@ import rib.util.Warehouse;
 
 public class Main {
 
+	// extragere data nasterii din cnp
+	// SELECT MID(client.CNP, 6,2) AS zi, MID(client.CNP, 4,2) AS luna,
+	// MID(client.CNP, 2,2) AS an, MID(client.CNP, 1,1) AS sex from client;
+	
 	@SuppressWarnings({ "resource", "unused" })
 	public static void main(String[] args) throws Exception {
 		Address address = new Address();
@@ -46,11 +50,10 @@ public class Main {
 		switch (key) {
 		case 1: {
 			int option1;
-			// customerAdvisorsSevice.customerAdvisorsLogin();
+			//customerAdvisorsSevice.customerAdvisorsLogin();
 			for (int i = 0; i < 50; ++i) {
 				System.out.println();
 			}
-			// warehouse.hello();
 			do {
 				System.err.println("\nMENIUL PRINCIPAL");
 				System.out.println("1. Adresa");
@@ -993,6 +996,7 @@ public class Main {
 								}
 								case 3: {
 									depositService.totalSumInEUR();
+									System.out.println();
 									break;
 								}
 								case 0: {
@@ -1018,7 +1022,7 @@ public class Main {
 					break;
 
 				}
-				case 4: {
+				case 0: {
 					warehouse.exit();
 					break;
 				}

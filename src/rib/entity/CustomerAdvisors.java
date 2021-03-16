@@ -49,10 +49,10 @@ public class CustomerAdvisors {
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "customerAdvisors")
 	private List<Client> client;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private BankAgency bankAgency;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Address address;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -80,10 +80,8 @@ public class CustomerAdvisors {
 		if (Hibernate.isInitialized(this.address) && this.address != null)
 			finalString += "\nAdresa bancher: " + this.address;
 		if (Hibernate.isInitialized(this.bankAgency) && this.bankAgency != null)
-			finalString += "Adresa agentie bancara: " + this.bankAgency.getAddress();
+			finalString += "\nAdresa agentie bancara: " + this.bankAgency.getAddress();
 		finalString += "\n";
-//		else
-//			finalString += "\n";
 		return finalString;
 	}
 

@@ -81,7 +81,7 @@ public class Client {
 //				+ lastName + "\nCNP: " + cnp + "\nEmail: " + email + "\nTelefon: " + phoneNumber + "\n";
 		String finalString = null;
 		if (Hibernate.isInitialized(this.no))
-			finalString = "Client no. " + this.no;
+			finalString = "\nClient no. " + this.no;
 		if (Hibernate.isInitialized(this.id))
 			finalString += "\nId: " + this.id;
 		if (Hibernate.isInitialized(this.firstName))
@@ -93,12 +93,12 @@ public class Client {
 		if (Hibernate.isInitialized(this.email) && this.email != null)
 			finalString += "\nEmail: " + this.email;
 		if (Hibernate.isInitialized(this.phoneNumber) && this.phoneNumber != null)
-			finalString += "\nPhone: " + this.phoneNumber + "\n";
+			finalString += "\nPhone: " + this.phoneNumber;
 
 		if (Hibernate.isInitialized(this.address) && this.address != null)
-			finalString += "Adresa clientului: " + this.address;
+			finalString += "\nAdresa clientului: " + this.address;
 		if (Hibernate.isInitialized(this.customerAdvisors) && this.customerAdvisors != null)
-			finalString += this.customerAdvisors;
+			finalString +=this.customerAdvisors;
 		return finalString;
 	}
 }

@@ -60,26 +60,28 @@ public class Deposit {
 
 	@Override
 	public String toString() {
-		String finalString = "SOLD ";
+		String finalString = "";
 		if (Hibernate.isInitialized(this.no))
-			finalString += this.no + ": ";
-		if (Hibernate.isInitialized(this.ron) && this.getRon() != null)
-			finalString += "RON: " + this.ron;
-		else if (this.getRon() == null)
-			finalString += ", RON: " + 0;
-		if (Hibernate.isInitialized(this.eur) && this.getEur() != null)
-			finalString += ", EUR: " + this.eur;
-		else if (this.getEur() == null)
-			finalString += ", EUR: " + 0;
-		if (Hibernate.isInitialized(this.usd) && this.getUsd() != null)
-			finalString += ", USD: " + this.usd;
-		else if (this.getUsd() == null)
-			finalString += ", USD: " + 0;
-		if (Hibernate.isInitialized(this.gbp) && this.getGbp() != null)
-			finalString += ", GBP: " + this.gbp + "\n";
-		else if (this.getGbp() == null)
-			finalString += ", GBP: " + 0;
+			finalString += "\nSOLD " + this.no + ": ";
+		if (Hibernate.isInitialized(this.ron) && this.getRon() != 0)
+			finalString += "RON: " + this.ron + ", ";
+		else
+			finalString += "";
+		if (Hibernate.isInitialized(this.eur) && this.getEur() != 0)
+			finalString += "EUR: " + this.eur + ", ";
+		else
+			finalString += "";
+		if (Hibernate.isInitialized(this.usd) && this.getUsd() != 0 && Hibernate.isInitialized(this.gbp)
+				&& this.getGbp() != 0)
+			finalString += "USD: " + this.usd + ", ";
+		else if (Hibernate.isInitialized(this.usd) && this.getUsd() != 0 && Hibernate.isInitialized(this.gbp)
+				&& this.getGbp() == 0)
+			finalString += "USD: " + this.usd;
+		else
+			finalString += "";
+		if (Hibernate.isInitialized(this.gbp) && this.getGbp() != 0)
+			finalString += "GBP: " + this.gbp;
+		finalString += "";
 		return finalString;
 	}
-
 }

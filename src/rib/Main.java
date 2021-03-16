@@ -50,7 +50,7 @@ public class Main {
 		switch (key) {
 		case 1: {
 			int option1;
-			customerAdvisorsSevice.customerAdvisorsLogin();
+			// customerAdvisorsSevice.customerAdvisorsLogin();
 			for (int i = 0; i < 50; ++i) {
 				System.out.println();
 			}
@@ -284,6 +284,7 @@ public class Main {
 						}
 						case 2: {
 							System.out.println(clientService.showAllClients());
+							System.out.println("\n");
 							break;
 						}
 						case 3: {
@@ -594,11 +595,13 @@ public class Main {
 								}
 								case 2: {
 									System.out.println(bankAgencyService.showAllBankAgency());
+									System.out.println();
 									break;
 								}
 								case 3: {
 									int option3_1_1_3;
 									do {
+										System.err.println("STERGERE AGENTIE");
 										System.out.println("1. Stergeti o anumita agentie");
 										System.out.println("2. Stergeti toate agentiile");
 										System.out.println("0. Meniul anterior");
@@ -628,6 +631,7 @@ public class Main {
 								case 4: {
 									int option3_1_1_4;
 									do {
+										System.err.println("ORDONARE AGENTII");
 										System.out.println("1. Ordonati agentiile bancare dupa no");
 										System.out.println("2. Ordonati agentiile bancare dupa id");
 										System.out.println("3. Ordonati agentiile bancare dupa orele de program");
@@ -738,6 +742,7 @@ public class Main {
 								case 6: {
 									int option3_1_1_6;
 									do {
+										System.err.println("CAUTARE AGENTII");
 										System.out.println("1. Cautati dupa no");
 										System.out.println("2. Cautare dupa oras");
 										System.out.println("0. Meniul anterior");
@@ -811,6 +816,7 @@ public class Main {
 								}
 								case 2: {
 									System.out.println(customerAdvisorsSevice.showAll());
+									System.out.println("\n");
 									break;
 								}
 								case 3: {
@@ -844,6 +850,7 @@ public class Main {
 								case 4: {
 									int option3_1_2_4;
 									do {
+										System.err.println("ORDONARE ANGAJATI");
 										System.out.println("1. Ordonati angajati dupa nume");
 										System.out.println("2. Ordonati angajati dupa prenume");
 										System.out.println("0. Meniul anterior");
@@ -986,11 +993,12 @@ public class Main {
 								System.out.println();
 								switch (option3_1_3) {
 								case 1: {
-									System.out.println(depositService.showAll() + "\n");
+									System.out.print(depositService.showAll());
+									System.out.println("\n");
 									break;
 								}
 								case 2: {
-									System.out.println(depositService.showPersonalDeposit() + "\n");
+									System.out.println(depositService.showPersonalDeposit());
 									break;
 								}
 								case 3: {
@@ -1006,8 +1014,8 @@ public class Main {
 									continue;
 								}
 								}
-								break;
 							} while (option3_1_3 != 0);
+							break;
 						}
 						case 0: {
 							break;
@@ -1143,13 +1151,14 @@ public class Main {
 							break;
 						}
 						case 3: {
-							System.out.println(depositService.showPersonalDeposit());
+							System.out.print(depositService.showPersonalDeposit());
+							System.out.println("\n");
 							break;
 						}
 						case 4: {
 							int option2_1_4;
 							do {
-								System.err.println("\nSchimb valutar");
+								System.err.println("\nSCHIMB VALUTAR");
 								System.out.println("1. RON -> EUR");
 								System.out.println("2. EUR -> RON");
 								System.out.println("0. Meniul anterior");
@@ -1180,7 +1189,8 @@ public class Main {
 						case 5: {
 							int option2_1_5;
 							do {
-								System.out.println("\n Convertiti toti banii in:");
+								System.err.println("\nSIMULARE");
+								System.out.println("Convertiti toti banii in:");
 								System.out.println("1. RON");
 								System.out.println("2. EUR");
 								System.out.println("0. Meniul anterior");
@@ -1221,7 +1231,8 @@ public class Main {
 				case 2: {
 					int option2_2;
 					do {
-						System.out.println("\n1. Lista agentii bancare");
+						System.err.println("\nAGENTII BANCARE");
+						System.out.println("1. Lista agentii bancare");
 						System.out.println("2. Cautare agentie bancara");
 						System.out.println("0. Meniul principal");
 						System.out.print("Introduceti optiunea dumneavoastra: ");

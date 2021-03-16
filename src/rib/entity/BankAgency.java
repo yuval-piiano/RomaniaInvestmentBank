@@ -70,10 +70,7 @@ public class BankAgency {
 				+ "\nSambata si Duminica: inchis" + "\nPauza de masa: " + lunchBreak + "\n";
 
 		if (Hibernate.isInitialized(this.address) && this.address != null)
-			finalString += "Adresa agentie bancara: " + this.address;
-//		else
-//			finalString += "\n".toString();
-
+			finalString += "Adresa agentie bancara: " + this.address + "\n";
 		return finalString;
 	}
 

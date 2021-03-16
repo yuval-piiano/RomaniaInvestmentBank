@@ -53,9 +53,10 @@ public class Address {
 	@OneToOne(mappedBy = "address")
 	private BankAgency bankAgency;
 
-	public Address(String county, String city, String street, String houseNumber, String blockOfFlatsNumber,
+	public Address(int no, String county, String city, String street, String houseNumber, String blockOfFlatsNumber,
 			String apartment) {
 		super();
+		this.no=no;
 		this.county = county;
 		this.city = city;
 		this.street = street;
@@ -66,21 +67,21 @@ public class Address {
 
 	@Override
 	public String toString() {
-		String finalString = "Adresa ";
+		String finalString = "\nAdresa "+this.no+": ";
 		if (Hibernate.isInitialized(this.county) && this.county != null)
-			finalString = "Judet " + this.county;
+			finalString += "Judet " + this.county+", ";
 		if (Hibernate.isInitialized(this.city) && this.city != null)
-			finalString += ", Oras " + this.city;
+			finalString += "Oras " + this.city+", ";
 		if (Hibernate.isInitialized(this.street) && this.street != null)
-			finalString += ", Str. " + this.street;
+			finalString += "Str. " + this.street+", ";
 		if (Hibernate.isInitialized(this.houseNumber) && this.houseNumber != null)
-			finalString += ", Nr. " + this.houseNumber;
+			finalString += "Nr. " + this.houseNumber;
 		if (Hibernate.isInitialized(this.blockOfFlatsNumber) && this.blockOfFlatsNumber != null)
-			finalString += ", Nr. bloc. " + this.blockOfFlatsNumber;
+			finalString += "Nr. bloc. " + this.blockOfFlatsNumber+", ";
 		if (Hibernate.isInitialized(this.apartment) && this.apartment != null)
-			finalString += ", Ap. " + this.apartment + "\n";
+			finalString += "Ap. " + this.apartment;
 		// else
-		finalString += "\n";
+		//finalString += "\n";
 		return finalString;
 	}
 }

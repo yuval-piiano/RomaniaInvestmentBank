@@ -126,6 +126,18 @@ public class DepositService {
 		depositDao.convertAllMoneyToEUR();
 		depositDao.closeCurrentSession();
 	}
+	
+	public void convertRonToEur(Deposit deposit) {
+		depositDao.openCurrentSessionwithTransaction();
+		depositDao.convertRonToEur(deposit);
+		depositDao.closeCurrentSessionwithTransaction();
+	}
+	
+	public void convertEurToRon(Deposit deposit) {
+		depositDao.openCurrentSessionwithTransaction();
+		depositDao.convertEurToRon(deposit);
+		depositDao.closeCurrentSessionwithTransaction();
+	}
 
 	public void totalSumInEUR() {
 		depositDao.openCurrentSession();

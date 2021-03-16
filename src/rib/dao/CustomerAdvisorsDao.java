@@ -69,9 +69,11 @@ public class CustomerAdvisorsDao implements EntityDao<CustomerAdvisors, Integer>
 			}
 			attempts++;
 			if ((3 - attempts) == 2)
-				System.err.print("\nAutentificare incorecta, va rugam să incercati din nou!\nMai aveti 2 incercari disponibile!\n");
+				System.err.print(
+						"\nAutentificare incorecta, va rugam sa incercati din nou!\nMai aveti 2 incercari disponibile!\n");
 			if ((3 - attempts) == 1)
-				System.err.print("\nAutentificare incorecta, va rugam sa incercati din nou!\nMai aveti o incercare disponibila!\n");
+				System.err.print(
+						"\nAutentificare incorecta, va rugam sa incercati din nou!\nMai aveti o incercare disponibila!\n");
 		} while (attempts <= 3);
 	}
 

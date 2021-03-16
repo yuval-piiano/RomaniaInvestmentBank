@@ -24,34 +24,33 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BankAccount {
 	@Id
-	@Column(name="ID")
+	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="Username")
+
+	@Column(name = "Username")
 	private String username;
-	
-	@Column(name="Password")
+
+	@Column(name = "Password")
 	private int password;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Deposit deposit;
-	
+
 	public BankAccount(String username, int password, Deposit deposit) {
 		super();
-		this.username=username;
-		this.password=password;
-		this.deposit=deposit;
+		this.username = username;
+		this.password = password;
+		this.deposit = deposit;
 	}
 
 	@Override
 	public String toString() {
-		String finalString = "Id cont: " + id + ", nume de utilizator: " + username + ", parola: " + password ;
+		String finalString = "Id cont: " + id + ", nume de utilizator: " + username + ", parola: " + password;
 		if (Hibernate.isInitialized(this.deposit) && this.deposit != null)
 			finalString += "\nDepozit: " + this.deposit + "\n";
 		else
-			finalString+="\n";
+			finalString += "\n";
 		return finalString;
 	}
 }
-

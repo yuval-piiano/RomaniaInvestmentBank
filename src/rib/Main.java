@@ -23,7 +23,7 @@ public class Main {
 	// extragere data nasterii din cnp
 	// SELECT MID(client.CNP, 6,2) AS zi, MID(client.CNP, 4,2) AS luna,
 	// MID(client.CNP, 2,2) AS an, MID(client.CNP, 1,1) AS sex from client;
-	
+
 	@SuppressWarnings({ "resource", "unused" })
 	public static void main(String[] args) throws Exception {
 		Address address = new Address();
@@ -228,7 +228,6 @@ public class Main {
 							break;
 						}
 						case 5: {
-							// testeaza-------------------------
 							addressService.updateAddress(address);
 							break;
 						}
@@ -1057,7 +1056,8 @@ public class Main {
 						System.out.println("1. Depunere numerar");
 						System.out.println("2. Retragere numerar");
 						System.out.println("3. Vizualizare sold");
-						System.out.println("4. Simulare");
+						System.out.println("4. Schimb valutar");
+						System.out.println("5. Simulare");
 						System.out.println("0. Meniul principal");
 						System.out.print("Introduceti optiunea dumneavoastra: ");
 						option2_1 = scanner.nextInt();
@@ -1149,14 +1149,45 @@ public class Main {
 						case 4: {
 							int option2_1_4;
 							do {
+								System.err.println("\nSchimb valutar");
+								System.out.println("1. RON -> EUR");
+								System.out.println("2. EUR -> RON");
+								System.out.println("0. Meniul anterior");
+								System.out.print("Introduceti optiunea dumneavoastra: ");
+								option2_1_4 = scanner.nextInt();
+								switch (option2_1_4) {
+								case 1: {
+									depositService.convertRonToEur(deposit);
+									System.out.println(depositService.showPersonalDeposit());
+									break;
+								}
+								case 2: {
+									depositService.convertEurToRon(deposit);
+									System.out.println(depositService.showPersonalDeposit());
+									break;
+								}
+								case 0: {
+									break;
+								}
+								default: {
+									System.err.println("Optiune introdusa invalida!");
+									continue;
+								}
+								}
+							} while (option2_1_4 != 0);
+							break;
+						}
+						case 5: {
+							int option2_1_5;
+							do {
 								System.out.println("\n Convertiti toti banii in:");
 								System.out.println("1. RON");
 								System.out.println("2. EUR");
 								System.out.println("0. Meniul anterior");
 								System.out.print("Introduceti optiunea dumneavoastra: ");
-								option2_1_4 = scanner.nextInt();
+								option2_1_5 = scanner.nextInt();
 								System.out.println();
-								switch (option2_1_4) {
+								switch (option2_1_5) {
 								case 1: {
 									depositService.convertAllMoneyToRON();
 									break;
@@ -1173,7 +1204,7 @@ public class Main {
 									continue;
 								}
 								}
-							} while (option2_1_4 != 0);
+							} while (option2_1_5 != 0);
 							break;
 						}
 						case 0: {

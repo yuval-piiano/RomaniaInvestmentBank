@@ -74,9 +74,11 @@ public class ClientDao implements EntityDao<Client, Integer> {
 			}
 			attempts++;
 			if ((3 - attempts) == 2)
-				System.err.print("\nAutentificare incorecta, va rugam să incercati din nou!\nMai aveti 2 incercari disponibile!\n");
+				System.err.print(
+						"\nAutentificare incorecta, va rugam să incercati din nou!\nMai aveti 2 incercari disponibile!\n");
 			if ((3 - attempts) == 1)
-				System.err.print("\nAutentificare incorecta, va rugam sa incercati din nou!\nMai aveti o incercare disponibila!\n");
+				System.err.print(
+						"\nAutentificare incorecta, va rugam sa incercati din nou!\nMai aveti o incercare disponibila!\n");
 		} while (attempts <= 3);
 	}
 
@@ -91,7 +93,7 @@ public class ClientDao implements EntityDao<Client, Integer> {
 				.setParameter("lastName", lastName).setParameter("firstName", firstName).list();
 		while (list.isEmpty()) {
 			System.err.println(
-					"Nu s-a gasit adresa clientului " + lastName.toUpperCase() + " " + firstName.toUpperCase()+"!");
+					"Nu s-a gasit adresa clientului " + lastName.toUpperCase() + " " + firstName.toUpperCase() + "!");
 			break;
 		}
 		return list;
@@ -103,7 +105,7 @@ public class ClientDao implements EntityDao<Client, Integer> {
 		long cnp = scanner.nextLong();
 		List<Client> list = session.createQuery("from Client where CNP=:cnp").setParameter("cnp", cnp).list();
 		while (list.isEmpty()) {
-			System.err.println("Nu s-a gasit client cu CNP-ul " + cnp+"!");
+			System.err.println("Nu s-a gasit client cu CNP-ul " + cnp + "!");
 			break;
 		}
 		return list;
@@ -115,7 +117,7 @@ public class ClientDao implements EntityDao<Client, Integer> {
 		String id = scanner.next();
 		List<Client> list = session.createQuery("from Client where ID=:id").setParameter("id", id).list();
 		while (list.isEmpty()) {
-			System.err.println("Nu s-a gasit client cu id-ul " + id+"!");
+			System.err.println("Nu s-a gasit client cu id-ul " + id + "!");
 			break;
 		}
 		return list;
@@ -130,8 +132,8 @@ public class ClientDao implements EntityDao<Client, Integer> {
 		List<Client> list = session.createQuery("from Client where LastName=:lastName and Firstname=:firstName")
 				.setParameter("lastName", lastName).setParameter("firstName", firstName).list();
 		while (list.isEmpty()) {
-			System.err
-					.println("Nu s-a gasit client cu numele " + lastName.toUpperCase() + " " + firstName.toUpperCase()+"!");
+			System.err.println(
+					"Nu s-a gasit client cu numele " + lastName.toUpperCase() + " " + firstName.toUpperCase() + "!");
 			break;
 		}
 		return list;
@@ -147,7 +149,8 @@ public class ClientDao implements EntityDao<Client, Integer> {
 				"from Client where bankAccount_ID in (select id from BankAccount where Username=:username AND Password=:password)")
 				.setParameter("username", username).setParameter("password", password).list();
 		while (list.isEmpty()) {
-			System.err.println("Nu s-a gasit client cu numele de utilizator " + username + " si cu parola " + password+"!");
+			System.err.println(
+					"Nu s-a gasit client cu numele de utilizator " + username + " si cu parola " + password + "!");
 			break;
 		}
 		return list;

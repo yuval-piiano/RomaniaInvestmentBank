@@ -94,7 +94,7 @@ public class Client {
 			finalString += "\nEmail: " + this.email;
 		if (Hibernate.isInitialized(this.phoneNumber) && this.phoneNumber != null)
 			finalString += "\nPhone: " + this.phoneNumber + "\n";
-		
+
 		if (Hibernate.isInitialized(this.address) && this.address != null)
 			finalString += "Adresa clientului: " + this.address;
 		if (Hibernate.isInitialized(this.customerAdvisors) && this.customerAdvisors != null)

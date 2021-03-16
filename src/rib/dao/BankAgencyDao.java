@@ -40,28 +40,28 @@ public class BankAgencyDao implements EntityDao<BankAgency, Integer> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<BankAgency> findBankAgencyByCity(){
+	public List<BankAgency> findBankAgencyByCity() {
 		System.out.print("Introduceti orasul: ");
 		String city = scanner.next();
 		List<BankAgency> list = session
 				.createQuery("from BankAgency where address_No in (SELECT no from Address where City=:city)")
 				.setParameter("city", city).list();
 		while (list.isEmpty()) {
-			System.err.println("Nu s-a gasit nicio agentie bancara in " + city.toUpperCase()+"!");
+			System.err.println("Nu s-a gasit nicio agentie bancara in " + city.toUpperCase() + "!");
 			break;
 		}
 		return list;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<BankAgency> findBankAgencyByCounty(){
+	public List<BankAgency> findBankAgencyByCounty() {
 		System.out.print("Introduceti judetul: ");
 		String county = scanner.next();
 		List<BankAgency> list = session
 				.createQuery("from BankAgency where address_No in (SELECT no from Address where County=:county)")
 				.setParameter("county", county).list();
 		while (list.isEmpty()) {
-			System.err.println("Nu s-a gasit nicio agentie bancara in " + county.toUpperCase()+"!");
+			System.err.println("Nu s-a gasit nicio agentie bancara in " + county.toUpperCase() + "!");
 			break;
 		}
 		return list;

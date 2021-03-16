@@ -197,10 +197,10 @@ public class DepositDao {
 	public List<Deposit> showAll() {
 		return session.createQuery("FROM Deposit", Deposit.class).list();
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Deposit> selectTheLastDepositCreated(){
-		List<Deposit> list= session.createQuery("FROM Deposit where no=(Select max(no) from Deposit)").list();
+	public List<Deposit> selectTheLastDepositCreated() {
+		List<Deposit> list = session.createQuery("FROM Deposit where no=(Select max(no) from Deposit)").list();
 		return list;
 	}
 
@@ -246,9 +246,36 @@ public class DepositDao {
 			System.err.print("Sold EUR: " + list + "\n");
 	}
 	
+	public void convertRonToEur(Deposit deposit) {
+		query =session.createNativeQuery("UPDATE Deposit d set d.Deposit_EUR=round((?1/4.8849)+d.Deposit_EUR,2), d.Deposit_RON=d.Deposit_RON-?1 where d.Deposit_RON>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
+		System.out.print("Introduceti suma: ");
+		deposit.setRon(scanner.nextInt());
+		System.out.print("Introduceti parola: ");
+		bankAccount.setPassword(scanner.nextInt());
+		
+		query.setParameter(1, deposit.getRon());
+		query.setParameter(2, bankAccount.getPassword());
+		query.executeUpdate();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void convertEurToRon(Deposit deposit) {
+		query =session.createNativeQuery("UPDATE Deposit d set d.Deposit_RON=round(Deposit_RON+(?1*4.8849),2), d.Deposit_EUR=d.Deposit_EUR-?1 where d.Deposit_EUR>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
+		System.out.print("Introduceti suma: ");
+		deposit.setEur(scanner.nextInt());
+		System.out.print("Introduceti parola: ");
+		bankAccount.setPassword(scanner.nextInt());
+		
+		query.setParameter(1, deposit.getEur());
+		query.setParameter(2, bankAccount.getPassword());
+		query.executeUpdate();
+	}
+
 	@SuppressWarnings("unchecked")
 	public void totalSumInEUR() {
-		List<Deposit> list=session.createQuery("SELECT sum(round((Deposit_RON*4.8849)+Deposit_EUR+(Deposit_GBP*1.16551)+(Deposit_USD*0.840084),2)) from Deposit").list();
+		List<Deposit> list = session.createQuery(
+				"SELECT sum(round((Deposit_RON*4.8849)+Deposit_EUR+(Deposit_GBP*1.16551)+(Deposit_USD*0.840084),2)) from Deposit")
+				.list();
 		System.err.print("Sold total EUR: " + list + "\n");
 	}
 }

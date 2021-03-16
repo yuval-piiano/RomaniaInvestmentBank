@@ -9,7 +9,7 @@ import rib.entity.Address;
 import rib.entity.Deposit;
 import rib.util.HibernateUtils;
 
-public class AddressDao implements EntityDao<Address, Integer>{
+public class AddressDao implements EntityDao<Address, Integer> {
 	private Session session = HibernateUtils.getSessionFactory().getCurrentSession();
 
 	private Transaction transaction;
@@ -42,11 +42,11 @@ public class AddressDao implements EntityDao<Address, Integer>{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Address> selectTheLastAddressCreated(){
-		List<Address> list= session.createQuery("FROM Address where no=(Select max(no) from Address)").list();
+	public List<Address> selectTheLastAddressCreated() {
+		List<Address> list = session.createQuery("FROM Address where no=(Select max(no) from Address)").list();
 		return list;
 	}
-	
+
 	@Override
 	public void deleteAll() {
 		session.createQuery("delete from Address").executeUpdate();
@@ -59,12 +59,12 @@ public class AddressDao implements EntityDao<Address, Integer>{
 	public List<Address> orderByCityDesc() {
 		return session.createQuery("FROM Address order by city desc", Address.class).list();
 	}
-	
-	public List<Address> orderByCountyAsc(){
+
+	public List<Address> orderByCountyAsc() {
 		return session.createQuery("FROM Address order by county asc", Address.class).list();
 	}
-	
-	public List<Address> orderByCountyDesc(){
+
+	public List<Address> orderByCountyDesc() {
 		return session.createQuery("FROM Address order by county desc", Address.class).list();
 	}
 
@@ -85,6 +85,6 @@ public class AddressDao implements EntityDao<Address, Integer>{
 
 	@Override
 	public List<Address> showAll() {
-		return session.createQuery("from Address",Address.class).list();
+		return session.createQuery("from Address", Address.class).list();
 	}
 }

@@ -9,7 +9,7 @@ public interface EntityDao<Entity, No> {
 	public List<Entity> orderByNoAsc();
 
 	public List<Entity> orderByNoDesc();
-	
+
 	public void persist(Entity entity);
 
 	public List<Entity> showAll();

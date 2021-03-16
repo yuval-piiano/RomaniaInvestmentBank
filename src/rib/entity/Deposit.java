@@ -55,14 +55,14 @@ public class Deposit {
 		this.eur = eur;
 		this.usd = usd;
 		this.gbp = gbp;
-		this.bankAccount=bankAccount;
+		this.bankAccount = bankAccount;
 	}
 
 	@Override
 	public String toString() {
 		String finalString = "SOLD ";
 		if (Hibernate.isInitialized(this.no))
-			finalString += this.no+": ";
+			finalString += this.no + ": ";
 		if (Hibernate.isInitialized(this.ron) && this.getRon() != null)
 			finalString += "RON: " + this.ron;
 		else if (this.getRon() == null)
@@ -76,7 +76,7 @@ public class Deposit {
 		else if (this.getUsd() == null)
 			finalString += ", USD: " + 0;
 		if (Hibernate.isInitialized(this.gbp) && this.getGbp() != null)
-			finalString += ", GBP: " + this.gbp+"\n";
+			finalString += ", GBP: " + this.gbp + "\n";
 		else if (this.getGbp() == null)
 			finalString += ", GBP: " + 0;
 		return finalString;

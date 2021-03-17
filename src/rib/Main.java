@@ -37,8 +37,8 @@ public class Main {
 		CustomerAdvisors customerAdvisors = new CustomerAdvisors();
 		CustomerAdvisorsSevice customerAdvisorsSevice = new CustomerAdvisorsSevice();
 		CustomerAdvisorsPassword customerAdvisorsPassword = new CustomerAdvisorsPassword();
-		DepositService depositService = new DepositService();
 		Deposit deposit = new Deposit();
+		DepositService depositService = new DepositService();
 		HibernateUtils hibernateUtils = new HibernateUtils();
 		Scanner scanner = new Scanner(System.in);
 		Warehouse warehouse = new Warehouse();
@@ -987,6 +987,7 @@ public class Main {
 								System.out.println("\n1. Lista depozite");
 								System.out.println("2. Cautare depozit");
 								System.out.println("3. Simulare - convertiti in euro si afisati soldul total");
+								System.out.println("4. Schimb valutar");
 								System.out.println("0. Meniul anterior");
 								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option3_1_3 = scanner.nextInt();
@@ -1004,6 +1005,45 @@ public class Main {
 								case 3: {
 									depositService.totalSumInEUR();
 									System.out.println();
+									break;
+								}
+								case 4: {
+									int option3_1_3_4;
+									do {
+										System.err.println("\nSCHIMB VALUTAR");
+										System.out.println("1. RON -> EUR");
+										System.out.println("2. EUR -> RON");
+										System.out.println("3. RON -> USD");
+										System.out.println("4. USD -> RON");
+										System.out.println("0. Meniul anterior");
+										System.out.print("Introduceti optiunea dumneavoastra: ");
+										option3_1_3_4 = scanner.nextInt();
+										switch (option3_1_3_4) {
+										case 1: {
+											depositService.convertRonToEur();
+											break;
+										}
+										case 2: {
+											depositService.convertEurToRon();
+											break;
+										}
+										case 3: {
+											depositService.convertRonToUsd();
+											break;
+										}
+										case 4: {
+											depositService.convertUsdToRon();
+											break;
+										}
+										case 0: {
+											break;
+										}
+										default: {
+											System.err.println("Optiune introdusa invalida!");
+											continue;
+										}
+										}
+									} while (option3_1_3_4 != 0);
 									break;
 								}
 								case 0: {
@@ -1161,17 +1201,29 @@ public class Main {
 								System.err.println("\nSCHIMB VALUTAR");
 								System.out.println("1. RON -> EUR");
 								System.out.println("2. EUR -> RON");
+								System.out.println("3. RON -> USD");
+								System.out.println("4. USD -> RON");
 								System.out.println("0. Meniul anterior");
 								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option2_1_4 = scanner.nextInt();
 								switch (option2_1_4) {
 								case 1: {
-									depositService.convertRonToEur(deposit);
+									depositService.convertRonToEurInAccount(deposit);
 									System.out.println(depositService.showPersonalDeposit());
 									break;
 								}
 								case 2: {
-									depositService.convertEurToRon(deposit);
+									depositService.convertEurToRonInAccount(deposit);
+									System.out.println(depositService.showPersonalDeposit());
+									break;
+								}
+								case 3: {
+									depositService.convertRonToUsdInAccount(deposit);
+									System.out.println(depositService.showPersonalDeposit());
+									break;
+								}
+								case 4: {
+									depositService.convertUsdToRonInAccount(deposit);
 									System.out.println(depositService.showPersonalDeposit());
 									break;
 								}

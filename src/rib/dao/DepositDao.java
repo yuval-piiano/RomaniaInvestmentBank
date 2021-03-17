@@ -1,5 +1,6 @@
 package rib.dao;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,6 +18,7 @@ public class DepositDao {
 	private Query query;
 	private Transaction transaction;
 	BankAccount bankAccount = new BankAccount();
+	DecimalFormat decimalFormat = new DecimalFormat("0.00");
 	Scanner scanner = new Scanner(System.in);
 
 	public DepositDao() {
@@ -246,7 +248,7 @@ public class DepositDao {
 			System.err.print("Sold EUR: " + list + "\n");
 	}
 
-	public void convertRonToEur(Deposit deposit) {
+	public void convertRonToEurInAccount(Deposit deposit) {
 		query = session.createNativeQuery(
 				"UPDATE Deposit d set d.Deposit_EUR=round((?1/4.8849)+d.Deposit_EUR,2), d.Deposit_RON=d.Deposit_RON-?1 where d.Deposit_RON>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
 		System.out.print("Introduceti suma: ");
@@ -259,7 +261,20 @@ public class DepositDao {
 		query.executeUpdate();
 	}
 
-	public void convertEurToRon(Deposit deposit) {
+	public void convertRonToUsdInAccount(Deposit deposit) {
+		query = session.createNativeQuery(
+				"UPDATE Deposit d set d.Deposit_USD=round((?1/4.0908)+d.Deposit_USD,2), d.Deposit_RON=d.Deposit_RON-?1 where d.Deposit_RON>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
+		System.out.print("Introduceti suma: ");
+		deposit.setRon(scanner.nextInt());
+		System.out.print("Introduceti parola: ");
+		bankAccount.setPassword(scanner.nextInt());
+
+		query.setParameter(1, deposit.getRon());
+		query.setParameter(2, bankAccount.getPassword());
+		query.executeUpdate();
+	}
+
+	public void convertEurToRonInAccount(Deposit deposit) {
 		query = session.createNativeQuery(
 				"UPDATE Deposit d set d.Deposit_RON=round(Deposit_RON+(?1*4.8849),2), d.Deposit_EUR=d.Deposit_EUR-?1 where d.Deposit_EUR>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
 		System.out.print("Introduceti suma: ");
@@ -270,6 +285,63 @@ public class DepositDao {
 		query.setParameter(1, deposit.getEur());
 		query.setParameter(2, bankAccount.getPassword());
 		query.executeUpdate();
+	}
+
+	public void convertUsdToRonInAccount(Deposit deposit) {
+		query = session.createNativeQuery(
+				"UPDATE Deposit d set d.Deposit_RON=round(Deposit_RON+(?1*4.0908),2), d.Deposit_USD=d.Deposit_USD-?1 where d.Deposit_USD>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
+		System.out.print("Introduceti suma: ");
+		deposit.setUsd(scanner.nextInt());
+		System.out.print("Introduceti parola: ");
+		bankAccount.setPassword(scanner.nextInt());
+
+		query.setParameter(1, deposit.getUsd());
+		query.setParameter(2, bankAccount.getPassword());
+		query.executeUpdate();
+	}
+
+	public void convertRonToEur() {
+		System.out.print("Introduceti suma: ");
+		int ron = scanner.nextInt();
+		if (ron > 0) {
+			double eur;
+			eur = ron / 4.8849;
+			System.out.println("Suma rezultata dupa convertire este: " + decimalFormat.format(eur) + " euro");
+		} else
+			System.err.println("Nu puteti sa convertiti " + ron + " ron!");
+	}
+
+	public void convertEurToRon() {
+		System.out.print("Introduceti suma: ");
+		int eur = scanner.nextInt();
+		if (eur > 0) {
+			double ron;
+			ron = eur * 4.8849;
+			System.out.println("Suma rezultata dupa convertire este: " + decimalFormat.format(ron) + " ron");
+		} else
+			System.err.println("Nu puteti sa convertiti " + eur + " euro!");
+	}
+
+	public void convertRonToUsd() {
+		System.out.print("Introduceti suma: ");
+		int ron = scanner.nextInt();
+		if (ron > 0) {
+			double usd;
+			usd = ron / 4.0908;
+			System.out.println("Suma rezultata dupa convertire este: " + decimalFormat.format(usd) + " dolari\n");
+		} else
+			System.err.println("Nu puteti sa convertiti " + ron + " ron!");
+	}
+
+	public void convertUsdToRon() {
+		System.out.print("Introduceti suma: ");
+		int usd = scanner.nextInt();
+		if (usd > 0) {
+			double ron;
+			ron = usd * 4.0908;
+			System.out.println("Suma rezultata dupa convertire este: " + decimalFormat.format(ron) + " ron");
+		} else
+			System.err.println("Nu puteti sa convertiti " + usd + " dolari!");
 	}
 
 	@SuppressWarnings("unchecked")

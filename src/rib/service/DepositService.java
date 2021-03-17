@@ -126,16 +126,44 @@ public class DepositService {
 		depositDao.convertAllMoneyToEUR();
 		depositDao.closeCurrentSession();
 	}
-	
-	public void convertRonToEur(Deposit deposit) {
+
+	public void convertRonToEurInAccount(Deposit deposit) {
 		depositDao.openCurrentSessionwithTransaction();
-		depositDao.convertRonToEur(deposit);
+		depositDao.convertRonToEurInAccount(deposit);
 		depositDao.closeCurrentSessionwithTransaction();
 	}
-	
-	public void convertEurToRon(Deposit deposit) {
+
+	public void convertRonToEur() {
+		depositDao.convertRonToEur();
+	}
+
+	public void convertEurToRon() {
+		depositDao.convertEurToRon();
+	}
+
+	public void convertRonToUsd() {
+		depositDao.convertRonToUsd();
+	}
+
+	public void convertUsdToRon() {
+		depositDao.convertUsdToRon();
+	}
+
+	public void convertRonToUsdInAccount(Deposit deposit) {
 		depositDao.openCurrentSessionwithTransaction();
-		depositDao.convertEurToRon(deposit);
+		depositDao.convertRonToUsdInAccount(deposit);
+		depositDao.closeCurrentSessionwithTransaction();
+	}
+
+	public void convertEurToRonInAccount(Deposit deposit) {
+		depositDao.openCurrentSessionwithTransaction();
+		depositDao.convertEurToRonInAccount(deposit);
+		depositDao.closeCurrentSessionwithTransaction();
+	}
+
+	public void convertUsdToRonInAccount(Deposit deposit) {
+		depositDao.openCurrentSessionwithTransaction();
+		depositDao.convertUsdToRonInAccount(deposit);
 		depositDao.closeCurrentSessionwithTransaction();
 	}
 

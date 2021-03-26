@@ -18,10 +18,9 @@ public class ClientDao implements EntityDao<Client, Integer> {
 	private Session session = HibernateUtils.getSessionFactory().getCurrentSession();
 	// private Query query;
 	private Transaction transaction;
-	Warehouse warehouse = new Warehouse();
 	BankAccount bankAccount = new BankAccount();
-
 	Scanner scanner = new Scanner(System.in);
+	Warehouse warehouse = new Warehouse();
 
 	public ClientDao() {
 	}
@@ -44,10 +43,6 @@ public class ClientDao implements EntityDao<Client, Integer> {
 	public void closeCurrentSessionwithTransaction() {
 		transaction.commit();
 		session.close();
-	}
-
-	public Client calculateAge(String birthDay) {
-		return null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -121,6 +116,31 @@ public class ClientDao implements EntityDao<Client, Integer> {
 			break;
 		}
 		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	public void selectBirthDayAndAgeFromCNP() {
+		System.out.print("Introduceti numele: ");
+		String lastName = scanner.next();
+		System.out.print("Introduceti prenumele: ");
+		String firstName = scanner.next();
+		//birthday
+		List<Client> list1 = session.createNativeQuery(
+				"SELECT STR_TO_DATE(concat(MID(Client.cnp, 6,2),'-', MID(Client.cnp, 4,2),'-', MID(Client.cnp, 2,2)), '%d-%m-%Y') AS DATA_NASTERII from Client where Client.lastName=?1 and Client.firstName=?2")
+				.setParameter(1, lastName).setParameter(2, firstName).list();
+		//age
+		List<Client> list2 = session.createNativeQuery(
+				"SELECT TRUNCATE(DATEDIFF(sysdate(),str_TO_DATE(concat(substr(Client.cnp,6,2),'-', substr(Client.cnp,4,2),'-',substr(Client.cnp,2,2) ),'%d-%m-%Y'))/365,0) from Client where Client.lastName=?1 and Client.firstName=?2")
+				.setParameter(1, lastName).setParameter(2, firstName).list();
+		while (list1.isEmpty() || list2.isEmpty()) {
+			System.err.println(
+					"\nNu s-a gasit clientul " + lastName.toUpperCase() + " " + firstName.toUpperCase() + "!\n");
+			break;
+		}
+		while (!list1.isEmpty() || !list2.isEmpty()) {
+			System.out.print("\n\nData nasterii: " + list1 + ", varsta: " + list2 + "\n\n");
+			break;
+		}
 	}
 
 	@SuppressWarnings("unchecked")

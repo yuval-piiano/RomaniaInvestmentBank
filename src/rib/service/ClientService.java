@@ -132,7 +132,6 @@ public class ClientService {
 	public void deleteClientById() throws Exception {
 		clientDao.openCurrentSessionwithTransaction();
 		clientDao.deleteClientById();
-		;
 		clientDao.closeCurrentSessionwithTransaction();
 	}
 
@@ -289,5 +288,12 @@ public class ClientService {
 		System.err.println("Client actualizat cu succes!");
 		query.executeUpdate();
 		session.getTransaction().commit();
+	}
+
+	public void selectBirthDayAndAgeFromCNP() {
+		clientDao.openCurrentSession();
+		clientDao.selectBirthDayAndAgeFromCNP();
+		clientDao.closeCurrentSession();
+
 	}
 }

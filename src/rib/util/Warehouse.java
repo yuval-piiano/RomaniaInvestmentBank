@@ -1,6 +1,9 @@
 package rib.util;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Warehouse {
@@ -32,12 +35,12 @@ public class Warehouse {
 		Calendar calendar = Calendar.getInstance();
 		int timeOfDay = calendar.get(Calendar.HOUR_OF_DAY);
 		if (timeOfDay >= 0 && timeOfDay < 12) {
-			System.out.println("\nBuna dimineata!\n");
+			System.out.println("BUNA DIMINEATA!\n");
 		} else if (timeOfDay >= 12 && timeOfDay < 16) {
-			System.out.println("\nBuna ziua!\n");
+			System.out.println("BUNA ZIUA!\n");
 		} else if (timeOfDay >= 16 && timeOfDay < 24) {
-			System.out.println("\nBuna seara!");
-			System.out.println();
+			System.out.println("BUNA SEARA!\n");
+			//System.out.println();
 		}
 	}
 
@@ -54,4 +57,5 @@ public class Warehouse {
 		}
 		System.out.print("Verificare: ");
 	}
+
 }

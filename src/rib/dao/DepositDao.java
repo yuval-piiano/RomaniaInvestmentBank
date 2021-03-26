@@ -222,8 +222,8 @@ public class DepositDao {
 	public void convertAllMoneyToRON() {
 		System.out.print("Introduceti parola: ");
 		int password = scanner.nextInt();
-		List<Deposit> list = session.createQuery(
-				"SELECT round(Deposit_RON+(Deposit_EUR*4.8849)+(Deposit_GBP*5.7)+(Deposit_USD*4.1036),2) as TOTAL from Deposit where No in (SELECT id from BankAccount where Password=:password)")
+		List<Deposit> list = session.createNativeQuery(
+				"SELECT truncate(Deposit_RON+(Deposit_EUR*4.8849)+(Deposit_GBP*5.7)+(Deposit_USD*4.1036),2) as TOTAL from Deposit where No in (SELECT id from BankAccount where Password=:password)")
 				.setParameter("password", password).list();
 		while (list.isEmpty()) {
 			System.err.println("Nu s-a gasit cont asociat acestei parole!");
@@ -237,8 +237,8 @@ public class DepositDao {
 	public void convertAllMoneyToEUR() {
 		System.out.print("Introduceti parola: ");
 		int password = scanner.nextInt();
-		List<Deposit> list = session.createQuery(
-				"SELECT round((Deposit_RON/4.8849)+Deposit_EUR+(Deposit_GBP/1.16551)+(Deposit_USD/0.840084),2) as TOTAL from Deposit where No in (SELECT id from BankAccount where Password=:password)")
+		List<Deposit> list = session.createNativeQuery(
+				"SELECT truncate((Deposit_RON/4.8849)+Deposit_EUR+(Deposit_GBP/1.16551)+(Deposit_USD/0.840084),2) as TOTAL from Deposit where No in (SELECT id from BankAccount where Password=:password)")
 				.setParameter("password", password).list();
 		while (list.isEmpty()) {
 			System.err.println("Nu s-a gasit cont asociat acestei parole!");
@@ -250,7 +250,7 @@ public class DepositDao {
 
 	public void convertRonToEurInAccount(Deposit deposit) {
 		query = session.createNativeQuery(
-				"UPDATE Deposit d set d.Deposit_EUR=round((?1/4.8849)+d.Deposit_EUR,2), d.Deposit_RON=d.Deposit_RON-?1 where d.Deposit_RON>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
+				"UPDATE Deposit d set d.Deposit_EUR=truncate((?1/4.8849)+d.Deposit_EUR,2), d.Deposit_RON=d.Deposit_RON-?1 where d.Deposit_RON>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
 		System.out.print("Introduceti suma: ");
 		deposit.setRon(scanner.nextInt());
 		System.out.print("Introduceti parola: ");
@@ -263,7 +263,7 @@ public class DepositDao {
 
 	public void convertRonToUsdInAccount(Deposit deposit) {
 		query = session.createNativeQuery(
-				"UPDATE Deposit d set d.Deposit_USD=round((?1/4.0908)+d.Deposit_USD,2), d.Deposit_RON=d.Deposit_RON-?1 where d.Deposit_RON>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
+				"UPDATE Deposit d set d.Deposit_USD=truncate((?1/4.0908)+d.Deposit_USD,2), d.Deposit_RON=d.Deposit_RON-?1 where d.Deposit_RON>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
 		System.out.print("Introduceti suma: ");
 		deposit.setRon(scanner.nextInt());
 		System.out.print("Introduceti parola: ");
@@ -276,7 +276,7 @@ public class DepositDao {
 
 	public void convertEurToRonInAccount(Deposit deposit) {
 		query = session.createNativeQuery(
-				"UPDATE Deposit d set d.Deposit_RON=round(Deposit_RON+(?1*4.8849),2), d.Deposit_EUR=d.Deposit_EUR-?1 where d.Deposit_EUR>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
+				"UPDATE Deposit d set d.Deposit_RON=truncate(Deposit_RON+(?1*4.8849),2), d.Deposit_EUR=d.Deposit_EUR-?1 where d.Deposit_EUR>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
 		System.out.print("Introduceti suma: ");
 		deposit.setEur(scanner.nextInt());
 		System.out.print("Introduceti parola: ");
@@ -289,7 +289,7 @@ public class DepositDao {
 
 	public void convertUsdToRonInAccount(Deposit deposit) {
 		query = session.createNativeQuery(
-				"UPDATE Deposit d set d.Deposit_RON=round(Deposit_RON+(?1*4.0908),2), d.Deposit_USD=d.Deposit_USD-?1 where d.Deposit_USD>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
+				"UPDATE Deposit d set d.Deposit_RON=truncate(Deposit_RON+(?1*4.0908),2), d.Deposit_USD=d.Deposit_USD-?1 where d.Deposit_USD>=?1 and No in (SELECT deposit_No from BankAccount where Password=?2)");
 		System.out.print("Introduceti suma: ");
 		deposit.setUsd(scanner.nextInt());
 		System.out.print("Introduceti parola: ");
@@ -346,8 +346,8 @@ public class DepositDao {
 
 	@SuppressWarnings("unchecked")
 	public void totalSumInEUR() {
-		List<Deposit> list = session.createQuery(
-				"SELECT sum(round((Deposit_RON*4.8849)+Deposit_EUR+(Deposit_GBP*1.16551)+(Deposit_USD*0.840084),2)) from Deposit")
+		List<Deposit> list = session.createNativeQuery(
+				"SELECT sum(truncate((Deposit_RON*4.8849)+Deposit_EUR+(Deposit_GBP*1.16551)+(Deposit_USD*0.840084),2)) from Deposit")
 				.list();
 		System.err.print("Sold total EUR: " + list + "\n");
 	}

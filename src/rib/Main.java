@@ -20,10 +20,11 @@ import rib.util.Warehouse;
 
 public class Main {
 
-	// extragere data nasterii din cnp
-	// SELECT MID(client.CNP, 6,2) AS zi, MID(client.CNP, 4,2) AS luna,
-	// MID(client.CNP, 2,2) AS an, MID(client.CNP, 1,1) AS sex from client;
-
+	// extragere data nasterii si sexul din cnp
+	// SELECT STR_TO_DATE(concat(MID(client.CNP, 6,2),"-", MID(client.CNP, 4,2),"-",
+	// MID(client.CNP, 2,2)), "%d-%m-%Y") AS DATA_NASTERII,
+	// REPLACE(REPLACE(REPLACE(REPLACE(MID(client.CNP, 1,1),1,"M"),5,"M"), 2,
+	// "F"),6, "F") AS sex from client;
 	@SuppressWarnings({ "resource", "unused" })
 	public static void main(String[] args) throws Exception {
 		Address address = new Address();
@@ -43,6 +44,8 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 		Warehouse warehouse = new Warehouse();
 
+		// clientService.findClientAge();
+
 		int key;
 		System.out.println("\n\n1 ADMIN   2 CLIENT");
 		System.out.print("Introduceti optiunea dumneavoastra: ");
@@ -55,6 +58,7 @@ public class Main {
 				System.out.println();
 			}
 			do {
+				warehouse.hello();
 				System.out.println("\nMENIUL PRINCIPAL");
 				System.out.println("1. Adresa");
 				System.out.println("2. Client");
@@ -514,10 +518,12 @@ public class Main {
 						case 6: {
 							int option2_1_6;
 							do {
-								System.out.println("\n1. Cautati dupa nume");
+								System.out.println("\nMENIU CAUTARE CLIENT");
+								System.out.println("1. Cautati dupa nume");
 								System.out.println("2. Cautati dupa CNP");
 								System.out.println("3. Cautati dupa id");
 								System.out.println("4. Cautati dupa cont");
+								System.out.println("5. Data nasterii si varsta");
 								System.out.println("0. Meniul anterior");
 								System.out.print("Introduceti optiunea dumneavoastra: ");
 								option2_1_6 = scanner.nextInt();
@@ -537,6 +543,10 @@ public class Main {
 								}
 								case 4: {
 									System.out.println(clientService.findClientByAccount());
+									break;
+								}
+								case 5: {
+									clientService.selectBirthDayAndAgeFromCNP();
 									break;
 								}
 								case 0: {
@@ -1083,11 +1093,11 @@ public class Main {
 		}
 
 		case 2: {
-			clientService.clientLogin();
+			// clientService.clientLogin();
 			for (int i = 0; i < 50; ++i) {
 				System.out.println();
 			}
-			// warehouse.hello();
+			warehouse.hello();
 			int option2;
 			do {
 				System.out.println("\nMENIUL PRINCIPAL");
